@@ -1,0 +1,34 @@
+{
+  "name": "player",
+  "version": "1.0.0",
+  "description": "A minimalistic music player for desktop systems.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeF0x/player.git"
+  },
+  "keywords": [
+    "music",
+    "dark",
+    "theme",
+    "material",
+    "minimalistic",
+    "mp3",
+    "player",
+    "player",
+    "music",
+    "player"
+  ],
+  "author": "Tobias \"CodeF0x\" Oettl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeF0x/player/issues"
+  },
+  "homepage": "https://github.com/CodeF0x/player#readme",
+  "devDependencies": {
+    "electron": "^4.0.7"
+  }
+}
