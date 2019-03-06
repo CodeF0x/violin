@@ -2,6 +2,7 @@ const { ipcRenderer } = require('electron');
 const media = require('jsmediatags');
 const player = new Audio();
 let base64String;
+let globalFiles;
 
 document.getElementById('open-folder').addEventListener('click', () => {
   ipcRenderer.send('open-file-dialog');
@@ -11,11 +12,35 @@ ipcRenderer.on('music-files', (event, files) => {
   listMusicFiles(files);
 });
 
-function listMusicFiles(files) {
-  const middleArea = document.querySelector('.middle-area');
-  const list = document.createElement('ul');
+document.getElementById('play').addEventListener('click', function() {
+  if (player.src === '') {
+    return;
+  }
+  document.getElementById('pause').style.display = 'block';
+  this.style.display = 'none';
+  resume();
+});
 
-  middleArea.innerHTML = '';
+document.getElementById('pause').addEventListener('click', function() {
+  document.getElementById('play').style.display = 'block';
+  this.style.display = 'none';
+  pause();
+});
+
+document.getElementById('forward').addEventListener('click', () => {
+  skip();
+});
+
+document.getElementById('backward').addEventListener('click', () => {
+  back();
+});
+
+function listMusicFiles(files) {
+  globalFiles = files;
+  const middleArea = document.querySelector('.middle-area');
+  const list = middleArea.querySelector('ul');
+  list.innerHTML = '';
+
   files.forEach(file => {
     const fileItem = document.createElement('li');
     fileItem.innerText = file.name;
@@ -27,10 +52,12 @@ function listMusicFiles(files) {
 
     list.appendChild(fileItem);
   });
-  middleArea.appendChild(list);
 }
 
 function play(path) {
+  document.getElementById('play').style.display = 'none';
+  document.getElementById('pause').style.display = 'block';
+
   media.read(path, {
     onSuccess: tag => {
       document.getElementById('song-name').innerText = tag.tags.title;
@@ -65,4 +92,20 @@ function generateUrl(arr) {
       base64String += String.fromCharCode(arr[i]);
     }
   }
+}
+
+function pause() {
+  player.pause();
+}
+
+function skip() {}
+
+function back() {
+  if (player.currentTime != 0) {
+    player.currentTime = 0;
+  }
+}
+
+function resume() {
+  player.play();
 }
