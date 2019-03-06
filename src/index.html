@@ -1,20 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node
-    <script>
-      document.write(process.versions.node);</script
-    >, Chrome
-    <script>
-      document.write(process.versions.chrome);</script
-    >, and Electron
-    <script>
-      document.write(process.versions.electron);</script
-    >.
+    <section class="middle-area">
+      <div></div>
+    </section>
+    <footer>
+      <div class="album-cover">
+        <img class="album-cover" src="img/placeholder.png" />
+      </div>
+      <div class="controls">
+        <div>
+          <div class="buttons">
+            <span id="backward">
+              <img src="img/backward.png" />
+            </span>
+            <span id="play">
+              <img src="img/play.png" />
+            </span>
+            <span id="pause" style="display: none;">
+              <img src="img/pause.png" />
+            </span>
+            <span id="forward">
+              <img src="img/forward.png" />
+            </span>
+          </div>
+          <div class="progress">
+            <progress id="progress-value" value="50" max="100"></progress>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

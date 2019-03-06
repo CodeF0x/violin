@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto 10%;
+  grid-template-areas:
+    'middle-area middle-area'
+    'footer footer';
+}
+
+.middle-area {
+  background-color: rgb(0, 22, 40);
+  grid-area: middle-area;
+  height: 80vh;
+  width: 100%;
+}
+
+footer {
+  background-color: black;
+  grid-area: footer;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  align-content: flex-start;
+}
+
+.controls {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.buttons > span > img {
+  height: 30px;
+  width: 30px;
+}
+
+.progress {
+  padding-top: 5px;
+}
+
+#progress-value {
+  width: 100%;
+}
+
+.album-cover {
+  height: 19vh;
+}
