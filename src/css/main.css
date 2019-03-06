@@ -5,12 +5,27 @@
 
 body {
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  color: white;
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto 10%;
   grid-template-areas:
     'middle-area middle-area'
     'footer footer';
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 50px;
+}
+
+li {
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: lightgrey;
+  color: black;
 }
 
 .middle-area {
@@ -153,7 +168,6 @@ footer {
 }
 
 .current-song {
-  color: white;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -169,4 +183,8 @@ footer {
 .current-song > div > span:nth-child(1) {
   margin-bottom: 1%;
   margin-top: 1%;
+}
+
+audio {
+  display: none;
 }

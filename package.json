@@ -30,5 +30,8 @@
   "homepage": "https://github.com/CodeF0x/player#readme",
   "devDependencies": {
     "electron": "^4.0.7"
+  },
+  "dependencies": {
+    "jsmediatags": "^3.8.1"
   }
 }
