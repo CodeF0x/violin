@@ -3,6 +3,7 @@ const media = require('jsmediatags');
 const player = new Audio();
 let base64String;
 let globalFiles;
+let index;
 
 document.getElementById('open-folder').addEventListener('click', () => {
   ipcRenderer.send('open-file-dialog');
@@ -98,7 +99,18 @@ function pause() {
   player.pause();
 }
 
-function skip() {}
+function skip() {
+  const currentFile = player.src;
+  index = globalFiles.findIndex(elem => {
+    // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
+    return elem.path.replace(/\\/g, '/') === decodeURI(currentFile).split('///')[1];
+  });
+
+  if (index + 1 !== globalFiles.length) {
+    play(globalFiles[index + 1].path);
+    index++;
+  }
+}
 
 function back() {
   if (player.currentTime != 0) {
