@@ -4126,3 +4126,10 @@ input, select, textarea {
 		}
 
 	}
+
+
+/** Own style adjusments */
+.screenshot-preview > img {
+	width: 100%;
+	height: auto;
+}
