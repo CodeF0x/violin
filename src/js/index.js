@@ -178,14 +178,16 @@ function pause() {
 
 function skip() {
   const currentFile = player.src;
-  index = globalFiles.findIndex(elem => {
-    // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
-    return (
-      elem.path.replace(/\\/g, '/') ===
-      '/' + decodeURI(currentFile).split('///')[1]
-    );
-  });
 
+  // thanks for using backslashes instead of normal ones, Bill!
+  let currentFileUrl = decodeURI(currentFile).split('///')[1];
+  if (process.platform !== 'win32') {
+    currentFileUrl = '/' + currentFileUrl;
+  }
+
+  index = globalFiles.findIndex(elem => {
+    return elem.path.replace(/\\/g, '/') === currentFileUrl;
+  });
   if (index + 1 !== globalFiles.length) {
     play(globalFiles[index + 1].path);
     index++;
@@ -194,11 +196,12 @@ function skip() {
 
 function back() {
   const currentFile = player.src;
+  let currentFileUrl = decodeURI(currentFile).split('///')[1];
+  if (process.platform !== 'win32') {
+    currentFileUrl = '/' + currentFileUrl;
+  }
   index = globalFiles.findIndex(elem => {
-    return (
-      elem.path.replace(/\\/g, '/') ===
-      '/' + decodeURI(currentFile).split('///')[1]
-    );
+    return elem.path.replace(/\\/g, '/') === currentFileUrl;
   });
 
   if (index - 1 >= 0) {
