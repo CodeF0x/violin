@@ -17,5 +17,6 @@ has no name yet is a minimalistic and fast music player for Linux, macOS and Win
   - flac
   - mp4
 - Shows meta information like album cover, artist and song name
+- Shuffle your songs randomly and keep them on repeat!
 
 # (More sections will follow)
