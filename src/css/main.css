@@ -18,6 +18,8 @@ body {
 ul {
   list-style-type: none;
   padding-left: 50px;
+  overflow: auto;
+  max-height: 325px;
 }
 
 li {
@@ -189,4 +191,8 @@ footer {
 
 audio {
   display: none;
+}
+
+.ul-container {
+  margin-left: 15%;
 }
