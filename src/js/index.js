@@ -58,12 +58,16 @@ function listMusicFiles(files) {
 function play(path) {
   document.getElementById('play').style.display = 'none';
   document.getElementById('pause').style.display = 'block';
-  //document.getElementById('progress-value').value = 0;
+  document.getElementById('progress-value').value = 0;
 
   media.read(path, {
     onSuccess: tag => {
-      document.getElementById('song-name').innerText = tag.tags.title;
-      document.getElementById('artist-name').innerText = tag.tags.artist;
+      document.getElementById('song-name').innerText = tag.tags.title
+        ? tag.tags.title
+        : 'Unknown';
+      document.getElementById('artist-name').innerText = tag.tags.artist
+        ? tag.tags.artist
+        : 'Unknown';
 
       if (tag.tags.picture) {
         base64String = '';
@@ -84,6 +88,14 @@ function play(path) {
 
   player.src = path;
   player.play();
+
+  // update progress bar
+  const updateProgress = setInterval(() => {
+    const length = player.duration;
+    const current = player.currentTime;
+
+    document.getElementById('progress-value').value = 100 * (current / length);
+  }, 500);
 }
 
 function generateUrl(arr) {
@@ -125,7 +137,6 @@ function back() {
       '/' + decodeURI(currentFile).split('///')[1]
     );
   });
-  console.log(index);
 
   if (index - 1 >= 0) {
     if (player.currentTime < 2) {
