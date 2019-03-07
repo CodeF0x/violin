@@ -18,18 +18,18 @@ ipcRenderer.on('music-files', (event, files) => {
   listMusicFiles(files);
 });
 
-playButton.addEventListener('click', function() {
+playButton.addEventListener('click', () => {
   if (player.src === '') {
     return;
   }
   pauseButton.style.display = 'block';
-  this.style.display = 'none';
+  playButton.style.display = 'none';
   resume();
 });
 
-pauseButton.addEventListener('click', function() {
+pauseButton.addEventListener('click', () => {
   playButton.style.display = 'block';
-  this.style.display = 'none';
+  pauseButton.style.display = 'none';
   pause();
 });
 
