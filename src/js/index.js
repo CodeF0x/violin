@@ -6,8 +6,13 @@ const pauseButton = document.getElementById('pause');
 const playButton = document.getElementById('play');
 const forwardButton = document.getElementById('forward');
 const backwardButton = document.getElementById('backward');
+const shuffleButton = document.getElementById('shuffle');
+const shuffleButtonActive = document.getElementById('shuffle-active');
+const repeatButton = document.getElementById('repeat');
+const repeatButtonActive = document.getElementById('repeat-active');
 let base64String;
 let globalFiles;
+let originalGlobalFiles;
 let index;
 
 folderButton.addEventListener('click', () => {
@@ -18,18 +23,18 @@ ipcRenderer.on('music-files', (event, files) => {
   listMusicFiles(files);
 });
 
-playButton.addEventListener('click', function() {
+playButton.addEventListener('click', () => {
   if (player.src === '') {
     return;
   }
   pauseButton.style.display = 'block';
-  this.style.display = 'none';
+  playButton.style.display = 'none';
   resume();
 });
 
-pauseButton.addEventListener('click', function() {
+pauseButton.addEventListener('click', () => {
   playButton.style.display = 'block';
-  this.style.display = 'none';
+  pauseButton.style.display = 'none';
   pause();
 });
 
@@ -41,7 +46,32 @@ backwardButton.addEventListener('click', () => {
   back();
 });
 
+shuffleButton.addEventListener('click', () => {
+  if (!globalFiles) {
+    return;
+  }
+  shuffleButton.style.display = 'none';
+  shuffleButtonActive.style.display = 'block';
+  shuffle();
+});
+
+shuffleButtonActive.addEventListener('click', () => {
+  shuffleButtonActive.style.display = 'none';
+  shuffleButton.style.display = 'block';
+  unshuffle();
+});
+
+repeatButton.addEventListener('click', () => {
+  repeatButton.style.display = 'none';
+  repeatButtonActive.style.display = 'block';
+});
+
+repeatButtonActive.addEventListener('click', () => {
+  repeatButtonActive.style.display = 'none';
+  repeatButton.style.display = 'block';
+});
 function listMusicFiles(files) {
+  console.log('Listing!');
   globalFiles = files;
   const middleArea = document.querySelector('.middle-area');
   const list = middleArea.querySelector('ul');
@@ -177,4 +207,20 @@ function back() {
 
 function resume() {
   player.play();
+}
+
+function shuffle() {
+  function shuffleFiles(files) {
+    for (let i = files.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [files[i], files[j]] = [files[j], files[i]];
+    }
+    return files;
+  }
+  originalGlobalFiles = globalFiles.slice(''); // "backup" global files to unshuffle again
+  shuffleFiles(globalFiles);
+}
+
+function unshuffle() {
+  globalFiles = originalGlobalFiles;
 }
