@@ -70,6 +70,13 @@ footer {
   cursor: pointer;
 }
 
+.current-song > div > img {
+  -webkit-app-region: no-drag;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
 .progress {
   padding-top: 5px;
 }
@@ -176,13 +183,13 @@ footer {
   overflow: hidden;
 }
 
-.current-song > div {
+.current-song > .info {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.current-song > div > span:nth-child(1) {
+.current-song > .info > span:nth-child(1) {
   margin-bottom: 1%;
   margin-top: 1%;
 }
