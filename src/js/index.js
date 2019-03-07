@@ -10,10 +10,11 @@ const shuffleButton = document.getElementById('shuffle');
 const shuffleButtonActive = document.getElementById('shuffle-active');
 const repeatButton = document.getElementById('repeat');
 const repeatButtonActive = document.getElementById('repeat-active');
-let base64String;
-let globalFiles;
-let originalGlobalFiles;
-let index;
+let base64String = undefined;
+let globalFiles = undefined;
+let originalGlobalFiles = undefined;
+let index = undefined;
+let isOnRepeat = false;
 
 folderButton.addEventListener('click', () => {
   ipcRenderer.send('open-file-dialog');
@@ -64,14 +65,15 @@ shuffleButtonActive.addEventListener('click', () => {
 repeatButton.addEventListener('click', () => {
   repeatButton.style.display = 'none';
   repeatButtonActive.style.display = 'block';
+  isOnRepeat = true;
 });
 
 repeatButtonActive.addEventListener('click', () => {
   repeatButtonActive.style.display = 'none';
   repeatButton.style.display = 'block';
+  isOnRepeat = false;
 });
 function listMusicFiles(files) {
-  console.log('Listing!');
   globalFiles = files;
   const middleArea = document.querySelector('.middle-area');
   const list = middleArea.querySelector('ul');
@@ -139,12 +141,18 @@ function play(path) {
     const length = player.duration;
     const current = player.currentTime;
 
-    progressBar.value = 100 * (current / length);
-
+    try {
+      progressBar.value = 100 * (current / length);
+    } catch (e) {
+      // Nothing, errors here are fine
+    }
     if (current === length) {
       if (index + 1 !== globalFiles.length) {
         play(globalFiles[index + 1].path);
         index++;
+      } else if (index + 1 === globalFiles.length && isOnRepeat) {
+        play(globalFiles[0].path);
+        index = 0;
       } else {
         pauseButton.style.display = 'none';
         playButton.style.display = 'block';
