@@ -2,7 +2,7 @@
 
 # (Has no name yet)
 
-![screenshot](docs/img/screenshot.png)
+![screenshot](docs/images/screenshot.png)
 
 has no name yet is a minimalistic and fast music player for Linux, macOS and Windows.
 
