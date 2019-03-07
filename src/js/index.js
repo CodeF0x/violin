@@ -1,11 +1,16 @@
 const { ipcRenderer } = require('electron');
 const media = require('jsmediatags');
 const player = new Audio();
+const folderButton = document.getElementById('open-folder');
+const pauseButton = document.getElementById('pause');
+const playButton = document.getElementById('play');
+const forwardButton = document.getElementById('forward');
+const backwardButton = document.getElementById('backward');
 let base64String;
 let globalFiles;
 let index;
 
-document.getElementById('open-folder').addEventListener('click', () => {
+folderButton.addEventListener('click', () => {
   ipcRenderer.send('open-file-dialog');
 });
 
@@ -13,26 +18,26 @@ ipcRenderer.on('music-files', (event, files) => {
   listMusicFiles(files);
 });
 
-document.getElementById('play').addEventListener('click', function() {
+playButton.addEventListener('click', function() {
   if (player.src === '') {
     return;
   }
-  document.getElementById('pause').style.display = 'block';
+  pauseButton.style.display = 'block';
   this.style.display = 'none';
   resume();
 });
 
-document.getElementById('pause').addEventListener('click', function() {
-  document.getElementById('play').style.display = 'block';
+pauseButton.addEventListener('click', function() {
+  playButton.style.display = 'block';
   this.style.display = 'none';
   pause();
 });
 
-document.getElementById('forward').addEventListener('click', () => {
+forwardButton.addEventListener('click', () => {
   skip();
 });
 
-document.getElementById('backward').addEventListener('click', () => {
+backwardButton.addEventListener('click', () => {
   back();
 });
 
@@ -56,18 +61,18 @@ function listMusicFiles(files) {
 }
 
 function play(path) {
-  document.getElementById('play').style.display = 'none';
-  document.getElementById('pause').style.display = 'block';
-  document.getElementById('progress-value').value = 0;
+  const albumCover = document.getElementById('album-cover');
+  const progressBar = document.getElementById('progress-value');
+  const songName = document.getElementById('song-name');
+  const artistName = document.getElementById('artist-name');
+  playButton.style.display = 'none';
+  pauseButton.style.display = 'block';
+  progressBar.value = 0;
 
   media.read(path, {
     onSuccess: tag => {
-      document.getElementById('song-name').innerText = tag.tags.title
-        ? tag.tags.title
-        : 'Unknown';
-      document.getElementById('artist-name').innerText = tag.tags.artist
-        ? tag.tags.artist
-        : 'Unknown';
+      songName.innerText = tag.tags.title ? tag.tags.title : 'Unknown';
+      artistName.innerText = tag.tags.artist ? tag.tags.artist : 'Unknown';
 
       if (tag.tags.picture) {
         base64String = '';
@@ -76,9 +81,9 @@ function play(path) {
         const imgUrl = `data:${picture.format};base64,${window.btoa(
           base64String
         )}`;
-        document.getElementById('album-cover').src = imgUrl;
+        albumCover.src = imgUrl;
       } else {
-        document.getElementById('album-cover').src = 'img/placeholder.png';
+        albumCover.src = 'img/placeholder.png';
       }
     },
     onError: err => {
@@ -89,12 +94,33 @@ function play(path) {
   player.src = path;
   player.play();
 
-  // update progress bar
+  // update current index
+  const currentFile = player.src;
+  index = globalFiles.findIndex(elem => {
+    // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
+    return (
+      elem.path.replace(/\\/g, '/') ===
+      '/' + decodeURI(currentFile).split('///')[1]
+    );
+  });
+
+  // update progress bar and play next song
   const updateProgress = setInterval(() => {
     const length = player.duration;
     const current = player.currentTime;
 
-    document.getElementById('progress-value').value = 100 * (current / length);
+    progressBar.value = 100 * (current / length);
+
+    if (current === length) {
+      if (index + 1 !== globalFiles.length) {
+        play(globalFiles[index + 1].path);
+        index++;
+      } else {
+        pauseButton.style.display = 'none';
+        playButton.style.display = 'block';
+        progressBar.value = '0';
+      }
+    }
   }, 500);
 }
 
@@ -131,7 +157,6 @@ function skip() {
 function back() {
   const currentFile = player.src;
   index = globalFiles.findIndex(elem => {
-    // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
     return (
       elem.path.replace(/\\/g, '/') ===
       '/' + decodeURI(currentFile).split('///')[1]
