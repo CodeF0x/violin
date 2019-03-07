@@ -58,7 +58,7 @@ function listMusicFiles(files) {
 function play(path) {
   document.getElementById('play').style.display = 'none';
   document.getElementById('pause').style.display = 'block';
-  document.getElementById('progress-value').value = 0;
+  //document.getElementById('progress-value').value = 0;
 
   media.read(path, {
     onSuccess: tag => {
@@ -84,15 +84,6 @@ function play(path) {
 
   player.src = path;
   player.play();
-
-  // Update progress bar
-  const update = setInterval(() => {
-    const allTime = player.duration;
-    const onePercent = allTime / 100;
-    const current = onePercent * player.currentTime;
-    console.log(current);
-    
-  }, 1000);
 }
 
 function generateUrl(arr) {
@@ -113,7 +104,10 @@ function skip() {
   const currentFile = player.src;
   index = globalFiles.findIndex(elem => {
     // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
-    return elem.path.replace(/\\/g, '/') === decodeURI(currentFile).split('///')[1];
+    return (
+      elem.path.replace(/\\/g, '/') ===
+      '/' + decodeURI(currentFile).split('///')[1]
+    );
   });
 
   if (index + 1 !== globalFiles.length) {
@@ -123,24 +117,22 @@ function skip() {
 }
 
 function back() {
-  console.log(player.currentTime);
-  if (player.currentTime <= 1) {
-    player.currentTime = 0;
-    return;
-  }
-
   const currentFile = player.src;
   index = globalFiles.findIndex(elem => {
     // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
-    return elem.path.replace(/\\/g, '/') === decodeURI(currentFile).split('///')[1];
+    return (
+      elem.path.replace(/\\/g, '/') ===
+      '/' + decodeURI(currentFile).split('///')[1]
+    );
   });
+  console.log(index);
 
-  if (index - 1 > 0) {
-    if (player.currentTime > 1) {
-      player.currentTime = 0;
-    } else if (player.currentTime <= 1) {
+  if (index - 1 >= 0) {
+    if (player.currentTime < 2) {
       play(globalFiles[index - 1].path);
       index--;
+    } else {
+      player.currentTime = 0;
     }
   } else {
     player.currentTime = 0;

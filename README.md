@@ -2,17 +2,18 @@
 
 # (Has no name yet)
 
-has no name yet is a minimalistic and fast music player for Linux, MacOS and Windows.
+has no name yet is a minimalistic and fast music player for Linux, macOS and Windows.
 
 ## Features
 
 - It's dark themed by default (light theme may follow)
 - It supports all most common audio file types:
-  _ mp3
-  _ wav
-  _ ogg
-  _ webm
-  _ flac
-  _ mp4
+  - mp3
+  - wav
+  - ogg
+  - webm
+  - flac
+  - mp4
+- Shows meta information like album cover, artist and song name
 
 # (More sections will follow)
