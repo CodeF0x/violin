@@ -8,12 +8,10 @@ function createWindow() {
   window = new BrowserWindow({
     width: 800,
     height: 600,
-    minWidth: 800,
-    minHeight: 600,
-    maxWidth: 800,
-    maxHeight: 600
+    titleBarStyle: 'hiddenInset'
   });
 
+  window.setResizable(false);
   window.loadFile('src/index.html');
 }
 
