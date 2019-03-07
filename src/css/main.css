@@ -4,6 +4,7 @@
 }
 
 body {
+  -webkit-app-region: drag;
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
   color: white;
   display: grid;
@@ -105,6 +106,7 @@ footer {
 }
 
 .button {
+  -webkit-app-region: no-drag;
   position: relative;
 
   display: block;
