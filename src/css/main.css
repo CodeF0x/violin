@@ -9,7 +9,7 @@ body {
   color: white;
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: auto 10%;
+  grid-template-rows: auto auto;
   grid-template-areas:
     'middle-area middle-area'
     'footer footer';
@@ -35,7 +35,7 @@ li:hover {
   background-color: rgb(0, 22, 40);
   grid-area: middle-area;
   height: 76vh;
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
