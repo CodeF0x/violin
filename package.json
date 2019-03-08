@@ -15,16 +15,13 @@
     "url": "git+https://github.com/CodeF0x/player.git"
   },
   "keywords": [
-    "music",
-    "dark",
-    "theme",
-    "material",
+    "dark theme",
+    "material design",
     "minimalistic",
     "mp3",
-    "player",
-    "player",
+    "music player",
     "music",
-    "player"
+    "audio"
   ],
   "author": "Tobias \"CodeF0x\" Oettl",
   "license": "ISC",
