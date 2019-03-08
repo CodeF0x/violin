@@ -5,6 +5,7 @@
 
 body {
   -webkit-app-region: drag;
+  -webkit-font-smoothing: antialiased;
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
   color: white;
   display: grid;
