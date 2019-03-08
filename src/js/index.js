@@ -85,14 +85,15 @@ function listMusicFiles(files) {
     fileItem.setAttribute('data-file-path', file.path);
 
     fileItem.addEventListener('click', function() {
-      play(this.getAttribute('data-file-path'));
+      play(this);
     });
 
     list.appendChild(fileItem);
   });
 }
 
-function play(path) {
+function play(item) {
+  path = item.getAttribute('data-file-path');
   const albumCover = document.getElementById('album-cover');
   const progressBar = document.getElementById('progress-value');
   const songName = document.getElementById('song-name');
@@ -103,7 +104,7 @@ function play(path) {
 
   media.read(path, {
     onSuccess: tag => {
-      songName.innerText = tag.tags.title ? tag.tags.title : 'Unknown';
+      songName.innerText = tag.tags.title ? tag.tags.title : item.innerText;
       artistName.innerText = tag.tags.artist ? tag.tags.artist : 'Unknown';
 
       if (tag.tags.picture) {
