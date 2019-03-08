@@ -29,9 +29,9 @@
   "author": "Tobias \"CodeF0x\" Oettl",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CodeF0x/player/issues"
+    "url": "https://github.com/CodeF0x/violin/issues"
   },
-  "homepage": "https://github.com/CodeF0x/player#readme",
+  "homepage": "https://codef0x.github.io/violin/",
   "devDependencies": {
     "electron": "^4.0.7",
     "electron-installer-dmg": "^2.0.0",
