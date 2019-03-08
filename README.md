@@ -1,4 +1,4 @@
-# ⚠️ Warning: Design is not final will probably change!
+# ⚠️ Warning: Design is not final and will probably change!
 
 # (Has no name yet)
 
