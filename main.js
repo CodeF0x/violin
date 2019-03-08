@@ -14,7 +14,6 @@ function createWindow() {
     }
   });
 
-  console.log(process.platform);
   window.setResizable(false);
   window.loadFile('src/index.html');
 }
