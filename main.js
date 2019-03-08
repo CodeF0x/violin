@@ -8,9 +8,13 @@ function createWindow() {
   window = new BrowserWindow({
     width: 800,
     height: 600,
-    titleBarStyle: 'hiddenInset'
+    titleBarStyle: 'hiddenInset',
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
+  console.log(process.platform);
   window.setResizable(false);
   window.loadFile('src/index.html');
 }
