@@ -21,6 +21,6 @@ function getInstallerConfig() {
     outputDirectory: path.join(outPath, 'windows-installer'),
     exe: 'voilin.exe',
     setupExe: 'voilin-setup.exe',
-    setupIcon: path.join(rootPath, 'src', 'img', 'icon', 'icon.ico')
+    setupIcon: path.join(rootPath, 'src', 'img', 'icons', 'icon.ico')
   });
 }
