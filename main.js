@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const { dialog } = require('electron');
 const { ipcMain } = require('electron');
-let window;
+let window = null;
 let globalFiles = [];
 
 function createWindow() {
@@ -32,6 +32,10 @@ ipcMain.on('open-file-dialog', (event, path) => {
   );
 });
 app.on('ready', createWindow);
+
+app.on('window-all-closed', () => {
+  app.quit();
+});
 
 function openDirectory(path, event) {
   const fs = require('fs');
