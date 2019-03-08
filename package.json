@@ -1,5 +1,6 @@
 {
   "name": "violin",
+  "productName": "Violin",
   "version": "1.0.0",
   "description": "A minimalistic music player for desktop systems.",
   "main": "main.js",
@@ -7,12 +8,14 @@
     "start": "electron .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/img/icons/icon.icns --prune=true --out=release-builds",
     "create-installer-mac": "electron-installer-dmg ./release-builds/violin-darwin-x64/violin.app violin --out=release-builds --overwrite --icon=src/img/icon/icon.icns",
-    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=src/img/icons/icon.png --prune=true --out=release-builds",
-    "package-windows": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/img/icon/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Violin\""
+    "package-linux": "electron-packager .  violin --overwrite --asar=true --platform=linux --arch=x64 --icon=src/img/icon/icon.png --prune=true --out=release-builds",
+    "create-installer-linux": "electron-installer-debian --src release-builds/violin-linux-x64/ --arch amd64 --config config/debian-installer.json",
+    "package-windows": "electron-packager . violin --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/img/icon/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Violin\"",
+    "create-windows-installer": "node config/create-windows-installer.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodeF0x/player.git"
+    "url": "git+https://github.com/CodeF0x/violin.git"
   },
   "keywords": [
     "dark theme",
@@ -32,7 +35,8 @@
   "devDependencies": {
     "electron": "^4.0.7",
     "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^13.1.1"
+    "electron-packager": "^13.1.1",
+    "electron-winstaller": "^3.0.4"
   },
   "dependencies": {
     "jsmediatags": "^3.8.1"
