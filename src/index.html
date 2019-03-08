@@ -5,6 +5,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self'; style-src 'self'; img-src 'self' data:"
+    />
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
@@ -28,7 +32,7 @@
             <span id="shuffle">
               <img src="img/shuffle.png" />
             </span>
-            <span id="shuffle-active" style="display: none;">
+            <span id="shuffle-active">
               <img src="img/shuffle-active.png" />
             </span>
             <span id="backward">
@@ -37,7 +41,7 @@
             <span id="play">
               <img src="img/play.png" />
             </span>
-            <span id="pause" style="display: none;">
+            <span id="pause">
               <img src="img/pause.png" />
             </span>
             <span id="forward">
@@ -46,7 +50,7 @@
             <span id="repeat">
               <img src="img/repeat.png" />
             </span>
-            <span id="repeat-active" style="display: none;">
+            <span id="repeat-active">
               <img src="img/repeat-active.png" />
             </span>
           </div>

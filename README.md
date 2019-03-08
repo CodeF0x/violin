@@ -1,14 +1,14 @@
-# ⚠️ Warning: Design is not final and will probably change!
+# ⚠️ Warning: Design is not final and will probably change & app not production ready!
 
-# (Has no name yet)
+# Violin
 
 ![screenshot](docs/images/screenshot.png)
 
-has no name yet is a minimalistic and fast music player for Linux, macOS and Windows.
+Violin is a minimalistic and fast music player for Linux, macOS and Windows.
 
 ## Features
 
-- It's dark themed by default (light theme may follow)
+- It's dark themed
 - It supports all most common audio file types:
   - mp3
   - wav
@@ -16,13 +16,30 @@ has no name yet is a minimalistic and fast music player for Linux, macOS and Win
   - webm
   - flac
   - mp4
-- Shows meta information like album cover, artist and song name
-- Shuffle your songs randomly and keep them on repeat!
+- Shows meta information like album cover, artist and song name if available
+- Blazingly fast
+- Simple and self-explanatory UI
 
 ## Download and install it
 
 Work in progress
 
-## Pack it yourself
+## Pack it yourself & create a installer
 
-Work in progress
+#### Pack it yourself
+
+1. Clone the repository `git clone https://github.com/CodeF0x/violin.git`
+2. Install dependencies `npm install`
+3. Pack it for your system:
+   - `npm run package-mac`
+   - `npm run package-linux`
+   - `npm run package-windows`
+
+#### Create a installer
+
+(Steps 1 - 3 from above)
+
+4. Create installer for your system:
+   - `npm run create-installer-mac`
+   - `npm run create-installer-linux`
+   - `npm run create-installer-windows`

@@ -202,3 +202,15 @@ audio {
 .ul-container {
   margin-left: 15%;
 }
+
+#pause {
+  display: none;
+}
+
+#repeat-active {
+  display: none;
+}
+
+#shuffle-active {
+  display: none;
+}

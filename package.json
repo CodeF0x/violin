@@ -1,35 +1,37 @@
 {
-  "name": "player",
+  "name": "violin",
   "version": "1.0.0",
   "description": "A minimalistic music player for desktop systems.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/img/icons/icon.icns --prune=true --out=release-builds",
+    "create-installer-mac": "electron-installer-dmg ./release-builds/violin-darwin-x64/violin.app violin --out=release-builds --overwrite --icon=src/img/icon/icon.icns",
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=src/img/icons/icon.png --prune=true --out=release-builds",
+    "package-windows": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/img/icon/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Violin\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeF0x/player.git"
   },
   "keywords": [
-    "music",
-    "dark",
-    "theme",
-    "material",
+    "dark theme",
+    "material design",
     "minimalistic",
     "mp3",
-    "player",
-    "player",
+    "music player",
     "music",
-    "player"
+    "audio"
   ],
   "author": "Tobias \"CodeF0x\" Oettl",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CodeF0x/player/issues"
+    "url": "https://github.com/CodeF0x/violin/issues"
   },
-  "homepage": "https://github.com/CodeF0x/player#readme",
+  "homepage": "https://codef0x.github.io/violin/",
   "devDependencies": {
     "electron": "^4.0.7",
+    "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^13.1.1"
   },
   "dependencies": {
