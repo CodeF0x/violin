@@ -39,7 +39,7 @@ Work in progress
 
 (Steps 1 - 3 from above)
 
-4. Create installer for your system:
+4. Create installer for your system (you must be on the system you want to create an installer for):
    - `npm run create-installer-mac`
    - `npm run create-installer-linux`
    - `npm run create-installer-windows`
