@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const media = require('jsmediatags');
 const player = new Audio();
+const progressBar = document.getElementById('progress-value');
 const folderButton = document.getElementById('open-folder');
 const pauseButton = document.getElementById('pause');
 const playButton = document.getElementById('play');
@@ -73,6 +74,13 @@ repeatButtonActive.addEventListener('click', () => {
   repeatButton.style.display = 'block';
   isOnRepeat = false;
 });
+
+progressBar.addEventListener('click', function(e) {
+  const percent = e.offsetX / this.offsetWidth;
+  progressBar.value = percent / 100;
+  player.currentTime = percent * player.duration;
+});
+
 function listMusicFiles(files) {
   globalFiles = files;
   const middleArea = document.querySelector('.middle-area');
@@ -95,7 +103,6 @@ function listMusicFiles(files) {
 function play(item) {
   path = item.getAttribute('data-file-path');
   const albumCover = document.getElementById('album-cover');
-  const progressBar = document.getElementById('progress-value');
   const songName = document.getElementById('song-name');
   const artistName = document.getElementById('artist-name');
   playButton.style.display = 'none';

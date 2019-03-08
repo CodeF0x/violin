@@ -80,6 +80,7 @@ footer {
 
 .progress {
   padding-top: 5px;
+  cursor: pointer;
 }
 
 #progress-value {
