@@ -25,7 +25,9 @@ ipcMain.on('open-file-dialog', (event, path) => {
       properties: ['openDirectory']
     },
     filePaths => {
-      openDirectory(filePaths, event);
+      if (filePaths) {
+        openDirectory(filePaths, event);
+      }
     }
   );
 });
