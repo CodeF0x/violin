@@ -1,12 +1,12 @@
-# ⚠️ Warning: Design is not final and will probably change & app not production ready!
+# ⚠️ Warning: Design is not final and will probably change
 
-# Violin
+# 🎼 Violin
 
 ![screenshot](docs/images/screenshot.png)
 
 Violin is a minimalistic and fast music player for Linux, macOS and Windows.
 
-## Features
+## 📓 Features
 
 - It's dark themed
 - It supports all most common audio file types:
@@ -20,11 +20,11 @@ Violin is a minimalistic and fast music player for Linux, macOS and Windows.
 - Blazingly fast
 - Simple and self-explanatory UI
 
-## Download and install it
+## ⬇️ Download and install it
 
 Work in progress
 
-## Pack it yourself & create a installer
+## 🔨 Pack it yourself & create a installer
 
 #### Pack it yourself
 
