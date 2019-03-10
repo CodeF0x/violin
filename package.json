@@ -11,7 +11,38 @@
     "package-linux": "electron-packager .  violin --overwrite --asar=true --platform=linux --arch=x64 --icon=src/img/icons/icon.png --prune=true --out=release-builds",
     "create-installer-linux": "electron-installer-debian --src release-builds/violin-linux-x64/ --arch amd64 --config config/debian-installer.json",
     "package-windows": "electron-packager . violin --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/img/icons/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Violin\"",
-    "create-installer-windows": "node config/create-windows-installer.js"
+    "create-installer-windows": "node config/create-windows-installer.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.codef0x.violin",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "icon": "src/img/icons/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "src/img/icons/icon.png"
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "src/img/icons/icon.ico"
+    }
   },
   "repository": {
     "type": "git",
@@ -34,6 +65,7 @@
   "homepage": "https://codef0x.github.io/violin/",
   "devDependencies": {
     "electron": "^4.0.7",
+    "electron-builder": "^20.38.5",
     "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^13.1.1",
     "electron-winstaller": "^3.0.4"
