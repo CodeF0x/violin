@@ -1,16 +1,16 @@
-const { ipcRenderer } = require("electron");
-const media = require("jsmediatags");
+const { ipcRenderer } = require('electron');
+const media = require('jsmediatags');
 const player = new Audio();
-const progressBar = document.getElementById("progress-value");
-const folderButton = document.getElementById("open-folder");
-const pauseButton = document.getElementById("pause");
-const playButton = document.getElementById("play");
-const forwardButton = document.getElementById("forward");
-const backwardButton = document.getElementById("backward");
-const shuffleButton = document.getElementById("shuffle");
-const shuffleButtonActive = document.getElementById("shuffle-active");
-const repeatButton = document.getElementById("repeat");
-const repeatButtonActive = document.getElementById("repeat-active");
+const progressBar = document.getElementById('progress-value');
+const folderButton = document.getElementById('open-folder');
+const pauseButton = document.getElementById('pause');
+const playButton = document.getElementById('play');
+const forwardButton = document.getElementById('forward');
+const backwardButton = document.getElementById('backward');
+const shuffleButton = document.getElementById('shuffle');
+const shuffleButtonActive = document.getElementById('shuffle-active');
+const repeatButton = document.getElementById('repeat');
+const repeatButtonActive = document.getElementById('repeat-active');
 let base64String = undefined;
 let globalFiles = undefined;
 let originalGlobalFiles = undefined;
@@ -18,65 +18,65 @@ let currentFileInList = undefined;
 let index = undefined;
 let isOnRepeat = false;
 
-folderButton.addEventListener("click", () => {
-  ipcRenderer.send("open-file-dialog");
+folderButton.addEventListener('click', () => {
+  ipcRenderer.send('open-file-dialog');
 });
 
-ipcRenderer.on("music-files", (event, files) => {
+ipcRenderer.on('music-files', (event, files) => {
   listMusicFiles(files);
 });
 
-playButton.addEventListener("click", () => {
-  if (player.src === "") {
+playButton.addEventListener('click', () => {
+  if (player.src === '') {
     return;
   }
-  pauseButton.style.display = "block";
-  playButton.style.display = "none";
+  pauseButton.style.display = 'block';
+  playButton.style.display = 'none';
   resume();
 });
 
-pauseButton.addEventListener("click", () => {
-  playButton.style.display = "block";
-  pauseButton.style.display = "none";
+pauseButton.addEventListener('click', () => {
+  playButton.style.display = 'block';
+  pauseButton.style.display = 'none';
   pause();
 });
 
-forwardButton.addEventListener("click", () => {
+forwardButton.addEventListener('click', () => {
   skip();
 });
 
-backwardButton.addEventListener("click", () => {
+backwardButton.addEventListener('click', () => {
   back();
 });
 
-shuffleButton.addEventListener("click", () => {
+shuffleButton.addEventListener('click', () => {
   if (!globalFiles) {
     return;
   }
-  shuffleButton.style.display = "none";
-  shuffleButtonActive.style.display = "block";
+  shuffleButton.style.display = 'none';
+  shuffleButtonActive.style.display = 'block';
   shuffle();
 });
 
-shuffleButtonActive.addEventListener("click", () => {
-  shuffleButtonActive.style.display = "none";
-  shuffleButton.style.display = "block";
+shuffleButtonActive.addEventListener('click', () => {
+  shuffleButtonActive.style.display = 'none';
+  shuffleButton.style.display = 'block';
   unshuffle();
 });
 
-repeatButton.addEventListener("click", () => {
-  repeatButton.style.display = "none";
-  repeatButtonActive.style.display = "block";
+repeatButton.addEventListener('click', () => {
+  repeatButton.style.display = 'none';
+  repeatButtonActive.style.display = 'block';
   isOnRepeat = true;
 });
 
-repeatButtonActive.addEventListener("click", () => {
-  repeatButtonActive.style.display = "none";
-  repeatButton.style.display = "block";
+repeatButtonActive.addEventListener('click', () => {
+  repeatButtonActive.style.display = 'none';
+  repeatButton.style.display = 'block';
   isOnRepeat = false;
 });
 
-progressBar.addEventListener("click", function(e) {
+progressBar.addEventListener('click', function(e) {
   const percent = e.offsetX / this.offsetWidth;
   progressBar.value = percent / 100;
   player.currentTime = percent * player.duration;
@@ -84,16 +84,16 @@ progressBar.addEventListener("click", function(e) {
 
 function listMusicFiles(files) {
   globalFiles = files;
-  const middleArea = document.querySelector(".middle-area");
-  const list = middleArea.querySelector("ul");
-  list.innerHTML = "";
+  const middleArea = document.querySelector('.middle-area');
+  const list = middleArea.querySelector('ul');
+  list.innerHTML = '';
 
   files.forEach(file => {
-    const fileItem = document.createElement("li");
+    const fileItem = document.createElement('li');
     fileItem.innerText = file.name;
-    fileItem.setAttribute("data-file-path", file.path);
+    fileItem.setAttribute('data-file-path', file.path);
 
-    fileItem.addEventListener("click", function() {
+    fileItem.addEventListener('click', function() {
       play(this);
     });
 
@@ -103,26 +103,26 @@ function listMusicFiles(files) {
 
 function play(item) {
   let path = undefined;
-  if (typeof item === "object") {
-    path = item.getAttribute("data-file-path");
+  if (typeof item === 'object') {
+    path = item.getAttribute('data-file-path');
   } else {
     path = item;
   }
 
-  const albumCover = document.getElementById("album-cover");
-  const songName = document.getElementById("song-name");
-  const artistName = document.getElementById("artist-name");
-  playButton.style.display = "none";
-  pauseButton.style.display = "block";
+  const albumCover = document.getElementById('album-cover');
+  const songName = document.getElementById('song-name');
+  const artistName = document.getElementById('artist-name');
+  playButton.style.display = 'none';
+  pauseButton.style.display = 'block';
   progressBar.value = 0;
 
   media.read(path, {
     onSuccess: tag => {
       songName.innerText = tag.tags.title ? tag.tags.title : item.innerText;
-      artistName.innerText = tag.tags.artist ? tag.tags.artist : "Unknown";
+      artistName.innerText = tag.tags.artist ? tag.tags.artist : 'Unknown';
 
       if (tag.tags.picture) {
-        base64String = "";
+        base64String = '';
         const picture = tag.tags.picture;
         generateUrl(picture.data);
         const imgUrl = `data:${picture.format};base64,${window.btoa(
@@ -130,7 +130,7 @@ function play(item) {
         )}`;
         albumCover.src = imgUrl;
       } else {
-        albumCover.src = "img/placeholder.png";
+        albumCover.src = 'img/placeholder.png';
       }
     },
     onError: err => {
@@ -146,31 +146,31 @@ function play(item) {
   index = globalFiles.findIndex(elem => {
     // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
     return (
-      elem.path.replace(/\\/g, "/") ===
-      "/" + decodeURI(currentFile).split("///")[1]
+      elem.path.replace(/\\/g, '/') ===
+      '/' + decodeURI(currentFile).split('///')[1]
     );
   });
 
   // highlight currently playing file in list
-  let files = document.getElementsByTagName("li");
+  let files = document.getElementsByTagName('li');
   files = Array.prototype.slice.call(files);
 
   if (currentFileInList) {
-    currentFileInList.style.color = "white";
+    currentFileInList.style.color = 'white';
   }
 
   currentFileInList = files.find(elem => {
-    let prefix = "/";
-    if (process.platform === "win32") {
-      prefix = "\\";
+    let prefix = '/';
+    if (process.platform === 'win32') {
+      prefix = '';
     }
 
     return (
-      elem.getAttribute("data-file-path").replace(/\\/g, "/") ===
-      prefix + decodeURI(currentFile).split("///")[1]
+      elem.getAttribute('data-file-path').replace(/\\/g, '/') ===
+      prefix + decodeURI(currentFile).split('///')[1]
     );
   });
-  currentFileInList.style.color = "#F48FB1";
+  currentFileInList.style.color = '#F48FB1';
 
   // update progress bar and play next song
   const updateProgress = setInterval(() => {
@@ -190,9 +190,9 @@ function play(item) {
         play(globalFiles[0].path);
         index = 0;
       } else {
-        pauseButton.style.display = "none";
-        playButton.style.display = "block";
-        progressBar.value = "0";
+        pauseButton.style.display = 'none';
+        playButton.style.display = 'block';
+        progressBar.value = '0';
       }
     }
   }, 500);
@@ -216,13 +216,13 @@ function skip() {
   const currentFile = player.src;
 
   // thanks for using backslashes instead of normal ones, Bill!
-  let currentFileUrl = decodeURI(currentFile).split("///")[1];
-  if (process.platform !== "win32") {
-    currentFileUrl = "/" + currentFileUrl;
+  let currentFileUrl = decodeURI(currentFile).split('///')[1];
+  if (process.platform !== 'win32') {
+    currentFileUrl = '/' + currentFileUrl;
   }
 
   index = globalFiles.findIndex(elem => {
-    return elem.path.replace(/\\/g, "/") === currentFileUrl;
+    return elem.path.replace(/\\/g, '/') === currentFileUrl;
   });
   if (index + 1 !== globalFiles.length) {
     play(globalFiles[index + 1].path);
@@ -232,12 +232,12 @@ function skip() {
 
 function back() {
   const currentFile = player.src;
-  let currentFileUrl = decodeURI(currentFile).split("///")[1];
-  if (process.platform !== "win32") {
-    currentFileUrl = "/" + currentFileUrl;
+  let currentFileUrl = decodeURI(currentFile).split('///')[1];
+  if (process.platform !== 'win32') {
+    currentFileUrl = '/' + currentFileUrl;
   }
   index = globalFiles.findIndex(elem => {
-    return elem.path.replace(/\\/g, "/") === currentFileUrl;
+    return elem.path.replace(/\\/g, '/') === currentFileUrl;
   });
 
   if (index - 1 >= 0) {
@@ -264,7 +264,7 @@ function shuffle() {
     }
     return files;
   }
-  originalGlobalFiles = globalFiles.slice(""); // "backup" global files to unshuffle again
+  originalGlobalFiles = globalFiles.slice(''); // "backup" global files to unshuffle again
   shuffleFiles(globalFiles);
 }
 
