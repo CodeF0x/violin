@@ -1,10 +1,13 @@
-// this is for handling the installation of the app on Windows
-const handleSetupEvents = require('./config/setup-events');
-if (handleSetupEvents.handleSquirrelEvent()) {
-  return;
+const { app, BrowserWindow } = require('electron');
+
+if (require('electron-squirrel-startup')) app.quit();
+// if first time install on windows, do not run application, rather
+// let squirrel installer do its work
+const setupEvents = require('./config/setup-events');
+if (setupEvents.handleSquirrelEvent()) {
+  process.exit();
 }
 
-const { app, BrowserWindow } = require('electron');
 const { dialog } = require('electron');
 const { ipcMain } = require('electron');
 const openDirectory = require('./modules/open-directory');

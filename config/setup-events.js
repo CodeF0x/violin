@@ -38,7 +38,12 @@ module.exports = {
         // explorer context menus
 
         // Install desktop and start menu shortcuts
-        spawnUpdate(['--createShortcut', exeName]);
+        spawnUpdate([
+          '--createShortcut',
+          exeName,
+          '--shortcut-locations',
+          'Desktop,StartMenu'
+        ]);
 
         setTimeout(app.quit, 1000);
         return true;

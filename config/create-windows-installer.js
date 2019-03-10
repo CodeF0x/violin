@@ -2,7 +2,7 @@ const createWindowsInstaller = require('electron-winstaller')
   .createWindowsInstaller;
 const path = require('path');
 
-getInstaller()
+getInstallerConfig()
   .then(createWindowsInstaller)
   .catch(error => {
     console.error(error.message || error);
@@ -19,7 +19,7 @@ function getInstallerConfig() {
     authors: 'Tobias "CodeF0x" Oettl',
     noMsi: true,
     outputDirectory: path.join(outPath, 'windows-installer'),
-    exe: 'voilin.exe',
+    exe: 'violin.exe',
     setupExe: 'voilin-setup.exe',
     setupIcon: path.join(rootPath, 'src', 'img', 'icons', 'icon.ico')
   });
