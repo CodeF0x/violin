@@ -160,9 +160,14 @@ function play(item) {
   }
 
   currentFileInList = files.find(elem => {
+    let prefix = '/';
+    if (process.platform === 'win32') {
+      prefix = '';
+    }
+
     return (
       elem.getAttribute('data-file-path').replace(/\\/g, '/') ===
-      decodeURI(currentFile).split('///')[1]
+      prefix + decodeURI(currentFile).split('///')[1]
     );
   });
   currentFileInList.style.color = '#F48FB1';
