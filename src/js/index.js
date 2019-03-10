@@ -14,6 +14,7 @@ const repeatButtonActive = document.getElementById('repeat-active');
 let base64String = undefined;
 let globalFiles = undefined;
 let originalGlobalFiles = undefined;
+let currentFileInList = undefined;
 let index = undefined;
 let isOnRepeat = false;
 
@@ -101,7 +102,13 @@ function listMusicFiles(files) {
 }
 
 function play(item) {
-  path = item.getAttribute('data-file-path');
+  let path = undefined;
+  if (typeof item === 'object') {
+    path = item.getAttribute('data-file-path');
+  } else {
+    path = item;
+  }
+
   const albumCover = document.getElementById('album-cover');
   const songName = document.getElementById('song-name');
   const artistName = document.getElementById('artist-name');
@@ -143,6 +150,22 @@ function play(item) {
       '/' + decodeURI(currentFile).split('///')[1]
     );
   });
+
+  // highlight currently playing file in list
+  let files = document.getElementsByTagName('li');
+  files = Array.prototype.slice.call(files);
+
+  if (currentFileInList) {
+    currentFileInList.style.color = 'white';
+  }
+
+  currentFileInList = files.find(elem => {
+    return (
+      elem.getAttribute('data-file-path').replace(/\\/g, '/') ===
+      decodeURI(currentFile).split('///')[1]
+    );
+  });
+  currentFileInList.style.color = '#F48FB1';
 
   // update progress bar and play next song
   const updateProgress = setInterval(() => {
