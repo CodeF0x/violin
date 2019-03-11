@@ -1,6 +1,7 @@
-if (require('electron-squirrel-startup')) return;
-
 const { app, BrowserWindow } = require('electron');
+
+if (require('electron-squirrel-startup')) app.close();
+
 const { dialog } = require('electron');
 const { ipcMain } = require('electron');
 const openDirectory = require('./modules/open-directory');

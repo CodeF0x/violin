@@ -36,10 +36,10 @@
     "electron": "^4.0.7",
     "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^13.1.1",
-    "electron-squirrel-startup": "^1.0.0",
     "electron-winstaller": "^3.0.4"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "jsmediatags": "^3.8.1"
   }
 }
