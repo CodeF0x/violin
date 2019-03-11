@@ -42,4 +42,4 @@ Work in progress
 4. Create installer for your system (you must be on the system you want to create an installer for):
    - `npm run create-installer-mac`
    - `npm run create-installer-linux`
-   - `npm run create-installer-windows` (won't create a regular installer, will be a standalone-app)
+   - `npm run create-installer-windows` (this creates a standalone-app what is the intendend behaviour)
