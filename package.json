@@ -39,6 +39,7 @@
     "electron-winstaller": "^3.0.4"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "jsmediatags": "^3.8.1"
   }
 }
