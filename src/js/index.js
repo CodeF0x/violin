@@ -109,6 +109,11 @@ function play(item) {
     path = item;
   }
 
+  let prefix = '/';
+  if (process.platform === 'win32') {
+    prefix = '';
+  }
+
   const albumCover = document.getElementById('album-cover');
   const songName = document.getElementById('song-name');
   const artistName = document.getElementById('artist-name');
@@ -147,7 +152,7 @@ function play(item) {
     // replace all because Windows uses backslashes instead of normal slashes - thanks, Bill!
     return (
       elem.path.replace(/\\/g, '/') ===
-      '/' + decodeURI(currentFile).split('///')[1]
+      prefix + decodeURI(currentFile).split('///')[1]
     );
   });
 
@@ -160,11 +165,6 @@ function play(item) {
   }
 
   currentFileInList = files.find(elem => {
-    let prefix = '/';
-    if (process.platform === 'win32') {
-      prefix = '';
-    }
-
     return (
       elem.getAttribute('data-file-path').replace(/\\/g, '/') ===
       prefix + decodeURI(currentFile).split('///')[1]
@@ -185,6 +185,7 @@ function play(item) {
     if (current === length) {
       if (index + 1 !== globalFiles.length) {
         play(globalFiles[index + 1].path);
+        debugger;
         index++;
       } else if (index + 1 === globalFiles.length && isOnRepeat) {
         play(globalFiles[0].path);
