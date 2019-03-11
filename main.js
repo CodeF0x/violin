@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 
-if (require('electron-squirrel-startup')) app.close();
+if (require('electron-squirrel-startup')) app.quit();
 
 const { dialog } = require('electron');
 const { ipcMain } = require('electron');
