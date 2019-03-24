@@ -1,5 +1,3 @@
-## ⚠️ Design is not final and will change!
-
 # 🎼 Violin
 
 ![screenshot](docs/images/screenshot.png)
@@ -22,7 +20,7 @@ Violin is a minimalistic and fast music player for Linux, macOS and Windows.
 
 ## ⬇️ Download and install it
 
-Work in progress
+[Get it here.](https://github.com/CodeF0x/violin/releases)
 
 ## 🔨 Pack it yourself & create a installer
 
@@ -41,5 +39,5 @@ Work in progress
 
 4. Create installer for your system (you must be on the system you want to create an installer for):
    - `npm run create-installer-mac`
-   - `npm run create-installer-linux`
+   - `npm run create-installer-linux` (this creates a .deb package. For other distros, just pack it as described above)
    - `npm run create-installer-windows` (this creates a standalone-app what is the intendend behaviour)

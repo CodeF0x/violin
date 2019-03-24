@@ -3,6 +3,20 @@
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  height: 12px;
+  width: 4px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(244, 143, 177);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 body {
   -webkit-app-region: drag;
   -webkit-font-smoothing: antialiased;
@@ -20,7 +34,7 @@ ul {
   list-style-type: none;
   padding-left: 50px;
   overflow: auto;
-  max-height: 325px;
+  max-height: 345px;
 }
 
 li {
@@ -35,7 +49,7 @@ li:hover {
 .middle-area {
   background-color: rgb(0, 22, 40);
   grid-area: middle-area;
-  height: 76vh;
+  height: 80vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -45,14 +59,14 @@ li:hover {
 footer {
   background-color: black;
   grid-area: footer;
-  height: 24vh;
+  height: 20vh;
   width: 100%;
   display: flex;
   align-content: flex-start;
 }
 
 .controls {
-  width: 100%;
+  width: 75%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -66,8 +80,8 @@ footer {
 
 .buttons > span > img {
   -webkit-app-region: no-drag;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   cursor: pointer;
 }
 
@@ -96,7 +110,7 @@ footer {
 }
 
 .album-cover > img {
-  height: 24vh;
+  height: 20vh;
 }
 
 .button {
