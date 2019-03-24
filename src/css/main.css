@@ -35,7 +35,7 @@ ul {
   list-style-type: none;
   padding-left: 50px;
   overflow: auto;
-  max-height: 325px;
+  max-height: 290px;
 }
 
 li {
@@ -81,8 +81,8 @@ footer {
 
 .buttons > span > img {
   -webkit-app-region: no-drag;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   cursor: pointer;
 }
 
