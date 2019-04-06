@@ -17,6 +17,25 @@
   background: transparent;
 }
 
+progress {
+  height: 5px;
+  display: block;
+  background: rgb(0, 22, 40);
+}
+
+progress::-moz-progress-bar {
+  background: rgb(0, 22, 40);
+}
+
+progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 15px;
+  background: rgb(244, 143, 177);
+}
+
 body {
   -webkit-app-region: drag;
   -webkit-font-smoothing: antialiased;

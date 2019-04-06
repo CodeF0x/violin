@@ -94,7 +94,7 @@ function listMusicFiles(files) {
     fileItem.setAttribute('data-file-path', file.path);
 
     fileItem.addEventListener('click', function() {
-      play(this);
+      play(this.getAttribute('data-file-path'));
     });
 
     list.appendChild(fileItem);
@@ -102,12 +102,7 @@ function listMusicFiles(files) {
 }
 
 function play(item) {
-  let path = undefined;
-  if (typeof item === 'object') {
-    path = item.getAttribute('data-file-path');
-  } else {
-    path = item;
-  }
+  let path = item;
 
   let prefix = '/';
   if (process.platform === 'win32') {
@@ -123,7 +118,10 @@ function play(item) {
 
   media.read(path, {
     onSuccess: tag => {
-      songName.innerText = tag.tags.title ? tag.tags.title : item.innerText;
+      let songNameSplitted = item.split('/');
+      songNameSplitted = songNameSplitted[songNameSplitted.length - 1];
+
+      songName.innerText = tag.tags.title ? tag.tags.title : songNameSplitted;
       artistName.innerText = tag.tags.artist ? tag.tags.artist : 'Unknown';
 
       if (tag.tags.picture) {
@@ -185,7 +183,6 @@ function play(item) {
     if (current === length) {
       if (index + 1 !== globalFiles.length) {
         play(globalFiles[index + 1].path);
-        debugger;
         index++;
       } else if (index + 1 === globalFiles.length && isOnRepeat) {
         play(globalFiles[0].path);
