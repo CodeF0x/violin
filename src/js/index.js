@@ -18,10 +18,12 @@ let currentFileInList = undefined;
 let index = undefined;
 let isOnRepeat = false;
 
+// Sending event to main process
 folderButton.addEventListener('click', () => {
   ipcRenderer.send('open-file-dialog');
 });
 
+// Receive files from main process
 ipcRenderer.on('music-files', (event, files) => {
   listMusicFiles(files);
 });
@@ -82,6 +84,11 @@ progressBar.addEventListener('click', function(e) {
   player.currentTime = percent * player.duration;
 });
 
+/**
+ * @function listMusicFiles
+ * @description Lists all supported files in the current folder.
+ * @param {array} files - Array of objects containing file path and name
+ */
 function listMusicFiles(files) {
   globalFiles = files;
   const middleArea = document.querySelector('.middle-area');
@@ -101,6 +108,11 @@ function listMusicFiles(files) {
   });
 }
 
+/**
+ * @function play
+ * @description Plays a file. Either automatically or when user clicks on song.
+ * @param {string} item - File path
+ */
 function play(item) {
   let path = item;
 
@@ -116,6 +128,7 @@ function play(item) {
   pauseButton.style.display = 'block';
   progressBar.value = 0;
 
+  // Get album cover, song name, artist
   media.read(path, {
     onSuccess: tag => {
       let songNameSplitted = item.split('/');
@@ -196,6 +209,11 @@ function play(item) {
   }, 500);
 }
 
+/**
+ * @function generateUrl
+ * @description Generates base64 URL of album cover.
+ * @param {array} arr - Array of bytes
+ */
 function generateUrl(arr) {
   for (let i = 0; i < arr.length; i++) {
     if (Array.isArray(arr[i])) {
@@ -206,10 +224,18 @@ function generateUrl(arr) {
   }
 }
 
+/**
+ * @function pause
+ * @description Pauses current song.
+ */
 function pause() {
   player.pause();
 }
 
+/**
+ * @function skip
+ * @description Skips current song and play next in line
+ */
 function skip() {
   const currentFile = player.src;
 
@@ -228,6 +254,10 @@ function skip() {
   }
 }
 
+/**
+ * @function back
+ * @description Either resets current song to 0 or goes back to the last song.
+ */
 function back() {
   const currentFile = player.src;
   let currentFileUrl = decodeURI(currentFile).split('///')[1];
@@ -250,10 +280,18 @@ function back() {
   }
 }
 
+/**
+ * @function resume
+ * @description Continues to play current song when paused.
+ */
 function resume() {
   player.play();
 }
 
+/**
+ * @function shuffle
+ * @description Shuffles curent file list randomly.
+ */
 function shuffle() {
   function shuffleFiles(files) {
     for (let i = files.length - 1; i > 0; i--) {
@@ -266,6 +304,10 @@ function shuffle() {
   shuffleFiles(globalFiles);
 }
 
+/**
+ * @function unshuffle
+ * @description Reverts current file list to default order.
+ */
 function unshuffle() {
   globalFiles = originalGlobalFiles;
 }
