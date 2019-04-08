@@ -9,6 +9,7 @@ module.exports = {
   shuffleButtonActive: document.getElementById('shuffle-active'),
   repeatButton: document.getElementById('repeat'),
   repeatButtonActive: document.getElementById('repeat-active'),
+  sortByNameButton: document.getElementById('by-name'),
   base64String: undefined,
   globalFiles: undefined,
   originalGlobalFiles: undefined,

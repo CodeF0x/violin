@@ -6,7 +6,7 @@ module.exports = (function() {
 
   // Receive files from main process
   ipcRenderer.on('music-files', (event, files) => {
-    listMusicFiles(files);
+    listMusicFiles(files, true);
   });
 
   playButton.addEventListener('click', () => {
@@ -63,5 +63,9 @@ module.exports = (function() {
     const percent = e.offsetX / this.offsetWidth;
     progressBar.value = percent / 100;
     player.currentTime = percent * player.duration;
+  });
+
+  sortByNameButton.addEventListener('click', () => {
+    sortByName();
   });
 })();

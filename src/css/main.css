@@ -240,6 +240,10 @@ audio {
   min-width: 40%;
 }
 
+#sort-by > div:hover {
+  cursor: pointer;
+}
+
 #songs {
   max-height: 350px;
   overflow-y: scroll;

@@ -12,6 +12,7 @@ let {
   shuffleButtonActive,
   repeatButton,
   repeatButtonActive,
+  sortByNameButton,
   base64String,
   globalFiles,
   originalGlobalFiles,
@@ -22,4 +23,5 @@ let {
 const { pause, skip, back, resume } = require('./js/controls.js');
 const { listMusicFiles } = require('./js/render.js');
 const { play, generateUrl, shuffle, unshuffle } = require('./js/play.js');
+const { sortByName } = require('./js/sort.js');
 require('./js/event-listener.js');

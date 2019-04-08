@@ -4,7 +4,7 @@ module.exports = {
    * @description Lists all supported files in the current folder.
    * @param {array} files - Array of objects containing file path and name
    */
-  listMusicFiles: function(files) {
+  listMusicFiles: function(files, readTags) {
     globalFiles = files;
     const list = document.getElementById('songs');
     list.innerHTML = '';
@@ -21,19 +21,27 @@ module.exports = {
       const album = document.createElement('div');
       const artist = document.createElement('div');
 
-      new media.Reader(files[i].path)
-        .setTagsToRead(['title', 'album', 'artist'])
-        .read({
-          onSuccess: tag => {
-            let songNameSplitted = files[i].path.split('/');
-            songNameSplitted = songNameSplitted[songNameSplitted.length - 1];
+      if (readTags) {
+        new media.Reader(files[i].path)
+          .setTagsToRead(['title', 'album', 'artist'])
+          .read({
+            onSuccess: tag => {
+              let songNameSplitted = files[i].path.split('/');
+              songNameSplitted = songNameSplitted[songNameSplitted.length - 1];
 
-            name.innerText = tag.tags.title ? tag.tags.title : songNameSplitted;
-            album.innerText = tag.tags.album ? tag.tags.album : 'Unknown';
-            artist.innerText = tag.tags.artist ? tag.tags.artist : 'Unknown';
-          },
-          onError: err => console.error(err)
-        });
+              name.innerText = tag.tags.title
+                ? tag.tags.title
+                : songNameSplitted;
+              album.innerText = tag.tags.album ? tag.tags.album : 'Unknown';
+              artist.innerText = tag.tags.artist ? tag.tags.artist : 'Unknown';
+            },
+            onError: err => console.error(err)
+          });
+      } else {
+        name.innerText = files[i].name;
+        album.innerText = files[i].album;
+        album.innerText = files[i].artist;
+      }
 
       container.appendChild(name);
       container.appendChild(album);
