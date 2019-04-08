@@ -92,19 +92,37 @@ progressBar.addEventListener('click', function(e) {
 function listMusicFiles(files) {
   globalFiles = files;
   const middleArea = document.querySelector('.middle-area');
-  const list = middleArea.querySelector('ul');
+  const list = document.getElementById('songs');
   list.innerHTML = '';
+  document.getElementById('sort-by').style.display = 'flex';
 
   files.forEach(file => {
-    const fileItem = document.createElement('li');
-    fileItem.innerText = file.name;
-    fileItem.setAttribute('data-file-path', file.path);
+    const container = document.createElement('div');
+    container.setAttribute('data-file-path', file.path);
+    const name = document.createElement('div');
+    const album = document.createElement('div');
+    const artist = document.createElement('div');
 
-    fileItem.addEventListener('click', function() {
+    media.read(file.path, {
+      onSuccess: tag => {
+        let songNameSplitted = file.path.split('/');
+        songNameSplitted = songNameSplitted[songNameSplitted.length - 1];
+
+        name.innerText = tag.tags.title ? tag.tags.title : songNameSplitted;
+        album.innerText = tag.tags.album ? tag.tags.album : 'Unknown';
+        artist.innerText = tag.tags.artist ? tag.tags.artist : 'Unknown';
+      },
+      onError: err => console.error(err)
+    });
+
+    container.addEventListener('click', function() {
       play(this.getAttribute('data-file-path'));
     });
 
-    list.appendChild(fileItem);
+    container.appendChild(name);
+    container.appendChild(album);
+    container.appendChild(artist);
+    list.appendChild(container);
   });
 }
 
@@ -149,9 +167,7 @@ function play(item) {
         albumCover.src = 'img/placeholder.png';
       }
     },
-    onError: err => {
-      console.error(err);
-    }
+    onError: err => console.error(err)
   });
 
   player.src = path;

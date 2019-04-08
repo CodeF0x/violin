@@ -250,3 +250,23 @@ audio {
 #shuffle-active {
   display: none;
 }
+
+#sort-by {
+  display: none;
+  justify-content: space-evenly;
+}
+
+#songs {
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#songs > div {
+  float: left;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
