@@ -13,6 +13,10 @@ module.exports = {
     for (let i = 0; i < files.length; i++) {
       const container = document.createElement('div');
       container.setAttribute('data-file-path', files[i].path);
+      container.addEventListener('click', function() {
+        play(this.getAttribute('data-file-path'));
+      });
+
       const name = document.createElement('div');
       const album = document.createElement('div');
       const artist = document.createElement('div');
@@ -30,10 +34,6 @@ module.exports = {
           },
           onError: err => console.error(err)
         });
-
-      container.addEventListener('click', function() {
-        play(this.getAttribute('data-file-path'));
-      });
 
       container.appendChild(name);
       container.appendChild(album);
