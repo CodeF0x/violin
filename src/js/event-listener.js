@@ -82,7 +82,9 @@ function toggleSorting(whatToDo, element) {
     sortedElement = undefined;
     revertSorting(originalOrder);
   } else if (whatToDo === 'add class') {
+    if (sortedElement) sortedElement.classList.remove('sorted');
     element.classList.add('sorted');
+    if (originalOrder.length !== 0) revertSorting(originalOrder);
     sortedElement = element;
     const songData = getSongData();
     sortAlphabetically(songData, element.innerText.toLowerCase());
