@@ -242,6 +242,7 @@ audio {
 
 #sort-by > div:hover {
   cursor: pointer;
+  user-select: none;
 }
 
 #songs {
