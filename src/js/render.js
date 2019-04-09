@@ -3,6 +3,7 @@ module.exports = {
    * @function listMusicFiles
    * @description Lists all supported files in the current folder.
    * @param {array} files - Array of objects containing file path and name
+   * @param {boolean} readTags - Tells if function should read tags from file or if tags are already read
    */
   listMusicFiles: function(files, readTags) {
     globalFiles = files;
@@ -40,7 +41,7 @@ module.exports = {
       } else {
         name.innerText = files[i].name;
         album.innerText = files[i].album;
-        album.innerText = files[i].artist;
+        artist.innerText = files[i].artist;
       }
 
       container.appendChild(name);

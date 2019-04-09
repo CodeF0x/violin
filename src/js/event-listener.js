@@ -65,7 +65,26 @@ module.exports = (function() {
     player.currentTime = percent * player.duration;
   });
 
-  sortByNameButton.addEventListener('click', () => {
-    sortByName();
+  [sortByNameButton, sortByAlbumButton, sortByArtistButton].forEach(button => {
+    button.addEventListener('click', function() {
+      if (sortedElement !== this) {
+        toggleSorting('add class', this);
+      } else if (sortedElement === this) {
+        toggleSorting('remove class', this);
+      }
+    });
   });
 })();
+
+function toggleSorting(whatToDo, element) {
+  if (whatToDo === 'remove class') {
+    element.classList.remove('sorted');
+    sortedElement = undefined;
+    revertSorting(originalOrder);
+  } else if (whatToDo === 'add class') {
+    element.classList.add('sorted');
+    sortedElement = element;
+    const songData = getSongData();
+    sortAlphabetically(songData, element.innerText.toLowerCase());
+  }
+}

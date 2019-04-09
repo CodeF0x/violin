@@ -279,3 +279,13 @@ audio {
   padding-left: 10px;
   margin-right: 10px;
 }
+
+.sorted::after {
+  content: '';
+  border-radius: 50%;
+  height: 9px;
+  width: 9px;
+  background-color: #007f3f;
+  display: inline-block;
+  margin-left: 2px;
+}

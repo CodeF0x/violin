@@ -13,6 +13,8 @@ let {
   repeatButton,
   repeatButtonActive,
   sortByNameButton,
+  sortByAlbumButton,
+  sortByArtistButton,
   base64String,
   globalFiles,
   originalGlobalFiles,
@@ -23,5 +25,11 @@ let {
 const { pause, skip, back, resume } = require('./js/controls.js');
 const { listMusicFiles } = require('./js/render.js');
 const { play, generateUrl, shuffle, unshuffle } = require('./js/play.js');
-const { sortByName } = require('./js/sort.js');
+let {
+  originalOrder,
+  sortedElement,
+  getSongData,
+  revertSorting,
+  sortAlphabetically
+} = require('./js/sort.js');
 require('./js/event-listener.js');

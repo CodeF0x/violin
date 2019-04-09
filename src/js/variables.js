@@ -10,6 +10,8 @@ module.exports = {
   repeatButton: document.getElementById('repeat'),
   repeatButtonActive: document.getElementById('repeat-active'),
   sortByNameButton: document.getElementById('by-name'),
+  sortByAlbumButton: document.getElementById('by-album'),
+  sortByArtistButton: document.getElementById('by-artist'),
   base64String: undefined,
   globalFiles: undefined,
   originalGlobalFiles: undefined,
