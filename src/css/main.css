@@ -59,6 +59,13 @@ body {
   justify-content: center;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 footer {
   background-color: black;
   grid-area: footer;
@@ -118,29 +125,11 @@ footer {
 }
 
 .button {
-  display: block;
-  margin: 30px auto;
-  padding: 0;
-
-  overflow: hidden;
-
-  border-width: 0;
-  outline: none;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-
-  background-color: #2ecc71;
-  color: #ecf0f1;
-
-  transition: background-color 2s;
-}
-
-.button {
   -webkit-app-region: no-drag;
   position: relative;
 
   display: block;
-  margin: 30px auto;
+  margin: 30px 15px;
   padding: 0;
 
   overflow: hidden;
