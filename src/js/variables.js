@@ -12,6 +12,7 @@ module.exports = {
   sortByNameButton: document.getElementById('by-name'),
   sortByAlbumButton: document.getElementById('by-album'),
   sortByArtistButton: document.getElementById('by-artist'),
+  searchField: document.getElementById('search'),
   base64String: undefined,
   globalFiles: undefined,
   originalGlobalFiles: undefined,

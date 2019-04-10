@@ -74,6 +74,11 @@ module.exports = (function() {
       }
     });
   });
+
+  searchField.addEventListener('keyup', function(e) {
+    console.log('trigger');
+    search(e, document.querySelectorAll('div[data-file-path]'), this.value);
+  });
 })();
 
 function toggleSorting(whatToDo, element) {

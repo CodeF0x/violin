@@ -113,6 +113,7 @@ body {
 }
 
 .search {
+  -webkit-app-region: no-drag;
   background: transparent;
   border: none;
   height: 20px;
