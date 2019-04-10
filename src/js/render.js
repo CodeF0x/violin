@@ -8,10 +8,13 @@ module.exports = {
   listMusicFiles: function(files, readTags) {
     globalFiles = files;
     const list = document.getElementById('songs');
+    list.style.display = 'none';
     list.innerHTML = '';
     document.querySelector('.sort-by').classList.remove('hidden');
     document.querySelector('.search').classList.remove('hidden');
+    document.querySelector('.button-container').style.justifyContent = 'start';
 
+    const fragment = document.createDocumentFragment();
     for (let i = 0; i < files.length; i++) {
       const container = document.createElement('div');
       container.setAttribute('data-file-path', files[i].path);
@@ -48,7 +51,11 @@ module.exports = {
       container.appendChild(name);
       container.appendChild(album);
       container.appendChild(artist);
-      list.appendChild(container);
+      fragment.appendChild(container);
     }
+    list.appendChild(fragment);
+    setTimeout(() => {
+      list.style.display = 'flex';
+    }, 200);
   }
 };
