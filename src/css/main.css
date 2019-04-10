@@ -32,8 +32,6 @@ body {
   grid-template-columns: 50% 50%;
   grid-template-rows: auto auto;
   grid-template-areas: 'middle-area middle-area' 'footer footer';
-  height: 100vh;
-  width: 100vw;
 }
 
 .middle-area {
@@ -154,7 +152,7 @@ body {
 }
 
 #songs {
-  max-height: 380px;
+  max-height: 350px;
   overflow-y: scroll;
   overflow-x: hidden;
   white-space: nowrap;
@@ -211,7 +209,7 @@ footer {
 }
 
 .album-cover > img {
-  height: 120px;
+  height: 20vh;
 }
 
 .controls {
