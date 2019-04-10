@@ -9,7 +9,8 @@ module.exports = {
     globalFiles = files;
     const list = document.getElementById('songs');
     list.innerHTML = '';
-    document.getElementById('sort-by').style.display = 'flex';
+    document.querySelector('.sort-by').classList.remove('hidden');
+    document.querySelector('.search').classList.remove('hidden');
 
     for (let i = 0; i < files.length; i++) {
       const container = document.createElement('div');

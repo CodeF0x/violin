@@ -61,7 +61,7 @@ body {
 
 .button-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -129,7 +129,6 @@ footer {
   position: relative;
 
   display: block;
-  margin: 30px 15px;
   padding: 0;
 
   overflow: hidden;
@@ -220,18 +219,15 @@ audio {
   display: none;
 }
 
-#sort-by {
-  display: none;
+.sort-by {
+  display: flex;
   justify-content: space-evenly;
 }
 
-#sort-by:first-child {
-  min-width: 40%;
-}
-
-#sort-by > div:hover {
+.sort-by > div:hover {
   cursor: pointer;
   user-select: none;
+  font-weight: 900;
 }
 
 #songs {
@@ -265,6 +261,10 @@ audio {
   overflow: hidden;
 }
 
+#songs > div > div:first-child {
+  width: 465px;
+}
+
 #songs > div > div:nth-child(2) {
   padding-left: 10px;
   margin-right: 10px;
@@ -278,4 +278,26 @@ audio {
   background-color: #007f3f;
   display: inline-block;
   margin-left: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+.search {
+  background: transparent;
+  border: none;
+  height: 20px;
+  width: 200px;
+  color: lightgrey;
+  text-align: center;
+  margin: 5px 0 5px 0;
+}
+
+.search:hover:enabled,
+.search:focus:enabled {
+  outline: none;
+  border: 1px solid rgb(244, 143, 177);
+  border-radius: 5px;
+  margin: 4px 0 4px 0;
 }
