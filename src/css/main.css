@@ -1,6 +1,12 @@
+/** GENERAL RULES */
+
 * {
   margin: 0;
   padding: 0;
+}
+
+audio {
+  display: none;
 }
 
 ::-webkit-scrollbar {
@@ -17,25 +23,6 @@
   background: transparent;
 }
 
-progress {
-  height: 5px;
-  display: block;
-  background: rgb(0, 22, 40);
-}
-
-progress::-moz-progress-bar {
-  background: rgb(0, 22, 40);
-}
-
-progress::-webkit-progress-bar {
-  background: transparent;
-}
-
-progress::-webkit-progress-value {
-  border-radius: 15px;
-  background: rgb(244, 143, 177);
-}
-
 body {
   -webkit-app-region: drag;
   -webkit-font-smoothing: antialiased;
@@ -44,16 +31,15 @@ body {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto auto;
-  grid-template-areas:
-    'middle-area middle-area'
-    'footer footer';
+  grid-template-areas: 'middle-area middle-area' 'footer footer';
+  height: 100vh;
+  width: 100vw;
 }
 
 .middle-area {
   background-color: rgb(0, 22, 40);
   grid-area: middle-area;
   height: 80vh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,64 +50,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-footer {
-  background-color: black;
-  grid-area: footer;
-  height: 20vh;
-  width: 100%;
-  display: flex;
-  align-content: flex-start;
-}
-
-.controls {
-  width: 100%; /** container 100% */
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.buttons {
-  width: 86%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.buttons > span > img {
-  -webkit-app-region: no-drag;
-  height: 25px;
-  width: 25px;
-  cursor: pointer;
-}
-
-.current-song > div > img {
-  -webkit-app-region: no-drag;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-}
-
-.progress {
-  padding-top: 5px;
-  cursor: pointer;
-}
-
-#progress-value {
-  width: 100%;
-}
-
-.album-cover {
-  text-align: center;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.album-cover > img {
-  height: 20vh;
 }
 
 .button {
@@ -184,39 +112,22 @@ footer {
   transition: width 0.1s ease-out, padding-top 0.1s ease-out;
 }
 
-.current-song {
-  width: 86%;
+.search {
+  background: transparent;
+  border: none;
+  height: 20px;
+  width: 200px;
+  color: lightgrey;
   text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  margin: 5px 0 5px 0;
 }
 
-.current-song > .info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.current-song > .info > span:nth-child(1) {
-  margin-bottom: 1%;
-  margin-top: 1%;
-}
-
-audio {
-  display: none;
-}
-
-#pause {
-  display: none;
-}
-
-#repeat-active {
-  display: none;
-}
-
-#shuffle-active {
-  display: none;
+.search:hover:enabled,
+.search:focus:enabled {
+  outline: none;
+  border: 1px solid rgb(244, 143, 177);
+  border-radius: 5px;
+  margin: 4px 0 4px 0;
 }
 
 .sort-by {
@@ -230,8 +141,18 @@ audio {
   font-weight: 900;
 }
 
+.sorted::after {
+  content: '';
+  border-radius: 50%;
+  height: 9px;
+  width: 9px;
+  background-color: #007f3f;
+  display: inline-block;
+  margin-left: 2px;
+}
+
 #songs {
-  max-height: 350px;
+  max-height: 380px;
   overflow-y: scroll;
   overflow-x: hidden;
   white-space: nowrap;
@@ -270,34 +191,115 @@ audio {
   margin-right: 10px;
 }
 
-.sorted::after {
-  content: '';
-  border-radius: 50%;
-  height: 9px;
-  width: 9px;
-  background-color: #007f3f;
-  display: inline-block;
-  margin-left: 2px;
+footer {
+  background-color: black;
+  grid-area: footer;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  align-content: flex-start;
 }
 
-.hidden {
+.album-cover {
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.album-cover > img {
+  height: 120px;
+}
+
+.controls {
+  width: 100%; /** container 100% */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+progress {
+  height: 5px;
+  display: block;
+  background: rgb(0, 22, 40);
+}
+
+progress::-moz-progress-bar {
+  background: rgb(0, 22, 40);
+}
+
+progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 15px;
+  background: rgb(244, 143, 177);
+}
+
+.buttons {
+  width: 86%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.buttons > span > img {
+  -webkit-app-region: no-drag;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+#pause {
   display: none;
 }
 
-.search {
-  background: transparent;
-  border: none;
-  height: 20px;
-  width: 200px;
-  color: lightgrey;
-  text-align: center;
-  margin: 5px 0 5px 0;
+#repeat-active {
+  display: none;
 }
 
-.search:hover:enabled,
-.search:focus:enabled {
-  outline: none;
-  border: 1px solid rgb(244, 143, 177);
-  border-radius: 5px;
-  margin: 4px 0 4px 0;
+#shuffle-active {
+  display: none;
+}
+
+.progress {
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+#progress-value {
+  width: 100%;
+}
+
+.current-song > div > img {
+  -webkit-app-region: no-drag;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.current-song {
+  width: 86%;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.current-song > .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.current-song > .info > span:nth-child(1) {
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+/** At the bottom to ensure elements are hidden per default */
+.hidden {
+  display: none;
 }
