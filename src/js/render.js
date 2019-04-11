@@ -57,5 +57,17 @@ module.exports = {
     setTimeout(() => {
       list.style.display = 'flex';
     }, 200);
+
+    // Highlight current song after sorting
+    if (currentFileInList) {
+      currentFileInList = [
+        ...document.querySelectorAll('div[data-file-path]')
+      ].find(song => {
+        return (
+          song.firstChild.innerText === currentFileInList.firstChild.innerText
+        );
+      });
+      currentFileInList.style.color = 'rgb(244, 143, 177)';
+    }
   }
 };
