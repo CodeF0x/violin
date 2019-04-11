@@ -75,8 +75,8 @@ module.exports = (function() {
     });
   });
 
-  searchField.addEventListener('keyup', function(e) {
-    search(e, document.querySelectorAll('div[data-file-path]'), this.value);
+  searchField.addEventListener('keyup', function() {
+    search(document.querySelectorAll('div[data-file-path]'), this.value);
   });
 })();
 
