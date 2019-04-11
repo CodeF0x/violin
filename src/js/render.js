@@ -12,7 +12,7 @@ module.exports = {
     list.innerHTML = '';
     document.querySelector('.sort-by').classList.remove('hidden');
     document.querySelector('.search').classList.remove('hidden');
-    document.querySelector('.button-container').style.justifyContent = 'start';
+    document.querySelector('.middle-area').style.justifyContent = 'start';
 
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < files.length; i++) {
