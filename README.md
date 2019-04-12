@@ -41,5 +41,5 @@ If you just want to open a folder with your music and start listening instead of
 
 4. Create installer for your system (you must be on the system you want to create an installer for):
    - `npm run create-installer-mac`
-   - `npm run create-installer-linux` (this creates a .deb package. For other distros, just pack it as described above)
+   - `npm run create-installer-linux` (this creates a .deb package. For other distros, use the created .app file you created in above's step 3)
    - `npm run create-installer-windows` (this creates a standalone-app what is the intendend behaviour)
