@@ -2,7 +2,9 @@
 
 ![screenshot](docs/images/screenshot.png)
 
-Violin is a minimalistic and fast music player for Linux, macOS and Windows.
+Violin is a minimalistic and fast music player for Linux, macOS, and Windows.
+
+If you just want to open a folder with your music and start listening instead of importing your songs to Spotify, downloading a huge app that's just overkill for your needs, or your songs are not on streaming platforms, Violin is for you. If that's not the case, you probably won't like Violin.
 
 ## 📓 Features
 
