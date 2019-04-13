@@ -35,3 +35,8 @@ let {
   sortAlphabetically
 } = require('./js/sort.js');
 require('./js/event-listener.js');
+
+// On Windows, a height of 380 px will cause the button to be cut off
+if (process.platform === 'win32') {
+  document.getElementById('songs').style.maxHeight = '350px';
+}
