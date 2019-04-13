@@ -37,6 +37,11 @@ let {
 require('./js/event-listener.js');
 
 // On Windows and Linux, a height of 380 px will cause the button to be cut off
-if (process.platform === 'win32' || process.platform === 'linux') {
-  document.getElementById('songs').style.maxHeight = '350px';
+const songList = document.getElementById('songs');
+switch (process.platform) {
+  case 'win32':
+    songList.style.maxHeight = '350px';
+    break;
+  case 'linux':
+    songList.style.maxHeight = '340px';
 }
