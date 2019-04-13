@@ -152,7 +152,7 @@ body {
 }
 
 #songs {
-  max-height: 380px;
+  max-height: 350px;
   overflow-y: scroll;
   overflow-x: hidden;
   white-space: nowrap;

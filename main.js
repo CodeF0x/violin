@@ -14,7 +14,7 @@ function createWindow() {
     height: 600,
     titleBarStyle: 'hiddenInset',
     fullscreenable: false,
-    useContentSize: true,
+    useContentSize: false,
     webPreferences: {
       nodeIntegration: true
     }
