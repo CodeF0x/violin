@@ -54,6 +54,15 @@ module.exports = {
       fragment.appendChild(container);
     }
     list.appendChild(fragment);
+    /**
+     * For some reason, the creation of the song list it pretty "laggy".
+     * I don't know it it's the library used for reading the tags or just
+     * the fact that so many DOM elements are created at once, and even
+     * using a Promise here and making everything async didn't help. I 
+     * decided to go for the "workaround" of adding a timeout, what even 
+     * somewhat works (songs list pops up at once, instead of "lagging in")
+     * More infos here: https://github.com/aadsm/jsmediatags/issues/111)
+     */
     setTimeout(() => {
       list.style.display = 'flex';
     }, 200);
