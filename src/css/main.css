@@ -1,6 +1,12 @@
+/** GENERAL RULES */
+
 * {
   margin: 0;
   padding: 0;
+}
+
+audio {
+  display: none;
 }
 
 ::-webkit-scrollbar {
@@ -17,25 +23,6 @@
   background: transparent;
 }
 
-progress {
-  height: 5px;
-  display: block;
-  background: rgb(0, 22, 40);
-}
-
-progress::-moz-progress-bar {
-  background: rgb(0, 22, 40);
-}
-
-progress::-webkit-progress-bar {
-  background: transparent;
-}
-
-progress::-webkit-progress-value {
-  border-radius: 15px;
-  background: rgb(244, 143, 177);
-}
-
 body {
   -webkit-app-region: drag;
   -webkit-font-smoothing: antialiased;
@@ -44,111 +31,24 @@ body {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto auto;
-  grid-template-areas:
-    'middle-area middle-area'
-    'footer footer';
-}
-
-ul {
-  list-style-type: none;
-  padding-left: 50px;
-  overflow: auto;
-  max-height: 345px;
-}
-
-li {
-  cursor: pointer;
-}
-
-li:hover {
-  background-color: lightgrey;
-  color: black;
+  grid-template-areas: 'middle-area middle-area' 'footer footer';
 }
 
 .middle-area {
   background-color: rgb(0, 22, 40);
   grid-area: middle-area;
   height: 80vh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-footer {
-  background-color: black;
-  grid-area: footer;
-  height: 20vh;
-  width: 100%;
-  display: flex;
-  align-content: flex-start;
-}
-
-.controls {
-  width: 100%; /** container 100% */
-  height: 100%;
+.button-container {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-}
-
-.buttons {
-  width: 86%;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.buttons > span > img {
-  -webkit-app-region: no-drag;
-  height: 25px;
-  width: 25px;
-  cursor: pointer;
-}
-
-.current-song > div > img {
-  -webkit-app-region: no-drag;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-}
-
-.progress {
-  padding-top: 5px;
-  cursor: pointer;
-}
-
-#progress-value {
-  width: 100%;
-}
-
-.album-cover {
-  text-align: center;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.album-cover > img {
-  height: 20vh;
-}
-
-.button {
-  display: block;
-  margin: 30px auto;
-  padding: 0;
-
-  overflow: hidden;
-
-  border-width: 0;
-  outline: none;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-
-  background-color: #2ecc71;
-  color: #ecf0f1;
-
-  transition: background-color 2s;
 }
 
 .button {
@@ -156,7 +56,6 @@ footer {
   position: relative;
 
   display: block;
-  margin: 30px auto;
   padding: 0;
 
   overflow: hidden;
@@ -212,6 +111,175 @@ footer {
   transition: width 0.1s ease-out, padding-top 0.1s ease-out;
 }
 
+.search {
+  -webkit-app-region: no-drag;
+  background: transparent;
+  border: none;
+  height: 20px;
+  width: 200px;
+  color: lightgrey;
+  text-align: center;
+  margin: 5px 0 5px 0;
+}
+
+.search:hover:enabled,
+.search:focus:enabled {
+  outline: none;
+  border: 1px solid rgb(244, 143, 177);
+  border-radius: 5px;
+  margin: 4px 0 4px 0;
+}
+
+.sort-by {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sort-by > div:hover {
+  cursor: pointer;
+  user-select: none;
+  font-weight: 900;
+}
+
+.sorted::after {
+  content: '';
+  border-radius: 50%;
+  height: 9px;
+  width: 9px;
+  background-color: #007f3f;
+  display: inline-block;
+  margin-left: 2px;
+}
+
+#songs {
+  max-height: 380px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  white-space: nowrap;
+  flex-flow: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 5px;
+}
+
+#songs > div {
+  float: left;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#songs > div:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+#songs > div > div {
+  width: 33%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#songs > div > div:first-child {
+  width: 465px;
+}
+
+#songs > div > div:nth-child(2) {
+  padding-left: 10px;
+  margin-right: 10px;
+}
+
+footer {
+  background-color: black;
+  grid-area: footer;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  align-content: flex-start;
+}
+
+.album-cover {
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.album-cover > img {
+  height: 20vh;
+}
+
+.controls {
+  width: 100%; /** container 100% */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+progress {
+  height: 5px;
+  display: block;
+  background: rgb(0, 22, 40);
+}
+
+progress::-moz-progress-bar {
+  background: rgb(0, 22, 40);
+}
+
+progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 15px;
+  background: rgb(244, 143, 177);
+}
+
+.buttons {
+  width: 86%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.buttons > span > img {
+  -webkit-app-region: no-drag;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+#pause {
+  display: none;
+}
+
+#repeat-active {
+  display: none;
+}
+
+#shuffle-active {
+  display: none;
+}
+
+.progress {
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+#progress-value {
+  width: 100%;
+}
+
+.current-song > div > img {
+  -webkit-app-region: no-drag;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
 .current-song {
   width: 86%;
   text-align: center;
@@ -231,22 +299,7 @@ footer {
   margin-top: 1%;
 }
 
-audio {
-  display: none;
-}
-
-.ul-container {
-  margin-left: 15%;
-}
-
-#pause {
-  display: none;
-}
-
-#repeat-active {
-  display: none;
-}
-
-#shuffle-active {
+/** At the bottom to ensure elements are hidden per default */
+.hidden {
   display: none;
 }

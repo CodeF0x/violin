@@ -2,7 +2,9 @@
 
 ![screenshot](docs/images/screenshot.png)
 
-Violin is a minimalistic and fast music player for Linux, macOS and Windows.
+Violin is a minimalistic and fast music player for Linux, macOS, and Windows.
+
+If you just want to open a folder with your music and start listening instead of importing your songs to Spotify, downloading a huge app that's just overkill for your needs, or your songs are not on streaming platforms, Violin is for you. If that's not the case, you probably won't like Violin.
 
 ## 📓 Features
 
@@ -39,5 +41,5 @@ Violin is a minimalistic and fast music player for Linux, macOS and Windows.
 
 4. Create installer for your system (you must be on the system you want to create an installer for):
    - `npm run create-installer-mac`
-   - `npm run create-installer-linux` (this creates a .deb package. For other distros, just pack it as described above)
-   - `npm run create-installer-windows` (this creates a standalone-app what is the intendend behaviour)
+   - `npm run create-installer-linux` (this creates a .deb package. For other distros, use the created .app file you created in above's step 3)
+   - `npm run create-installer-windows` (this creates a standalone-app what is the intendend behaviour. Also, the app is unsigned so Windows will probably complain)

@@ -3,3 +3,5 @@ node_modules/*
 docs/.DS_Store
 release-builds/*
 docs/images/.DS_Store
+src/img/icons/*-backup.*
+.idea/*
