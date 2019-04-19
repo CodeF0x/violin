@@ -4247,7 +4247,7 @@ body.is-preload #header .image img {
 
 /** Own style adjusments */
 .screenshot-preview > img {
-  max-width: 77%;
+  max-width: 100%;
   height: auto;
   display: inline-block;
 }
