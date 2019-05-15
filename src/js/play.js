@@ -12,11 +12,10 @@ module.exports = {
       prefix = '';
     }
 
-    const albumCover = document.getElementById('album-cover');
-    const songName = document.getElementById('song-name');
-    const artistName = document.getElementById('artist-name');
-    playButton.style.display = 'none';
-    pauseButton.style.display = 'block';
+    const albumCover = document.querySelector('.album-img');
+    const songName = document.getElementById('song-title');
+    const artistName = document.getElementById('song-artist');
+    playButton.style.backgroundImage = "url('img/pause.png')";
     progressBar.value = 0;
 
     // Get album cover, song name, artist
@@ -35,7 +34,7 @@ module.exports = {
           const imgUrl = `data:${picture.format};base64,${window.btoa(
             base64String
           )}`;
-          albumCover.src = imgUrl;
+          albumCover.style.backgroundImage = `url('${imgUrl}')`;
         } else {
           albumCover.src = 'img/placeholder.png';
         }

@@ -13,14 +13,13 @@ function createWindow() {
     width: 800,
     height: 600,
     titleBarStyle: 'hiddenInset',
-    fullscreenable: false,
     useContentSize: false,
     webPreferences: {
       nodeIntegration: true
     }
   });
 
-  window.setResizable(false);
+  window.setResizable(true);
   window.loadFile('src/index.html');
 }
 

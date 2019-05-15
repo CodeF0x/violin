@@ -10,9 +10,9 @@ module.exports = {
     const list = document.getElementById('songs');
     list.style.display = 'none';
     list.innerHTML = '';
-    document.querySelector('.sort-by').classList.remove('hidden');
-    document.querySelector('.search').classList.remove('hidden');
-    document.querySelector('.middle-area').style.justifyContent = 'start';
+    //document.querySelector('.sort-by').classList.remove('hidden');
+    //document.querySelector('.search').classList.remove('hidden');
+    //document.querySelector('.middle-area').style.justifyContent = 'start';
 
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < files.length; i++) {
@@ -54,6 +54,8 @@ module.exports = {
       fragment.appendChild(container);
     }
     list.appendChild(fragment);
+    list.style.gridRow = '2';
+    list.style.gridColumn = '1/5';
     setTimeout(() => {
       list.style.display = 'flex';
     }, 200);

@@ -12,71 +12,40 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <section class="middle-area">
-      <div class="button-container">
-        <button type="button" class="button" id="open-folder">
-          <span>Open Folder</span>
-        </button>
-        <input
-          type="text"
-          placeholder="Search by name"
-          class="hidden search"
-          id="search"
-        />
+    <div class="top-bg"></div>
+    <div class="file-con">
+      <a href="#" id="open-folder" class="btn">OPEN FOLDER</a>
+      <input
+        type="text"
+        placeholder="Search by name"
+        class="search"
+        id="search"
+      />
+    </div>
+    <div id="by-name">Name</div>
+    <div id="by-album">Album</div>
+    <div id="by-artist">Artist</div>
+    <div id="songs"></div>
+    <div class="album-img"></div>
+    <div class="bottom-bg">
+      <div class="control-con">
+        <div id="shuffle"></div>
+        <div id="last-song"></div>
+        <div id="play"></div>
+        <div id="next-song"></div>
+        <div id="repeat"></div>
       </div>
-      <div class="ul-container">
-        <div class="hidden sort-by">
-          <div id="by-name">Name</div>
-          <div id="by-album">Album</div>
-          <div id="by-artist">Artist</div>
-        </div>
-        <div id="songs"></div>
+      <div class="progress-con">
+        <div id="timer-start">0:00</div>
+        <progress id="progress-value" value="0" max="100"></progress>
+        <div id="timer-end">0:00</div>
       </div>
-    </section>
-    <footer>
-      <div class="album-cover">
-        <img class="album-cover" id="album-cover" src="img/placeholder.png" />
+      <div class="song-info">
+        <div id="song-title">Something</div>
+        by
+        <div id="song-artist">Someone</div>
       </div>
-      <div class="controls">
-        <div>
-          <div class="buttons">
-            <span id="shuffle">
-              <img src="img/shuffle.png" />
-            </span>
-            <span id="shuffle-active">
-              <img src="img/shuffle-active.png" />
-            </span>
-            <span id="backward">
-              <img src="img/backward.png" />
-            </span>
-            <span id="play">
-              <img src="img/play.png" />
-            </span>
-            <span id="pause">
-              <img src="img/pause.png" />
-            </span>
-            <span id="forward">
-              <img src="img/forward.png" />
-            </span>
-            <span id="repeat">
-              <img src="img/repeat.png" />
-            </span>
-            <span id="repeat-active">
-              <img src="img/repeat-active.png" />
-            </span>
-          </div>
-          <div class="progress">
-            <progress id="progress-value" value="0" max="100"></progress>
-          </div>
-          <div class="current-song">
-            <div class="info">
-              <span id="song-name">&nbsp;</span>
-              <span id="artist-name">Nothing playing right now</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    </div>
     <script src="js/index.js"></script>
   </body>
 </html>

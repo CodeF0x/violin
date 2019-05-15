@@ -1,6 +1,7 @@
 module.exports = (function() {
   // Sending event to main process
-  folderButton.addEventListener('click', () => {
+  folderButton.addEventListener('click', e => {
+    e.preventDefault();
     ipcRenderer.send('open-file-dialog');
   });
 
@@ -13,16 +14,15 @@ module.exports = (function() {
     if (player.src === '') {
       return;
     }
-    pauseButton.style.display = 'block';
-    playButton.style.display = 'none';
+    playButton.style.backgroundColor = '../img/pause.png';
     resume();
   });
 
-  pauseButton.addEventListener('click', () => {
-    playButton.style.display = 'block';
-    pauseButton.style.display = 'none';
-    pause();
-  });
+  // pauseButton.addEventListener('click', () => {
+  //   playButton.style.display = 'block';
+  //   pauseButton.style.display = 'none';
+  //   pause();
+  // });
 
   forwardButton.addEventListener('click', () => {
     skip();
@@ -41,11 +41,11 @@ module.exports = (function() {
     shuffle();
   });
 
-  shuffleButtonActive.addEventListener('click', () => {
-    shuffleButtonActive.style.display = 'none';
-    shuffleButton.style.display = 'block';
-    unshuffle();
-  });
+  // shuffleButtonActive.addEventListener('click', () => {
+  //   shuffleButtonActive.style.display = 'none';
+  //   shuffleButton.style.display = 'block';
+  //   unshuffle();
+  // });
 
   repeatButton.addEventListener('click', () => {
     repeatButton.style.display = 'none';
@@ -53,11 +53,11 @@ module.exports = (function() {
     isOnRepeat = true;
   });
 
-  repeatButtonActive.addEventListener('click', () => {
-    repeatButtonActive.style.display = 'none';
-    repeatButton.style.display = 'block';
-    isOnRepeat = false;
-  });
+  // repeatButtonActive.addEventListener('click', () => {
+  //   repeatButtonActive.style.display = 'none';
+  //   repeatButton.style.display = 'block';
+  //   isOnRepeat = false;
+  // });
 
   progressBar.addEventListener('click', function(e) {
     const percent = e.offsetX / this.offsetWidth;
