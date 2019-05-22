@@ -8,11 +8,7 @@ module.exports = {
   listMusicFiles: function(files, readTags) {
     globalFiles = files;
     const list = document.getElementById('songs');
-    list.style.display = 'none';
     list.innerHTML = '';
-    //document.querySelector('.sort-by').classList.remove('hidden');
-    //document.querySelector('.search').classList.remove('hidden');
-    //document.querySelector('.middle-area').style.justifyContent = 'start';
 
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < files.length; i++) {
@@ -21,10 +17,20 @@ module.exports = {
       container.addEventListener('click', function() {
         play(this.getAttribute('data-file-path'));
       });
+      container.style.display = 'grid';
+      container.style.gridTemplateColumns = '15% 1fr 1fr 1fr';
 
       const name = document.createElement('div');
+      name.classList.add('song-titles');
       const album = document.createElement('div');
+      album.classList.add('song-albums');
       const artist = document.createElement('div');
+      artist.classList.add('song-artists');
+
+      name.style.gridColumn = '1/3';
+      name.style.alignSelf = 'center';
+      album.style.gridColumn = '3';
+      artist.style.gridColumn = '4';
 
       if (readTags) {
         new media.Reader(files[i].path)
@@ -54,11 +60,6 @@ module.exports = {
       fragment.appendChild(container);
     }
     list.appendChild(fragment);
-    list.style.gridRow = '2';
-    list.style.gridColumn = '1/5';
-    setTimeout(() => {
-      list.style.display = 'flex';
-    }, 200);
 
     // Highlight current song after sorting
     if (currentFileInList) {
