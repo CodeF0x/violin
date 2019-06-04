@@ -8,9 +8,9 @@ module.exports = function search(list, query) {
   for (let i = 0; i < list.length; i++) {
     const searchedText = list[i].firstChild.innerText.toLowerCase();
     if (query.trim() === '') {
-      list[i].style.display = 'flex';
+      list[i].style.display = 'grid';
     } else if (searchedText.includes(query)) {
-      list[i].style.display = 'flex';
+      list[i].style.display = 'grid';
     } else {
       list[i].style.display = 'none';
     }

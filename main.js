@@ -6,7 +6,6 @@ const { dialog } = require('electron');
 const { ipcMain } = require('electron');
 const openDirectory = require('./modules/open-directory');
 let window = null;
-let globalFiles = [];
 
 function createWindow() {
   window = new BrowserWindow({

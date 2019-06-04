@@ -1,4 +1,17 @@
-module.exports = (function() {
+module.exports = function() {
+  let playPauseToggle = 0,
+    shuffleToggle = 0,
+    repeatToggle = 0;
+
+  /**
+   * @function toggleSetter
+   * @description setter for playPauseToggle.
+   * @param {number} toggle - toggle-number to set.
+   */
+  module.exports.toggleSetter = function(toggle) {
+    playPauseToggle = toggle;
+  };
+
   // Sending event to main process
   folderButton.addEventListener('click', e => {
     e.preventDefault();
@@ -7,22 +20,26 @@ module.exports = (function() {
 
   // Receive files from main process
   ipcRenderer.on('music-files', (event, files) => {
-    listMusicFiles(files, true);
+    listMusicFiles(files, true).then(() => {
+      console.log('LODADED');
+    });
   });
 
   playButton.addEventListener('click', () => {
     if (player.src === '') {
       return;
     }
-    playButton.style.backgroundColor = '../img/pause.png';
-    resume();
-  });
 
-  // pauseButton.addEventListener('click', () => {
-  //   playButton.style.display = 'block';
-  //   pauseButton.style.display = 'none';
-  //   pause();
-  // });
+    if (playPauseToggle === 0) {
+      resume();
+      playButton.style.backgroundImage = "url('../src/img/pause.png')";
+      module.exports.toggleSetter(1);
+    } else {
+      player.pause();
+      playButton.style.backgroundImage = "url('../src/img/play.png')";
+      module.exports.toggleSetter(0);
+    }
+  });
 
   forwardButton.addEventListener('click', () => {
     skip();
@@ -33,31 +50,32 @@ module.exports = (function() {
   });
 
   shuffleButton.addEventListener('click', () => {
-    if (!globalFiles) {
-      return;
-    }
-    shuffleButton.style.display = 'none';
-    shuffleButtonActive.style.display = 'block';
-    shuffle();
-  });
+    if (!globalFiles) return;
 
-  // shuffleButtonActive.addEventListener('click', () => {
-  //   shuffleButtonActive.style.display = 'none';
-  //   shuffleButton.style.display = 'block';
-  //   unshuffle();
-  // });
+    if (shuffleToggle === 0) {
+      shuffleButton.style.backgroundImage =
+        "url('../src/img/shuffle-active.png')";
+      shuffleToggle++;
+      shuffle();
+    } else {
+      shuffleButton.style.backgroundImage = "url('../src/img/shuffle.png')";
+      shuffleToggle--;
+      unshuffle();
+    }
+  });
 
   repeatButton.addEventListener('click', () => {
-    repeatButton.style.display = 'none';
-    repeatButtonActive.style.display = 'block';
-    isOnRepeat = true;
+    if (repeatToggle === 0) {
+      repeatButton.style.backgroundImage =
+        "url('../src/img/repeat-active.png')";
+      repeatToggle--;
+      isOnRepeat = true;
+    } else {
+      repeatButton.style.backgroundImage = "url('../src/img/repeat.png')";
+      repeatToggle++;
+      isOnRepeat = false;
+    }
   });
-
-  // repeatButtonActive.addEventListener('click', () => {
-  //   repeatButtonActive.style.display = 'none';
-  //   repeatButton.style.display = 'block';
-  //   isOnRepeat = false;
-  // });
 
   progressBar.addEventListener('click', function(e) {
     const percent = e.offsetX / this.offsetWidth;
@@ -78,7 +96,11 @@ module.exports = (function() {
   searchField.addEventListener('keyup', function() {
     search(document.querySelectorAll('div[data-file-path]'), this.value);
   });
-})();
+
+  creatorLink.addEventListener('click', () => {
+    require('electron').shell.openExternal('https://codef0x.dev');
+  });
+};
 
 function toggleSorting(whatToDo, element) {
   if (whatToDo === 'remove class') {

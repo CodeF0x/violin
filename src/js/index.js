@@ -13,6 +13,7 @@ let {
   sortByAlbumButton,
   sortByArtistButton,
   searchField,
+  creatorLink,
   base64String,
   globalFiles,
   originalGlobalFiles,
@@ -31,4 +32,4 @@ let {
   revertSorting,
   sortAlphabetically
 } = require('./js/sort.js');
-require('./js/event-listener.js');
+require('./js/event-listener.js')();

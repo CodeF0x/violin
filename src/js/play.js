@@ -5,6 +5,29 @@ module.exports = {
    * @param {string} item - File path
    */
   play: function(item) {
+    /**
+     * @function timerEndTimerStart
+     * @description Updates the start- and end time of the song next to the progress bar.
+     */
+    function timerEndTimerStart() {
+      const timerEnd = document.getElementById('timer-end');
+      const timerStart = document.getElementById('timer-start');
+
+      const endTimeInSeconds = player.duration;
+      const endTimeInMinutes = Math.floor(endTimeInSeconds / 60);
+      const endTimeRestSeconds = Math.floor(endTimeInSeconds % 60);
+
+      const currentTimeInSeconds = player.currentTime;
+      const currentTimeInMintues = Math.floor(currentTimeInSeconds / 60);
+      const currentTimeRestSeconds = Math.floor(currentTimeInSeconds % 60);
+
+      currentTimeRestSeconds < 10
+        ? (timerStart.innerText = `${currentTimeInMintues}:0${currentTimeRestSeconds}`)
+        : (timerStart.innerText = `${currentTimeInMintues}:${currentTimeRestSeconds}`);
+
+      timerEnd.innerText = `${endTimeInMinutes}:${endTimeRestSeconds}`;
+    }
+
     let path = item;
 
     let prefix = '/';
@@ -44,6 +67,7 @@ module.exports = {
 
     player.src = path;
     player.play();
+    timerEndTimerStart();
 
     // update current index
     const currentFile = player.src;
@@ -60,7 +84,9 @@ module.exports = {
     files = Array.prototype.slice.call(files);
 
     if (currentFileInList) {
-      currentFileInList.style.color = 'white';
+      //   currentFileInList.style.color = 'white';
+      currentFileInList.classList.remove('song-container-active');
+      currentFileInList.classList.add('song-container-inactive');
     }
 
     currentFileInList = files.find(elem => {
@@ -69,10 +95,11 @@ module.exports = {
         prefix + decodeURI(currentFile).split('///')[1]
       );
     });
-    currentFileInList.style.color = '#F48FB1';
+    currentFileInList.classList.add('song-container-active');
 
     // update progress bar and play next song
     const updateProgress = setInterval(() => {
+      timerEndTimerStart();
       const length = player.duration;
       const current = player.currentTime;
 
