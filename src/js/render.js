@@ -14,6 +14,8 @@ module.exports = {
       list.innerHTML = '';
 
       const fragment = document.createDocumentFragment();
+      showLoader();
+
       for (let i = 0; i < files.length; i++) {
         const container = document.createElement('div');
         container.setAttribute('data-file-path', files[i].path);

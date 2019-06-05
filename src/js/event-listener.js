@@ -20,7 +20,6 @@ module.exports = function() {
 
   // Receive files from main process
   ipcRenderer.on('music-files', (event, files) => {
-    showLoader();
     listMusicFiles(files, true).then(() => hideLoader());
   });
 
