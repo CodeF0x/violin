@@ -1,5 +1,5 @@
 module.exports = {
-  originalOrder: [], // Gets imported in index.js, to become accessible near the end of getSongData
+  originalOrder: [], // Gets imported in index.js to become accessible near the end of getSongData
   sortedElement: undefined, // This one is accessed in event-listeners.js
   /**
    * @function getSongData

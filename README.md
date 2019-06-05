@@ -20,6 +20,17 @@ If you just want to open a folder with your music and start listening instead of
 - Blazingly fast
 - Simple and self-explanatory UI
 
+## 🐛 Bugs / Issues
+
+#### Known Bugs / Issues
+
+- The album cover gets cropped sometimes: that's an issue with how certain CSS properties work in Electron. Maybe there will be a fix in future releases of Electron, but by now, this cannot get fixed.
+- "Laggin" elements when opening a folder and loading music files into the file list: that's also an issue with Electron, but I don't know what causes it. (Replicating the problem in a "normal" browser was not successful, no lagging in Firefox and Chrome, even with a greater amount of HTMLElements that get appended to the DOM)
+
+##### Report an issue
+
+You can report issues [here](https://github.com/CodeFox/violin/issues). Please try to lable correctly. (Bug, feature request, etc.)
+
 ## ⬇️ Download and install it
 
 [Get it here.](https://github.com/CodeF0x/violin/releases)
@@ -42,4 +53,4 @@ If you just want to open a folder with your music and start listening instead of
 4. Create installer for your system (you must be on the system you want to create an installer for):
    - `npm run create-installer-mac`
    - `npm run create-installer-linux` (this creates a .deb package. For other distros, use the created .app file you created in above's step 3)
-   - `npm run create-installer-windows` (this creates a standalone-app what is the intendend behaviour)
+   - `npm run create-installer-windows` (this creates a standalone-app what is the expected behaviour. If possible, will switch to a "classical" installer later)

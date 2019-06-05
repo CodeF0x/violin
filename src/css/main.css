@@ -14,6 +14,7 @@
 * {
   font-family: 'Roboto', sans-serif;
   margin: 0;
+  user-select: none;
 }
 
 ::-webkit-scrollbar {
@@ -87,6 +88,8 @@ body {
 }
 
 input {
+  -webkit-app-region: no-drag;
+  user-select: auto;
   -webkit-appearance: textfield;
   background-color: var(--input-color);
   -webkit-rtl-ordering: logical;
@@ -119,6 +122,12 @@ input:focus {
   margin-top: 10px;
   grid-row: 2;
   justify-self: center;
+}
+
+#by-name:hover,
+#by-album:hover,
+#by-artist:hover {
+  cursor: pointer;
 }
 
 #songs {

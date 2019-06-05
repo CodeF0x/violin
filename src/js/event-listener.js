@@ -86,9 +86,9 @@ module.exports = function() {
   [sortByNameButton, sortByAlbumButton, sortByArtistButton].forEach(button => {
     button.addEventListener('click', function() {
       if (sortedElement !== this) {
-        toggleSorting('add class', this);
+        toggleSorting('orange', this);
       } else if (sortedElement === this) {
-        toggleSorting('remove class', this);
+        toggleSorting('white', this);
       }
     });
   });
@@ -102,14 +102,20 @@ module.exports = function() {
   });
 };
 
-function toggleSorting(whatToDo, element) {
-  if (whatToDo === 'remove class') {
-    element.classList.remove('sorted');
+/**
+ * @function toggleSorting
+ * @description Toggles between sorted and unsorted song list.
+ * @param {string} color - tells what color to set
+ * @param {HTMLElement} element - the element the to modify
+ */
+function toggleSorting(color, element) {
+  if (color === 'white') {
+    element.style.color = 'var(--text-color)';
     sortedElement = undefined;
     revertSorting(originalOrder);
-  } else if (whatToDo === 'add class') {
-    if (sortedElement) sortedElement.classList.remove('sorted');
-    element.classList.add('sorted');
+  } else if (color === 'orange') {
+    if (sortedElement) sortedElement.style.color = 'var(--text-color)';
+    element.style.color = 'var(--song-con-active)';
     if (originalOrder.length !== 0) revertSorting(originalOrder);
     sortedElement = element;
     const songData = getSongData();
