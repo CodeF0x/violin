@@ -29,7 +29,8 @@ module.exports = {
    * @description Reverts sorting by calling listMusicFiles with initial order the songs got loaded.
    */
   revertSorting: function() {
-    listMusicFiles(originalOrder, false);
+    showLoader();
+    listMusicFiles(originalOrder, false).then(() => hideLoader());
   },
 
   /**
@@ -45,6 +46,7 @@ module.exports = {
       return 0;
     });
 
-    listMusicFiles(songData, false);
+    showLoader();
+    listMusicFiles(songData, false).then(() => hideLoader());
   }
 };

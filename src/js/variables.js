@@ -11,6 +11,7 @@ module.exports = {
   sortByArtistButton: document.getElementById('by-artist'),
   searchField: document.getElementById('search'),
   creatorLink: document.getElementById('creator-link'),
+  loader: document.getElementById('loader'),
   base64String: undefined,
   globalFiles: undefined,
   originalGlobalFiles: undefined,

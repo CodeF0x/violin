@@ -20,9 +20,8 @@ module.exports = function() {
 
   // Receive files from main process
   ipcRenderer.on('music-files', (event, files) => {
-    listMusicFiles(files, true).then(() => {
-      console.log('LODADED');
-    });
+    showLoader();
+    listMusicFiles(files, true).then(() => hideLoader());
   });
 
   playButton.addEventListener('click', () => {
