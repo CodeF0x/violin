@@ -78,7 +78,7 @@ module.exports = {
             song.firstChild.innerText === currentFileInList.firstChild.innerText
           );
         });
-        currentFileInList.style.color = 'rgb(244, 143, 177)';
+        currentFileInList.classList.add('song-container-active');
       }
     });
   }
