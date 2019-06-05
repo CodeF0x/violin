@@ -299,6 +299,7 @@ progress {
   display: block;
   background: rgb(0, 22, 40);
   width: 80%;
+  cursor: pointer;
 }
 
 progress::-moz-progress-bar {
