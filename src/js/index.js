@@ -23,7 +23,6 @@ let {
   isOnRepeat
 } = require('./js/variables.js');
 const { showLoader, hideLoader } = require('./js/loader.js');
-console.log(showLoader);
 const { pause, skip, back, resume } = require('./js/controls.js');
 const { listMusicFiles } = require('./js/render.js');
 const { play, generateUrl, shuffle, unshuffle } = require('./js/play.js');
