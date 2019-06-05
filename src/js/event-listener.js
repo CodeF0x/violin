@@ -85,6 +85,8 @@ module.exports = function() {
 
   [sortByNameButton, sortByAlbumButton, sortByArtistButton].forEach(button => {
     button.addEventListener('click', function() {
+      if (!globalFiles) return;
+
       if (sortedElement !== this) {
         toggleSorting('orange', this);
       } else if (sortedElement === this) {
