@@ -24,8 +24,8 @@ If you just want to open a folder with your music and start listening instead of
 
 #### Known Bugs / Issues
 
-- The album cover gets cropped sometimes: that's an issue with how certain CSS properties work in Electron. Maybe there will be a fix in future releases of Electron, but by now, this cannot get fixed.
-- "Laggin" elements when opening a folder and loading music files into the file list: that's also an issue with Electron, but I don't know what causes it. (Replicating the problem in a "normal" browser was not successful, no lagging in Firefox and Chrome, even with a greater amount of HTMLElements that get appended to the DOM)
+- _The album cover gets cropped sometimes_: probably Electron bug -> fix later with new Electron version
+- _"Lagging" elements when opening a folder and loading music files into the file list_: also Electron specific issue -> fix later with new Electron version
 
 ##### Report an issue
 
