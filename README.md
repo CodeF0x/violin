@@ -1,6 +1,6 @@
 # 🎼 Violin
 
-![size](https://img.shields.io/badge/size%3A-~90%20MB-green.svg) ![platform](https://img.shields.io/badge/works%20on%3A-linux--32%2F64%20%7C%20win--32%2F64%20%7C%20osx--32%2F64-blue.svg) ![issues](https://img.shields.io/github/issues/CodeF0x/violin.svg)
+![size](https://img.shields.io/badge/application%20size%3A-~55%20MB-green.svg) ![platform](https://img.shields.io/badge/works%20on%3A-linux--32%2F64%20%7C%20win--32%2F64%20%7C%20osx--32%2F64-blue.svg) ![issues](https://img.shields.io/github/issues/CodeF0x/violin.svg)
 
 ![screenshot](docs/images/screenshot.png)
 
