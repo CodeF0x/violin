@@ -88,17 +88,15 @@ module.exports = {
     files = Array.from(files);
 
     if (currentFileInList) {
-      currentFileInList.classList.remove('song-container-active');
-      currentFileInList.classList.add('song-container-inactive');
+      currentFileInList.classList.toggle('song-container-active');
     }
-
     currentFileInList = files.find(elem => {
       return (
         elem.getAttribute('data-file-path').replace(/\\/g, '/') ===
         prefix + decodeURI(currentFile).split('///')[1]
       );
     });
-    currentFileInList.classList.add('song-container-active');
+    currentFileInList.classList.toggle('song-container-active');
 
     // update progress bar and play next song
     const updateProgress = setInterval(() => {
