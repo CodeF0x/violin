@@ -21,11 +21,15 @@ module.exports = {
       const currentTimeInMintues = Math.floor(currentTimeInSeconds / 60);
       const currentTimeRestSeconds = Math.floor(currentTimeInSeconds % 60);
 
-      currentTimeRestSeconds < 10
-        ? (timerStart.innerText = `${currentTimeInMintues}:0${currentTimeRestSeconds}`)
-        : (timerStart.innerText = `${currentTimeInMintues}:${currentTimeRestSeconds}`);
+      timerStart.innerText =
+        currentTimeRestSeconds < 10
+          ? `${currentTimeInMintues}:0${currentTimeRestSeconds}`
+          : `${currentTimeInMintues}:${currentTimeRestSeconds}`;
 
-      timerEnd.innerText = `${endTimeInMinutes}:${endTimeRestSeconds}`;
+      timerEnd.innerText =
+        endTimeRestSeconds < 10
+          ? `${endTimeInMinutes}:0${endTimeRestSeconds}`
+          : `${endTimeInMinutes}:${endTimeRestSeconds}`;
     }
 
     let path = item;
@@ -81,10 +85,9 @@ module.exports = {
 
     // highlight currently playing file in list
     let files = document.querySelectorAll('#songs > div');
-    files = Array.prototype.slice.call(files);
+    files = Array.from(files);
 
     if (currentFileInList) {
-      //   currentFileInList.style.color = 'white';
       currentFileInList.classList.remove('song-container-active');
       currentFileInList.classList.add('song-container-inactive');
     }
