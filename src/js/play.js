@@ -5,14 +5,20 @@ module.exports = {
    * @param {string} item - File path
    */
   play: function(item) {
+    const { toggleSetter } = require('./event-listener');
+    const timerEnd = document.getElementById('timer-end');
+    const timerStart = document.getElementById('timer-start');
+    const albumCover = document.querySelector('.album-img');
+    const songName = document.getElementById('song-title');
+    const artistName = document.getElementById('song-artist');
+    let path = item;
+    let prefix = '/';
+
     /**
      * @function timerEndTimerStart
      * @description Updates the start- and end time of the song next to the progress bar.
      */
     function timerEndTimerStart() {
-      const timerEnd = document.getElementById('timer-end');
-      const timerStart = document.getElementById('timer-start');
-
       const endTimeInSeconds = player.duration;
       const endTimeInMinutes = Math.floor(endTimeInSeconds / 60);
       const endTimeRestSeconds = Math.floor(endTimeInSeconds % 60);
@@ -32,16 +38,26 @@ module.exports = {
           : `${endTimeInMinutes}:${endTimeRestSeconds}`;
     }
 
-    let path = item;
+    /**
+     * @stopPlayback
+     * @description Sets song length, song name, artist name, and album cover back to default.
+     */
+    function stopPlayback() {
+      playButton.style.backgroundImage = "url('../src/img/play.png')";
+      progressBar.value = '0';
 
-    let prefix = '/';
+      timerEnd.innerText = '0:00';
+      timerStart.innerText = '0:00';
+      songName.innerText = 'Something';
+      artistName.innerText = 'Someone';
+      albumCover.removeAttribute('style');
+      currentFileInList.classList.remove('song-container-active');
+    }
+
     if (process.platform === 'win32') {
       prefix = '';
     }
 
-    const albumCover = document.querySelector('.album-img');
-    const songName = document.getElementById('song-title');
-    const artistName = document.getElementById('song-artist');
     playButton.style.backgroundImage = "url('img/pause.png')";
     progressBar.value = 0;
 
@@ -117,9 +133,9 @@ module.exports = {
           play(globalFiles[0].path);
           index = 0;
         } else {
-          pauseButton.style.display = 'none';
-          playButton.style.display = 'block';
-          progressBar.value = '0';
+          toggleSetter(0);
+          stopPlayback();
+          clearInterval(updateProgress);
         }
       }
     }, 500);
