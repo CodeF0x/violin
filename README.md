@@ -1,6 +1,6 @@
 # 🎼 Violin
 
-![size](https://img.shields.io/badge/application%20size%3A-~55%20MB-green.svg) ![platform](https://img.shields.io/badge/works%20on%3A-linux--32%2F64%20%7C%20win--32%2F64%20%7C%20osx--32%2F64-blue.svg) ![latest releases](https://img.shields.io/github/release-date/CodeF0x/violin.svg?label=latest%20release%3A)
+![size](https://img.shields.io/badge/application%20size%3A-~55%20MB-green.svg) ![platform](https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg) ![latest releases](https://img.shields.io/github/release-date/CodeF0x/violin.svg?label=latest%20release%3A)
 
 ![screenshot](docs/images/screenshot.png)
 
@@ -41,18 +41,21 @@ You can report issues [here](https://github.com/CodeFox/violin/issues). Please t
 
 #### Pack it yourself
 
-1. Clone the repository `git clone https://github.com/CodeF0x/violin.git`
-2. Install dependencies `npm install`
+1. Clone the repository: `$ git clone https://github.com/CodeF0x/violin.git`
+2. Install dependencies: `$ npm install`
 3. Pack it for your system:
-   - `npm run package-mac`
-   - `npm run package-linux`
-   - `npm run package-windows`
+   - `$ npm run package-mac`
+   - `$ npm run package-linux`
+     - if you want to use Violin on any other distro than a Debian based one, execute the .app file created in this step and skip step 4
+   - `$ npm run package-windows`
 
 #### Create a installer
 
 (Steps 1 - 3 from above)
 
 4. Create installer for your system (you must be on the system you want to create an installer for):
-   - `npm run create-installer-mac`
-   - `npm run create-installer-linux` (this creates a .deb package. For other distros, use the created .app file you created in above's step 3)
-   - `npm run create-installer-windows` (this creates a standalone-app what is the expected behaviour. If possible, will switch to a "classical" installer later)
+   - `$ npm run create-installer-mac`
+   - `$ npm run create-installer-linux`
+     - this creates a .deb package. For other distros, simply execute the .app file you created in above's step 3
+   - `$ npm run create-installer-windows`
+     - this creates a standalone-app what is the expected behaviour. If possible, will switch to a "classical" installer later
