@@ -6,9 +6,18 @@ module.exports = {
    * @param {boolean} readTags - Tells if function should read tags from file or if tags are already read
    */
   listMusicFiles: function(files, readTags) {
-    return new Promise((resolve, reject) => {
-      const { toggleSetter } = require('./event-listener');
+    const { toggleSetter } = require('./event-listener');
 
+    /**
+     * @function clickHandler
+     * @description Handles the click on a list element in the song list.
+     */
+    function clickHandler() {
+      toggleSetter(1);
+      play(this.getAttribute('data-file-path'));
+    }
+
+    return new Promise((resolve, reject) => {
       globalFiles = files;
       const list = document.getElementById('songs');
       list.innerHTML = '';
@@ -20,10 +29,7 @@ module.exports = {
         const container = document.createElement('div');
         container.setAttribute('data-file-path', files[i].path);
 
-        container.addEventListener('click', function() {
-          toggleSetter(1);
-          play(this.getAttribute('data-file-path'));
-        });
+        container.addEventListener('click', clickHandler);
 
         container.classList.add('song-container');
 
