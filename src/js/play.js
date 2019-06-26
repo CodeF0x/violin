@@ -39,10 +39,10 @@ module.exports = {
     }
 
     /**
-     * @stopPlayback
+     * @resetPlayerUI
      * @description Sets song length, song name, artist name, and album cover back to default.
      */
-    function stopPlayback() {
+    function resetPlayerUI() {
       playButton.style.backgroundImage = "url('../src/img/play.png')";
       progressBar.value = '0';
 
@@ -127,14 +127,14 @@ module.exports = {
       }
       if (current === length) {
         if (index + 1 !== globalFiles.length) {
-          play(globalFiles[index + 1].path);
           index++;
+          play(globalFiles[index].path);
         } else if (index + 1 === globalFiles.length && isOnRepeat) {
-          play(globalFiles[0].path);
           index = 0;
+          play(globalFiles[index].path);
         } else {
           toggleSetter(0);
-          stopPlayback();
+          resetPlayerUI();
           clearInterval(updateProgress);
         }
       }
