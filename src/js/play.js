@@ -5,14 +5,20 @@ module.exports = {
    * @param {string} item - File path
    */
   play: function(item) {
+    const { toggleSetter } = require('./event-listener');
+    const timerEnd = document.getElementById('timer-end');
+    const timerStart = document.getElementById('timer-start');
+    const albumCover = document.querySelector('.album-img');
+    const songName = document.getElementById('song-title');
+    const artistName = document.getElementById('song-artist');
+    let path = item;
+    let prefix = '/';
+
     /**
      * @function timerEndTimerStart
      * @description Updates the start- and end time of the song next to the progress bar.
      */
     function timerEndTimerStart() {
-      const timerEnd = document.getElementById('timer-end');
-      const timerStart = document.getElementById('timer-start');
-
       const endTimeInSeconds = player.duration;
       const endTimeInMinutes = Math.floor(endTimeInSeconds / 60);
       const endTimeRestSeconds = Math.floor(endTimeInSeconds % 60);
@@ -21,23 +27,37 @@ module.exports = {
       const currentTimeInMintues = Math.floor(currentTimeInSeconds / 60);
       const currentTimeRestSeconds = Math.floor(currentTimeInSeconds % 60);
 
-      currentTimeRestSeconds < 10
-        ? (timerStart.innerText = `${currentTimeInMintues}:0${currentTimeRestSeconds}`)
-        : (timerStart.innerText = `${currentTimeInMintues}:${currentTimeRestSeconds}`);
+      timerStart.innerText =
+        currentTimeRestSeconds < 10
+          ? `${currentTimeInMintues}:0${currentTimeRestSeconds}`
+          : `${currentTimeInMintues}:${currentTimeRestSeconds}`;
 
-      timerEnd.innerText = `${endTimeInMinutes}:${endTimeRestSeconds}`;
+      timerEnd.innerText =
+        endTimeRestSeconds < 10
+          ? `${endTimeInMinutes}:0${endTimeRestSeconds}`
+          : `${endTimeInMinutes}:${endTimeRestSeconds}`;
     }
 
-    let path = item;
+    /**
+     * @resetPlayerUI
+     * @description Sets song length, song name, artist name, and album cover back to default.
+     */
+    function resetPlayerUI() {
+      playButton.style.backgroundImage = "url('../src/img/play.png')";
+      progressBar.value = '0';
 
-    let prefix = '/';
+      timerEnd.innerText = '0:00';
+      timerStart.innerText = '0:00';
+      songName.innerText = 'Something';
+      artistName.innerText = 'Someone';
+      albumCover.removeAttribute('style');
+      currentFileInList.classList.remove('song-container-active');
+    }
+
     if (process.platform === 'win32') {
       prefix = '';
     }
 
-    const albumCover = document.querySelector('.album-img');
-    const songName = document.getElementById('song-title');
-    const artistName = document.getElementById('song-artist');
     playButton.style.backgroundImage = "url('img/pause.png')";
     progressBar.value = 0;
 
@@ -81,21 +101,18 @@ module.exports = {
 
     // highlight currently playing file in list
     let files = document.querySelectorAll('#songs > div');
-    files = Array.prototype.slice.call(files);
+    files = Array.from(files);
 
     if (currentFileInList) {
-      //   currentFileInList.style.color = 'white';
-      currentFileInList.classList.remove('song-container-active');
-      currentFileInList.classList.add('song-container-inactive');
+      currentFileInList.classList.toggle('song-container-active');
     }
-
     currentFileInList = files.find(elem => {
       return (
         elem.getAttribute('data-file-path').replace(/\\/g, '/') ===
         prefix + decodeURI(currentFile).split('///')[1]
       );
     });
-    currentFileInList.classList.add('song-container-active');
+    currentFileInList.classList.toggle('song-container-active');
 
     // update progress bar and play next song
     const updateProgress = setInterval(() => {
@@ -110,15 +127,15 @@ module.exports = {
       }
       if (current === length) {
         if (index + 1 !== globalFiles.length) {
-          play(globalFiles[index + 1].path);
           index++;
+          play(globalFiles[index].path);
         } else if (index + 1 === globalFiles.length && isOnRepeat) {
-          play(globalFiles[0].path);
           index = 0;
+          play(globalFiles[index].path);
         } else {
-          pauseButton.style.display = 'none';
-          playButton.style.display = 'block';
-          progressBar.value = '0';
+          toggleSetter(0);
+          resetPlayerUI();
+          clearInterval(updateProgress);
         }
       }
     }, 500);
