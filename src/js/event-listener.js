@@ -39,13 +39,9 @@ module.exports = function() {
     }
   });
 
-  forwardButton.addEventListener('click', () => {
-    skip();
-  });
+  forwardButton.addEventListener('click', skip);
 
-  backwardButton.addEventListener('click', () => {
-    back();
-  });
+  backwardButton.addEventListener('click', back);
 
   shuffleButton.addEventListener('click', () => {
     if (!globalFiles) return;
