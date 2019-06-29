@@ -1,8 +1,12 @@
 # 🎼 Violin
 
+![size](https://img.shields.io/badge/application%20size%3A-~55%20MB-green.svg) ![platform](https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg) ![latest releases](https://img.shields.io/github/release-date/CodeF0x/violin.svg?label=latest%20release%3A)
+
 ![screenshot](docs/images/screenshot.png)
 
-Violin is a minimalistic and fast music player for Linux, macOS and Windows.
+Violin is a minimalistic and fast music player for Linux, macOS, and Windows.
+
+If you just want to open a folder with your music and start listening instead of importing your songs to Spotify, downloading a huge app that's just overkill for your needs, or your songs are not on streaming platforms, Violin is for you. If that's not the case, you probably won't like Violin.
 
 ## 📓 Features
 
@@ -18,6 +22,17 @@ Violin is a minimalistic and fast music player for Linux, macOS and Windows.
 - Blazingly fast
 - Simple and self-explanatory UI
 
+## 🐛 Bugs / Issues
+
+#### Known Bugs / Issues
+
+- _The album cover gets cropped sometimes_: probably Electron bug -> fix later with new Electron version
+- _"Lagging" elements when opening a folder and loading music files into the file list_: also Electron specific issue -> fix later with new Electron version
+
+##### Report an issue
+
+You can report issues [here](https://github.com/CodeFox/violin/issues). Please try to lable correctly. (Bug, feature request, etc.)
+
 ## ⬇️ Download and install it
 
 [Get it here.](https://github.com/CodeF0x/violin/releases)
@@ -26,18 +41,21 @@ Violin is a minimalistic and fast music player for Linux, macOS and Windows.
 
 #### Pack it yourself
 
-1. Clone the repository `git clone https://github.com/CodeF0x/violin.git`
-2. Install dependencies `npm install`
+1. Clone the repository: `$ git clone https://github.com/CodeF0x/violin.git`
+2. Install dependencies: `$ npm install`
 3. Pack it for your system:
-   - `npm run package-mac`
-   - `npm run package-linux`
-   - `npm run package-windows`
+   - `$ npm run package-mac`
+   - `$ npm run package-linux`
+     - if you want to use Violin on any other distro than a Debian based one, execute the .app file created in this step and skip step 4
+   - `$ npm run package-windows`
 
 #### Create a installer
 
 (Steps 1 - 3 from above)
 
 4. Create installer for your system (you must be on the system you want to create an installer for):
-   - `npm run create-installer-mac`
-   - `npm run create-installer-linux` (this creates a .deb package. For other distros, just pack it as described above)
-   - `npm run create-installer-windows` (this creates a standalone-app what is the intendend behaviour)
+   - `$ npm run create-installer-mac`
+   - `$ npm run create-installer-linux`
+     - this creates a .deb package. For other distros, simply execute the .app file you created in above's step 3
+   - `$ npm run create-installer-windows`
+     - this creates a standalone-app what is the expected behaviour. If possible, will switch to a "classical" installer later

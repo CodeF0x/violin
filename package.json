@@ -1,7 +1,7 @@
 {
   "name": "violin",
   "productName": "Violin",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "A minimalistic music player for desktop systems.",
   "main": "main.js",
   "scripts": {

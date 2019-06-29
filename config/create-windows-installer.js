@@ -20,7 +20,7 @@ function getInstallerConfig() {
     noMsi: true,
     outputDirectory: path.join(outPath, 'windows-installer'),
     exe: 'violin.exe',
-    setupExe: 'voilin.exe',
+    setupExe: 'violin.exe',
     setupIcon: path.join(rootPath, 'src', 'img', 'icons', 'icon.ico')
   });
 }
