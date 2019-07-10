@@ -1,0 +1,166 @@
+* {
+  font-family: "IBM Plex Mono", monospace;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-main: #f2f2f2;
+  --font-on-white: #212121;
+  --main-bg: #f76262;
+  --bg-download: #fe9a76;
+}
+
+.fa,
+.fas,
+.fab {
+  font-size: 2rem;
+  margin: 15px;
+}
+
+h1,
+p {
+  color: var(--font-main);
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+section {
+  height: 100vh;
+  width: 100%;
+}
+
+.first-card {
+  display: grid;
+  grid-template-columns: 10% 1fr 1fr 10%;
+  grid-auto-rows: auto;
+  grid-template-areas: ". con-left img-right .";
+  justify-content: center;
+  align-content: center;
+  background-color: var(--main-bg);
+}
+
+.firstcard__con-left {
+  justify-self: center;
+  align-self: center;
+  grid-area: con-left;
+}
+
+.firstcard__img-right {
+  height: 80%;
+  align-self: center;
+  grid-area: img-right;
+  justify-self: right;
+}
+
+.second-card {
+  display: grid;
+  grid-template-columns: 10% auto 10%;
+  grid-auto-rows: auto;
+  grid-template-areas:
+    " . . ."
+    ". feature-one . "
+    ". feature-two ."
+    ". feature-three ."
+    " . . .";
+  grid-gap: 5% 0;
+}
+
+.placeholder {
+  background-color: grey;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  margin-right: 2%;
+}
+
+.second-card__feature-one {
+  grid-area: feature-one;
+}
+
+.second-card__feature-two {
+  grid-area: feature-two;
+}
+
+.second-card__feature-three {
+  grid-area: feature-three;
+}
+
+.content-text {
+  font-size: 1.1rem;
+  color: var(--font-on-white);
+}
+
+.second-card__feature-one,
+.second-card__feature-two,
+.second-card__feature-three {
+  display: flex;
+  align-items: center;
+}
+
+.third-card {
+  display: grid;
+  grid-template-columns: 10% 1fr 1fr 1fr 10%;
+  grid-template-areas:
+    ". . headline . ."
+    ". windows debian macos .";
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  background-color: var(--bg-download);
+}
+
+.headline-wrp {
+  display: flex;
+  justify-content: center;
+  grid-area: headline;
+}
+
+.download-wrp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-debian {
+  grid-area: debian;
+}
+
+.download-windows {
+  grid-area: windows;
+}
+
+.download-macos {
+  grid-area: macos;
+}
+
+@media (max-width: 1100px) {
+  .first-card {
+    grid-template-areas: ". con-left .";
+    grid-template-columns: 10% 1fr 10%;
+  }
+
+  .firstcard__con-left {
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .third-card {
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+    grid-template-areas:
+      ". headline ."
+      ". windows ."
+      ". debian ."
+      ". macos .";
+    height: 50vh;
+    grid-auto-rows: auto;
+  }
+}

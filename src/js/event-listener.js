@@ -3,6 +3,7 @@ module.exports = function() {
     shuffleToggle = 0,
     repeatToggle = 0;
 
+  // TODO there might be a better solution for this
   /**
    * @function toggleSetter
    * @description setter for playPauseToggle.
@@ -23,20 +24,22 @@ module.exports = function() {
     listMusicFiles(files, true).then(() => hideLoader());
   });
 
-  playButton.addEventListener('click', () => {
-    if (player.src === '') {
-      return;
+  ipcRenderer.on('shortcut', (event, key) => {
+    switch (key) {
+      case 'MediaPlayPause':
+        togglePlayPause(playPauseToggle);
+        break;
+      case 'MediaNextTrack':
+        skip();
+        break;
+      case 'MediaPreviousTrack':
+        back();
+        break;
     }
+  });
 
-    if (playPauseToggle === 0) {
-      resume();
-      playButton.style.backgroundImage = "url('../src/img/pause.png')";
-      module.exports.toggleSetter(1);
-    } else {
-      player.pause();
-      playButton.style.backgroundImage = "url('../src/img/play.png')";
-      module.exports.toggleSetter(0);
-    }
+  playButton.addEventListener('click', event => {
+    togglePlayPause(playPauseToggle);
   });
 
   forwardButton.addEventListener('click', skip);
@@ -116,5 +119,26 @@ function toggleSorting(color, element) {
     sortedElement = element;
     const songData = getSongData();
     sortAlphabetically(songData, element.innerText.toLowerCase());
+  }
+}
+
+/**
+ * @function togglePlayPause
+ * @description Toggles between playing and pausing the current song.
+ * @param {number} playPauseToggle - 1 == song is playing, 0 == song is paused
+ */
+function togglePlayPause(playPauseToggle) {
+  if (player.src === '') {
+    return;
+  }
+
+  if (playPauseToggle === 0) {
+    resume();
+    playButton.style.backgroundImage = "url('../src/img/pause.png')";
+    module.exports.toggleSetter(1);
+  } else {
+    player.pause();
+    playButton.style.backgroundImage = "url('../src/img/play.png')";
+    module.exports.toggleSetter(0);
   }
 }

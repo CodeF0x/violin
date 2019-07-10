@@ -29,9 +29,9 @@ If you just want to open a folder with your music and start listening instead of
 - _The album cover gets cropped sometimes_: probably Electron bug -> fix later with new Electron version
 - _"Lagging" elements when opening a folder and loading music files into the file list_: also Electron specific issue -> fix later with new Electron version
 
-##### Report an issue
+#### Report an issue
 
-You can report issues [here](https://github.com/CodeFox/violin/issues). Please try to lable correctly. (Bug, feature request, etc.)
+Before reporting an issue, [please check the wiki](https://github.com/CodeF0x/violin/wiki) first. If this didn't help you, you can report issues [here](https://github.com/CodeFox/violin/issues). Please try to lable correctly. (Bug, feature request, etc.)
 
 ## ⬇️ Download and install it
 
