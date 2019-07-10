@@ -1,5 +1,5 @@
 * {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: 'IBM Plex Mono', monospace;
   margin: 0;
   padding: 0;
 }
@@ -40,7 +40,7 @@ section {
   display: grid;
   grid-template-columns: 10% 1fr 1fr 10%;
   grid-auto-rows: auto;
-  grid-template-areas: ". con-left img-right .";
+  grid-template-areas: '. con-left img-right .';
   justify-content: center;
   align-content: center;
   background-color: var(--main-bg);
@@ -64,11 +64,11 @@ section {
   grid-template-columns: 10% auto 10%;
   grid-auto-rows: auto;
   grid-template-areas:
-    " . . ."
-    ". feature-one . "
-    ". feature-two ."
-    ". feature-three ."
-    " . . .";
+    ' . . .'
+    '. feature-one . '
+    '. feature-two .'
+    '. feature-three .'
+    ' . . .';
   grid-gap: 5% 0;
 }
 
@@ -108,8 +108,8 @@ section {
   display: grid;
   grid-template-columns: 10% 1fr 1fr 1fr 10%;
   grid-template-areas:
-    ". . headline . ."
-    ". windows debian macos .";
+    '. . headline . .'
+    '. windows debian macos .';
   justify-content: center;
   align-items: center;
   height: 30vh;
@@ -142,12 +142,16 @@ section {
 
 @media (max-width: 1100px) {
   .first-card {
-    grid-template-areas: ". con-left .";
+    grid-template-areas: '. con-left .';
     grid-template-columns: 10% 1fr 10%;
   }
 
   .firstcard__con-left {
     text-align: center;
+  }
+
+  img {
+    display: none;
   }
 }
 
@@ -156,10 +160,10 @@ section {
     display: grid;
     grid-template-columns: 10% 1fr 10%;
     grid-template-areas:
-      ". headline ."
-      ". windows ."
-      ". debian ."
-      ". macos .";
+      '. headline .'
+      '. windows .'
+      '. debian .'
+      '. macos .';
     height: 50vh;
     grid-auto-rows: auto;
   }
