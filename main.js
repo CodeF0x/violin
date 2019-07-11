@@ -1,21 +1,16 @@
-const {
-  app,
-  BrowserWindow,
-  globalShortcut,
-  Notification
-} = require("electron");
+const { app, BrowserWindow, globalShortcut } = require('electron');
 
-if (require("electron-squirrel-startup")) app.quit();
+if (require('electron-squirrel-startup')) app.quit();
 
-const { dialog, ipcMain } = require("electron");
-const openDirectory = require("./modules/open-directory");
+const { dialog, ipcMain } = require('electron');
+const openDirectory = require('./modules/open-directory');
 let window = null;
 
 function createWindow() {
   window = new BrowserWindow({
     width: 800,
     height: 600,
-    titleBarStyle: "hiddenInset",
+    titleBarStyle: 'hiddenInset',
     useContentSize: false,
     webPreferences: {
       nodeIntegration: true
@@ -23,14 +18,14 @@ function createWindow() {
   });
 
   window.setResizable(true);
-  window.loadFile("src/index.html");
+  window.loadFile('src/index.html');
 }
 
-ipcMain.on("open-file-dialog", (event, path) => {
+ipcMain.on('open-file-dialog', (event, path) => {
   dialog.showOpenDialog(
     window,
     {
-      properties: ["openDirectory"]
+      properties: ['openDirectory']
     },
     filePaths => {
       if (filePaths) {
@@ -40,23 +35,23 @@ ipcMain.on("open-file-dialog", (event, path) => {
   );
 });
 
-app.on("ready", () => {
+app.on('ready', () => {
   createWindow();
 
   // TODO find a smoother way to register shortcuts
-  globalShortcut.register("MediaPlayPause", () => {
-    window.webContents.send("shortcut", "MediaPlayPause");
+  globalShortcut.register('MediaPlayPause', () => {
+    window.webContents.send('shortcut', 'MediaPlayPause');
   });
 
-  globalShortcut.register("MediaNextTrack", () => {
-    window.webContents.send("shortcut", "MediaNextTrack");
+  globalShortcut.register('MediaNextTrack', () => {
+    window.webContents.send('shortcut', 'MediaNextTrack');
   });
 
-  globalShortcut.register("MediaPreviousTrack", () => {
-    window.webContents.send("shortcut", "MediaPreviousTrack");
+  globalShortcut.register('MediaPreviousTrack', () => {
+    window.webContents.send('shortcut', 'MediaPreviousTrack');
   });
 });
 
-app.on("window-all-closed", () => {
+app.on('window-all-closed', () => {
   app.quit();
 });
