@@ -53,5 +53,6 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
+  globalShortcut.unregisterAll();
   app.quit();
 });
