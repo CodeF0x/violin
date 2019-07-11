@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/CodeF0x/violin/issues"
   },
-  "homepage": "https://codef0x.github.io/violin/",
+  "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
     "electron-installer-dmg": "^2.0.0",

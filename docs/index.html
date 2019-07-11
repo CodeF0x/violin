@@ -1,142 +1,99 @@
 <!DOCTYPE html>
-<!--
-	Fractal by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+<html lang="en">
   <head>
-    <title>Violin</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://kit.fontawesome.com/c8c69acc60.js"></script>
     <link
-      href="https://fonts.googleapis.com/css?family=Pacifico"
+      href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap"
       rel="stylesheet"
     />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css"/></noscript>
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Violin</title>
   </head>
-  <body class="is-preload">
-    <!-- Header -->
-    <header id="header">
-      <div class="content">
-        <h1><a href="#" class="violin">Violin</a></h1>
-        <p>
-          A minimalistic and simple music player for desktop systems.
-        </p>
-        <div class="screenshot-preview">
-          <img src="images/screenshot.png" />
+  <body>
+    <section class="first-card">
+      <div class="firstcard__con-left">
+        <h1>Violin</h1>
+        <p>A fast, light-weight, and minimalistic desktop music player.</p>
+      </div>
+
+      <img
+        src="assets/screenshot.png"
+        class="firstcard__img-right"
+        alt="Picture of Violin application"
+      />
+    </section>
+
+    <section class="second-card">
+      <div class="second-card__feature-one">
+        <i class="fas fa-tachometer-alt"></i>
+        <div class="feature__content-wrp">
+          <h3>fast and simple</h3>
+          <p class="content-text">
+            No confusing UI elements and no loading time at all enable you to
+            really enjoy your music.
+          </p>
         </div>
-        <ul class="actions">
-          <li>
-            <a href="#one" class="button icon fa-chevron-down scrolly"
-              >Features</a
-            >
-          </li>
-        </ul>
       </div>
-    </header>
 
-    <!-- One -->
-    <section id="one" class="wrapper">
-      <div class="inner alt">
-        <section class="spotlight">
-          <div class="content">
-            <h3>Dark Theme</h3>
-            <p>
-              The app is dark themed by default. (Light theme may follow).
-            </p>
-          </div>
-        </section>
-        <section class="spotlight">
-          <div class="content">
-            <h3>Fast and simple</h3>
-            <p>
-              No confusing UI elements and no loading time at all enable you to
-              really enjoy your music.
-            </p>
-          </div>
-        </section>
-        <section class="spotlight">
-          <div class="content">
-            <h3>Cross-platform support</h3>
-            <p>
-              It doesn't matter on what system you are on,
-              <span class="violin">Violin</span> supports Windows, Linux (Debian
-              based), and macOS.
-            </p>
-          </div>
-        </section>
-        <section class="special">
-          <div>
-            <p>Get <span class="violin">Violin</span> now!</p>
-          </div>
-          <ul class="icons labeled">
-            <li>
-              <span class="icon fa-linux"
-                ><span class="label"
-                  ><a
-                    href="https://github.com/CodeF0x/violin/releases/download/v1.3/violin-setup-debian.deb"
-                    >Linux</a
-                  ></span
-                ></span
-              >
-            </li>
-            <li>
-              <span class="icon fa-windows"
-                ><span class="label"
-                  ><a
-                    href="https://github.com/CodeF0x/violin/releases/download/v1.3/violin-setup-windows.zip"
-                    >Windows</a
-                  ></span
-                ></span
-              >
-            </li>
-            <li>
-              <span class="icon fa-apple"
-                ><span class="label"
-                  ><a
-                    href="https://github.com/CodeF0x/violin/releases/download/v1.3/violin-setup-mac.dmg"
-                    >macOS</a
-                  ></span
-                ></span
-              >
-            </li>
-          </ul>
-        </section>
+      <div class="second-card__feature-two">
+        <i class="fas fa-heart"></i>
+        <div class="feature__content-wrp">
+          <h3>cross-platform support</h3>
+          <p class="content-text">
+            It doesn't matter if you're on Windows, Linux (Debian), or MacOS.
+            Violin loves all of them.
+          </p>
+        </div>
+      </div>
+
+      <div class="second-card__feature-three">
+        <i class="fas fa-keyboard"></i>
+        <div class="feature__content-wrp">
+          <h3>usable media keys</h3>
+          <p class="content-text">
+            Violin is usable via the media keys on your keyboard -- even if
+            Violin runs in the background.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- Three -->
-    <section id="three" class="wrapper style2 special">
-      <header class="major">
-        <h2>Other</h2>
-        <p>
-          Bug reports and feature requests are very welcome and can be submitted
-          <a href="https://github.com/CodeF0x/violin/issues">here</a>.
-          <br />
-          When you do so, please lable correctly.
-        </p>
-      </header>
+    <section class="third-card">
+      <div class="headline-wrp">
+        <h3 class="download-headline">Get Violin now!</h3>
+      </div>
+      <div class="download-windows">
+        <div class="download-wrp">
+          <i class="fab fa-windows"></i>
+          <a
+            href="https://github.com/CodeF0x/violin/releases/download/v2.0/violin.exe"
+            >Windows</a
+          >
+        </div>
+      </div>
+
+      <div class="download-debian">
+        <div class="download-wrp">
+          <i class="fab fa-linux"></i>
+          <a
+            href="https://github.com/CodeF0x/violin/releases/download/v2.0/violin-setup-debian.deb"
+            >Debian based distros</a
+          >
+        </div>
+      </div>
+
+      <div class="download-macos">
+        <div class="download-wrp">
+          <i class="fab fa-apple"></i>
+          <a
+            href="https://github.com/CodeF0x/violin/releases/download/v2.0/violin-setup-mac.dmg"
+            >MacOS</a
+          >
+        </div>
+      </div>
     </section>
-
-    <!-- Footer -->
-    <footer id="footer">
-      <p class="copyright">
-        With ❤️ by <a href="https://codef0x.dev">Tobias "CodeF0x" Oettl</a> |
-        Website template by <a href="https://html5up.net">HTML5Up!</a>
-      </p>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
   </body>
 </html>
