@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, globalShortcut } = require('electron');
 
 if (require('electron-squirrel-startup')) app.quit();
 
@@ -35,7 +35,22 @@ ipcMain.on('open-file-dialog', (event, path) => {
   );
 });
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+
+  // TODO find a smoother way to register shortcuts
+  globalShortcut.register('MediaPlayPause', () => {
+    window.webContents.send('shortcut', 'MediaPlayPause');
+  });
+
+  globalShortcut.register('MediaNextTrack', () => {
+    window.webContents.send('shortcut', 'MediaNextTrack');
+  });
+
+  globalShortcut.register('MediaPreviousTrack', () => {
+    window.webContents.send('shortcut', 'MediaPreviousTrack');
+  });
+});
 
 app.on('window-all-closed', () => {
   app.quit();
