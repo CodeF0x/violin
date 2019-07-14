@@ -1,4 +1,10 @@
-const { app, BrowserWindow, globalShortcut } = require('electron');
+const {
+  app,
+  BrowserWindow,
+  globalShortcut,
+  systemPreferences,
+  Notification
+} = require('electron');
 
 if (require('electron-squirrel-startup')) app.quit();
 
@@ -36,20 +42,36 @@ ipcMain.on('open-file-dialog', (event, path) => {
 });
 
 app.on('ready', () => {
+  function registerShortcuts() {
+    if (process.platform === 'darwin') {
+      if (!systemPreferences.isTrustedAccessibilityClient(true)) {
+        const not = new Notification({
+          title: 'Violin',
+          body:
+            'Please add Violin as a trusted client, then click on this message or restart Violin.'
+        });
+        not.on('click', () => {
+          app.relaunch();
+          app.quit();
+        });
+        not.show();
+      }
+    }
+    // TODO find a smoother way to register shortcuts
+    globalShortcut.register('MediaPlayPause', () => {
+      window.webContents.send('shortcut', 'MediaPlayPause');
+    });
+
+    globalShortcut.register('MediaNextTrack', () => {
+      window.webContents.send('shortcut', 'MediaNextTrack');
+    });
+
+    globalShortcut.register('MediaPreviousTrack', () => {
+      window.webContents.send('shortcut', 'MediaPreviousTrack');
+    });
+  }
   createWindow();
-
-  // TODO find a smoother way to register shortcuts
-  globalShortcut.register('MediaPlayPause', () => {
-    window.webContents.send('shortcut', 'MediaPlayPause');
-  });
-
-  globalShortcut.register('MediaNextTrack', () => {
-    window.webContents.send('shortcut', 'MediaNextTrack');
-  });
-
-  globalShortcut.register('MediaPreviousTrack', () => {
-    window.webContents.send('shortcut', 'MediaPreviousTrack');
-  });
+  registerShortcuts();
 });
 
 app.on('window-all-closed', () => {
