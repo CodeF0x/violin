@@ -1,6 +1,6 @@
 # 🎼 Violin
 
-![size](https://img.shields.io/badge/application%20size%3A-~55%20MB-green.svg) ![platform](https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg) ![latest releases](https://img.shields.io/github/release-date/CodeF0x/violin.svg?label=latest%20release%3A) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7549990eb1954df9858c27b21bf0f8ed)](https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade)
+![size](https://img.shields.io/badge/application%20size:-~55%20--%20132%20MB-yellowgreen.svg) ![platform](https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg) ![latest releases](https://img.shields.io/github/release-date/CodeF0x/violin.svg?label=latest%20release%3A) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7549990eb1954df9858c27b21bf0f8ed)](https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade)
 
 ![screenshot](docs/assets/screenshot.png)
 
