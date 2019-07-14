@@ -53,7 +53,7 @@ section {
 }
 
 .firstcard__img-right {
-  height: 80%;
+  width: 80%;
   align-self: center;
   grid-area: img-right;
   justify-self: right;
