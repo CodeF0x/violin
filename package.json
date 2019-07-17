@@ -6,44 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
-  },
-  "build": {
-    "appId": "violin",
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "build/icon.ico"
-    },
-    "nsis": {
-      "oneClick": "false",
-      "perMachine": "false",
-      "allowElevation": "true",
-      "allowToChangeInstallationDirectory": "true"
-    },
-    "directories": {
-      "output": "release-builds"
-    }
+    "build": "electron-forge make"
   },
   "repository": {
     "type": "git",
@@ -66,7 +29,8 @@
   "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
-    "electron-builder": "^21.0.15"
+    "electron-forge": "^5.2.4",
+    "electron-prebuilt-compile": "4.0.0"
   },
   "dependencies": {
     "jsmediatags": "^3.8.1"
