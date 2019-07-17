@@ -6,7 +6,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "ship": "electron-builder"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "build": {
     "appId": "violin",
@@ -34,6 +35,12 @@
       "target": "nsis",
       "icon": "build/icon.ico"
     },
+    "nsis": {
+      "oneClick": "false",
+      "perMachine": "false",
+      "allowElevation": "true",
+      "allowToChangeInstallationDirectory": "true"
+    },
     "directories": {
       "output": "release-builds"
     }
@@ -59,13 +66,9 @@
   "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
-    "electron-builder": "^21.0.15",
-    "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^13.1.1",
-    "electron-winstaller": "^3.0.4"
+    "electron-builder": "^21.0.15"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "jsmediatags": "^3.8.1"
   }
 }
