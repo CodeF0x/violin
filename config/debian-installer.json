@@ -1,6 +1,0 @@
-{
-  "dest": "release-builds",
-  "icon": "src/img/icons/icon.png",
-  "categories": ["Audio"],
-  "lintianOverrides": ["changelog-file-missing-in-native-package"]
-}

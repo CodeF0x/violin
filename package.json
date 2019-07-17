@@ -6,12 +6,37 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/img/icons/icon.icns --prune=true --out=release-builds",
-    "create-installer-mac": "electron-installer-dmg ./release-builds/Violin-darwin-x64/violin.app violin --out=release-builds --overwrite --icon=src/img/icons/icon.icns",
-    "package-linux": "electron-packager .  violin --overwrite --asar=true --platform=linux --arch=x64 --icon=src/img/icons/icon.png --prune=true --out=release-builds",
-    "create-installer-linux": "electron-installer-debian --src release-builds/violin-linux-x64/ --arch amd64 --config config/debian-installer.json",
-    "package-windows": "electron-packager . violin --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/img/icons/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Violin\"",
-    "create-installer-windows": "node config/create-windows-installer.js"
+    "ship": "electron-builder"
+  },
+  "build": {
+    "appId": "violin",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "directories": {
+      "output": "release-builds"
+    }
   },
   "repository": {
     "type": "git",
@@ -27,13 +52,14 @@
     "audio"
   ],
   "author": "Tobias \"CodeF0x\" Oettl",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CodeF0x/violin/issues"
   },
   "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
+    "electron-builder": "^21.0.15",
     "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^13.1.1",
     "electron-winstaller": "^3.0.4"
