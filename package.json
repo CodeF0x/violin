@@ -2,7 +2,7 @@
   "name": "violin",
   "productName": "Violin",
   "version": "2.1.0",
-  "description": "A minimalistic music player for desktop systems.",
+  "description": "A fast, lightweight, and minimalistic desktop music player.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
