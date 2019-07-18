@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-forge make"
+    "ship": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -29,10 +29,39 @@
   "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
-    "electron-forge": "^5.2.4",
+    "electron-builder": "^21.0.15",
     "electron-prebuilt-compile": "4.0.0"
   },
   "dependencies": {
     "jsmediatags": "^3.8.1"
+  },
+  "build": {
+    "directories": {
+      "output": "release-builds"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "snap": {
+      "confinement": "strict",
+      "summary": "A fast, lightweight, and minimalistic desktop music player.",
+      "grade": "stable",
+      "category": "Video"
+    },
+    "win": {
+      "target": "msi",
+      "icon": "build/icon.ico"
+    }
   }
 }
