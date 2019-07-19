@@ -36,26 +36,3 @@ Before reporting an issue, [please check the wiki](https://github.com/CodeF0x/vi
 ## ⬇️ Download and install it
 
 [Get it here.](https://github.com/CodeF0x/violin/releases)
-
-## 🔨 Pack it yourself & create a installer
-
-#### Pack it yourself
-
-1. Clone the repository: `$ git clone https://github.com/CodeF0x/violin.git`
-2. Install dependencies: `$ npm install`
-3. Pack it for your system:
-   - `$ npm run package-mac`
-   - `$ npm run package-linux`
-     - if you want to use Violin on any other distro than a Debian based one, execute the .app file created in this step and skip step 4
-   - `$ npm run package-windows`
-
-#### Create a installer
-
-(Steps 1 - 3 from above)
-
-4. Create installer for your system (you must be on the system you want to create an installer for):
-   - `$ npm run create-installer-mac`
-   - `$ npm run create-installer-linux`
-     - this creates a .deb package. For other distros, simply execute the .app file you created in above's step 3
-   - `$ npm run create-installer-windows` (not recommended, use the standalone .exe file from step 3 above)
-     - this creates a standalone-app what is the expected behaviour. If possible, will switch to a "classical" installer later

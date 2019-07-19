@@ -57,7 +57,7 @@
       "confinement": "strict",
       "summary": "A fast, lightweight, and minimalistic desktop music player.",
       "grade": "stable",
-      "category": "Video"
+      "category": "Audio"
     },
     "win": {
       "target": "msi",
