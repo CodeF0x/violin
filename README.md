@@ -10,7 +10,6 @@ If you just want to open a folder with your music and start listening instead of
 
 ## 📓 Features
 
-- It's dark themed
 - It supports all most common audio file types:
   - mp3
   - wav
