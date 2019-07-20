@@ -1,37 +1,54 @@
-# 🎼 Violin
+<h1 align="center">Welcome to Violin 👋</h1>
+<p>
+  <img alt="Application size" src="https://img.shields.io/badge/application%20size:-~55%20--%20132%20MB-yellowgreen.svg">
+  <img alt="Supported platforms" src="https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg">
+  <a href="https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade">
+    <img alt="Codacy Code Grade" src="https://api.codacy.com/project/badge/Grade/7549990eb1954df9858c27b21bf0f8ed">
+  </a>
+  <img alt="GitHub" src="https://img.shields.io/github/license/CodeF0x/violin.svg?color=yellw&label=license%3A">
+</p>
 
-![size](https://img.shields.io/badge/application%20size:-~55%20--%20132%20MB-yellowgreen.svg) ![platform](https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg) ![latest releases](https://img.shields.io/github/release-date/CodeF0x/violin.svg?label=latest%20release%3A) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7549990eb1954df9858c27b21bf0f8ed)](https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade)
+> A fast, lightweight, and minimalistic desktop music player.
 
-![screenshot](docs/assets/screenshot.png)
+![Violin application screenshot](docs/assets/screenshot.png)
 
-Violin is a minimalistic and fast music player for Linux, macOS, and Windows.
+### 🏠 [Homepage](https://violin-player.cc/)
 
-If you just want to open a folder with your music and start listening instead of importing your songs to Spotify, downloading a huge app that's just overkill for your needs, or your songs are not on streaming platforms, Violin is for you. If that's not the case, you probably won't like Violin.
+## Install
 
-## 📓 Features
+### Linux:
 
-- It supports all most common audio file types:
-  - mp3
-  - wav
-  - ogg
-  - webm
-  - flac
-  - mp4
-- Shows meta information like album cover, artist and song name if available
-- Blazingly fast
-- Simple and self-explanatory UI
+```sh
+snap install violin
+```
 
-## 🐛 Bugs / Issues
+### MacOS and Windows:
 
-#### Known Bugs / Issues
+[MacOS installer](#) | [Windows installer](#)
 
-- _The album cover gets cropped sometimes_: probably Electron bug -> fix later with new Electron version
-- _"Lagging" elements when opening a folder and loading music files into the file list_: also Electron specific issue -> fix later with new Electron version
+## Usage
 
-#### Report an issue
+Launch it like any other application on your computer. 🚀
 
-Before reporting an issue, [please check the wiki](https://github.com/CodeF0x/violin/wiki) first. If this didn't help you, you can report issues [here](https://github.com/CodeFox/violin/issues). Please try to lable correctly. (Bug, feature request, etc.)
+## Author
 
-## ⬇️ Download and install it
+👤 **Tobias Oettl**
 
-[Get it here.](https://github.com/CodeF0x/violin/releases)
+- Github: [@CodeF0x](https://github.com/CodeF0x)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/CodeF0x/violin/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2019 [Tobias Oettl](https://github.com/CodeF0x).<br />
+This project is [MIT](https://github.com/CodeF0x/violin/blob/master/LICENSE) licensed.
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
