@@ -5,22 +5,22 @@ const { exec } = require('child_process');
 
 gulp.task('copy', () => {
   return gulp
-    .src(['src/**/*', 'src/**/*.png', '!src/**/icons/*', 'src/**/*.html'])
+    .src(['!src/img/icons/*', 'src/**/*', 'main.js', 'modules/**/*'])
     .pipe(gulp.dest('build/src'));
 });
 
 gulp.task('minify-js', () => {
   return gulp
-    .src('src/**/*.js')
+    .src('build/src/**/*.js')
     .pipe(terser())
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('build/src'));
 });
 
 gulp.task('minify-css', () => {
   return gulp
-    .src('src/**/*.css')
+    .src('build/src/**/*.css')
     .pipe(cleanCSS())
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('build/src'));
 });
 
 gulp.task('build', cb => {
