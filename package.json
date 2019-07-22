@@ -37,6 +37,7 @@
   },
   "build": {
     "files": [
+      "!**/*",
       "build/**/*",
       "main.js",
       "modules/**/*"
