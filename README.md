@@ -1,61 +1,54 @@
-# 🎼 Violin
+<h1 align="center">Welcome to Violin 👋</h1>
+<p>
+  <img alt="Application size" src="https://img.shields.io/badge/application%20size:-~55%20--%20132%20MB-yellowgreen.svg">
+  <img alt="Supported platforms" src="https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg">
+  <a href="https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade">
+    <img alt="Codacy Code Grade" src="https://api.codacy.com/project/badge/Grade/7549990eb1954df9858c27b21bf0f8ed">
+  </a>
+  <img alt="GitHub" src="https://img.shields.io/github/license/CodeF0x/violin.svg?color=yellw&label=license%3A">
+</p>
 
-![size](https://img.shields.io/badge/application%20size:-~55%20--%20132%20MB-yellowgreen.svg) ![platform](https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg) ![latest releases](https://img.shields.io/github/release-date/CodeF0x/violin.svg?label=latest%20release%3A) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7549990eb1954df9858c27b21bf0f8ed)](https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade)
+> A fast, lightweight, and minimalistic desktop music player.
 
-![screenshot](docs/assets/screenshot.png)
+![Violin application screenshot](docs/assets/screenshot.png)
 
-Violin is a minimalistic and fast music player for Linux, macOS, and Windows.
+### 🏠 [Homepage](https://violin-player.cc/)
 
-If you just want to open a folder with your music and start listening instead of importing your songs to Spotify, downloading a huge app that's just overkill for your needs, or your songs are not on streaming platforms, Violin is for you. If that's not the case, you probably won't like Violin.
+## Install
 
-## 📓 Features
+### Linux:
 
-- It's dark themed
-- It supports all most common audio file types:
-  - mp3
-  - wav
-  - ogg
-  - webm
-  - flac
-  - mp4
-- Shows meta information like album cover, artist and song name if available
-- Blazingly fast
-- Simple and self-explanatory UI
+```sh
+snap install violin
+```
 
-## 🐛 Bugs / Issues
+### MacOS and Windows:
 
-#### Known Bugs / Issues
+[MacOS installer](#) | [Windows installer](#)
 
-- _The album cover gets cropped sometimes_: probably Electron bug -> fix later with new Electron version
-- _"Lagging" elements when opening a folder and loading music files into the file list_: also Electron specific issue -> fix later with new Electron version
+## Usage
 
-#### Report an issue
+Launch it like any other application on your computer. 🚀
 
-Before reporting an issue, [please check the wiki](https://github.com/CodeF0x/violin/wiki) first. If this didn't help you, you can report issues [here](https://github.com/CodeFox/violin/issues). Please try to lable correctly. (Bug, feature request, etc.)
+## Author
 
-## ⬇️ Download and install it
+👤 **Tobias Oettl**
 
-[Get it here.](https://github.com/CodeF0x/violin/releases)
+- Github: [@CodeF0x](https://github.com/CodeF0x)
 
-## 🔨 Pack it yourself & create a installer
+## 🤝 Contributing
 
-#### Pack it yourself
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/CodeF0x/violin/issues).
 
-1. Clone the repository: `$ git clone https://github.com/CodeF0x/violin.git`
-2. Install dependencies: `$ npm install`
-3. Pack it for your system:
-   - `$ npm run package-mac`
-   - `$ npm run package-linux`
-     - if you want to use Violin on any other distro than a Debian based one, execute the .app file created in this step and skip step 4
-   - `$ npm run package-windows`
+## Show your support
 
-#### Create a installer
+Give a ⭐️ if this project helped you!
 
-(Steps 1 - 3 from above)
+## 📝 License
 
-4. Create installer for your system (you must be on the system you want to create an installer for):
-   - `$ npm run create-installer-mac`
-   - `$ npm run create-installer-linux`
-     - this creates a .deb package. For other distros, simply execute the .app file you created in above's step 3
-   - `$ npm run create-installer-windows` (not recommended, use the standalone .exe file from step 3 above)
-     - this creates a standalone-app what is the expected behaviour. If possible, will switch to a "classical" installer later
+Copyright © 2019 [Tobias Oettl](https://github.com/CodeF0x).<br />
+This project is [MIT](https://github.com/CodeF0x/violin/blob/master/LICENSE) licensed.
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

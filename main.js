@@ -6,8 +6,6 @@ const {
   Notification
 } = require('electron');
 
-if (require('electron-squirrel-startup')) app.quit();
-
 const { dialog, ipcMain } = require('electron');
 const openDirectory = require('./modules/open-directory');
 let window = null;
