@@ -5,3 +5,4 @@ release-builds/*
 docs/images/.DS_Store
 src/img/icons/*-backup.*
 .idea/*
+build/*
