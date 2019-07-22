@@ -43,7 +43,8 @@
       "modules/**/*"
     ],
     "directories": {
-      "output": "release-builds"
+      "output": "release-builds",
+      "buildResources": "src/img/icons"
     },
     "dmg": {
       "contents": [
@@ -67,7 +68,7 @@
     },
     "win": {
       "target": "msi",
-      "icon": "build/icon.ico"
+      "icon": "src/img/icons/icon.ico"
     }
   }
 }
