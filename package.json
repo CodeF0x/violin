@@ -36,6 +36,11 @@
     "jsmediatags": "^3.8.1"
   },
   "build": {
+    "files": [
+      "build/**/*",
+      "main.js",
+      "modules/**/*"
+    ],
     "directories": {
       "output": "release-builds"
     },
