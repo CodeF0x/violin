@@ -5,8 +5,8 @@ const { exec } = require('child_process');
 
 gulp.task('copy', () => {
   return gulp
-    .src(['src/**/*.png', '!src/**/icons/*', 'src/**/*.html'])
-    .pipe(gulp.dest('build'));
+    .src(['src/**/*', 'src/**/*.png', '!src/**/icons/*', 'src/**/*.html'])
+    .pipe(gulp.dest('build/src'));
 });
 
 gulp.task('minify-js', () => {

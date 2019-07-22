@@ -22,7 +22,7 @@ function createWindow() {
   });
 
   window.setResizable(true);
-  window.loadFile('build/index.html');
+  window.loadFile('src/index.html');
 }
 
 ipcMain.on('open-file-dialog', (event, path) => {
