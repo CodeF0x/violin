@@ -29,19 +29,19 @@
   "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
-    "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^13.1.1",
-    "electron-winstaller": "^3.0.4",
+    "electron-builder": "^21.1.1",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
-    "gulp-terser": "^1.2.0"
+    "gulp-cli": "^2.2.0",
+    "gulp-terser": "^1.2.0",
+    "gulp-uglify": "^3.0.2"
   },
   "dependencies": {
     "jsmediatags": "^3.8.1"
   },
   "build": {
+    "appId": "dev.codef0x.violin",
     "files": [
-      "!**/*",
       "build/**/*",
       "main.js",
       "modules/**/*"
