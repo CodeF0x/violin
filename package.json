@@ -19,11 +19,13 @@
     "gulp-terser": "^1.2.0"
   },
   "build": {
-    "category": "audio",
     "directories": {
       "app": "dist",
       "output": "release-builds",
       "buildResources": "src/img/icons"
+    },
+    "mac": {
+      "category": "public.app-category.audio"
     },
     "dmg": {
       "contents": [
@@ -37,6 +39,12 @@
           "type": "link",
           "path": "/Applications"
         }
+      ]
+    },
+    "linux": {
+      "category": [
+        "AudioVideo",
+        "Audio"
       ]
     },
     "snap": {
