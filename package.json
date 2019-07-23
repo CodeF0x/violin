@@ -1,54 +1,31 @@
 {
-  "name": "violin",
-  "productName": "Violin",
-  "version": "2.1.0",
-  "description": "A fast, lightweight, and minimalistic desktop music player.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "postinstall": "electron-builder install-app-deps",
     "ship": "electron-builder"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeF0x/violin.git"
   },
-  "keywords": [
-    "lightweight",
-    "cross-platform",
-    "fast",
-    "minimalistic",
-    "music player",
-    "music",
-    "audio"
-  ],
-  "author": "Tobias \"CodeF0x\" Oettl",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CodeF0x/violin/issues"
   },
-  "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
-    "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^13.1.1",
-    "electron-winstaller": "^3.0.4",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-terser": "^1.2.0"
   },
-  "dependencies": {
-    "jsmediatags": "^3.8.1"
-  },
   "build": {
-    "files": [
-      "!**/*",
-      "build/**/*",
-      "main.js",
-      "modules/**/*"
-    ],
     "directories": {
+      "app": "dist",
       "output": "release-builds",
       "buildResources": "src/img/icons"
+    },
+    "mac": {
+      "category": "public.app-category.audio"
     },
     "dmg": {
       "contents": [
@@ -63,6 +40,9 @@
           "path": "/Applications"
         }
       ]
+    },
+    "linux": {
+      "category": "Audio"
     },
     "snap": {
       "confinement": "strict",
