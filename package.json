@@ -42,10 +42,7 @@
       ]
     },
     "linux": {
-      "category": [
-        "AudioVideo",
-        "Audio"
-      ]
+      "category": "audio"
     },
     "snap": {
       "confinement": "strict",
