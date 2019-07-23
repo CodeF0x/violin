@@ -11,60 +11,52 @@ gulp.task('copy', () => {
     '!**/img/icons/**/*',
     'modules/**/*'
   ];
-  return gulp.src(filesToMove, { base: './' }).pipe(gulp.dest('build'));
+  return gulp.src(filesToMove, { base: './' }).pipe(gulp.dest('dist'));
 });
 
 gulp.task('minify-js', () => {
   gulp
-    .src('build/src/**/*.js')
+    .src('dist/src/**/*.js')
     .pipe(terser())
-    .pipe(gulp.dest('build/src'));
+    .pipe(gulp.dest('dist/src'));
 
   gulp
-    .src('build/*.js')
+    .src('dist/*.js')
     .pipe(terser())
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('dist'));
 
   return gulp
-    .src('build/modules/*.js')
+    .src('dist/modules/*.js')
     .pipe(terser())
-    .pipe(gulp.dest('build/modules'));
+    .pipe(gulp.dest('dist/modules'));
 });
 
 gulp.task('minify-css', () => {
   return gulp
-    .src('build/src/**/*.css')
+    .src('dist/src/**/*.css')
     .pipe(cleanCSS())
-    .pipe(gulp.dest('build/src'));
+    .pipe(gulp.dest('dist/src'));
 });
 
 gulp.task('build', cb => {
-  exec(
-    './node_modules/.bin/electron-builder --mac',
-    (error, stdout, stderr) => {
-      console.log(stdout);
-      console.log(stderr);
-      cb(error);
-    }
-  );
+  exec('electron-builder --mac', (error, stdout, stderr) => {
+    console.log(stdout);
+    console.log(stderr);
+    cb(error);
+  });
 
-  exec(
-    './node_modules/.bin/electron-builder --linux',
-    (error, stdout, stderr) => {
-      console.log(stdout);
-      console.log(stderr);
-      cb(error);
-    }
-  );
+  exec('electron-builder --linux', (error, stdout, stderr) => {
+    console.log(stdout);
+    console.log(stderr);
+    cb(error);
+  });
 
-  exec(
-    './node_modules/.bin/electron-builder --windows',
-    (error, stdout, stderr) => {
-      console.log(stdout);
-      console.log(stderr);
-      cb(error);
-    }
-  );
+  exec('electron-builder --windows', (error, stdout, stderr) => {
+    console.log(stdout);
+    console.log(stderr);
+    cb(error);
+  });
 });
 
 gulp.task('compile', gulp.series('copy', 'minify-js', 'minify-css'));
+gulp.task('all', gulp.series('compile', 'build'));

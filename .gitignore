@@ -5,4 +5,6 @@ release-builds/*
 docs/images/.DS_Store
 src/img/icons/*-backup.*
 .idea/*
-build/*
+dist/*
+!dist/package.json
+!dist/package-lock.json
