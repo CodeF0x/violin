@@ -29,9 +29,6 @@
   "homepage": "https://violin-player.cc/",
   "devDependencies": {
     "electron": "^4.0.7",
-    "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^13.1.1",
-    "electron-winstaller": "^3.0.4",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-terser": "^1.2.0"
