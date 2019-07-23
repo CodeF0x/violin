@@ -42,7 +42,7 @@
       ]
     },
     "linux": {
-      "category": "audio"
+      "category": "Audio"
     },
     "snap": {
       "confinement": "strict",
