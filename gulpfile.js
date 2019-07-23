@@ -15,10 +15,20 @@ gulp.task('copy', () => {
 });
 
 gulp.task('minify-js', () => {
-  return gulp
+  gulp
     .src('build/src/**/*.js')
     .pipe(terser())
     .pipe(gulp.dest('build/src'));
+
+  gulp
+    .src('build/*.js')
+    .pipe(terser())
+    .pipe(gulp.dest('build'));
+
+  return gulp
+    .src('build/modules/*.js')
+    .pipe(terser())
+    .pipe(gulp.dest('build/modules'));
 });
 
 gulp.task('minify-css', () => {
