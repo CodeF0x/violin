@@ -4,9 +4,14 @@ const cleanCSS = require('gulp-clean-css');
 const { exec } = require('child_process');
 
 gulp.task('copy', () => {
-  return gulp
-    .src(['!src/img/icons/*', 'src/**/*', 'main.js', 'modules/**/*'])
-    .pipe(gulp.dest('build/src'));
+  const filesToMove = [
+    'main.js',
+    'src/**/*',
+    '!**/img/icons',
+    '!**/img/icons/**/*',
+    'modules/**/*'
+  ];
+  return gulp.src(filesToMove, { base: './' }).pipe(gulp.dest('build'));
 });
 
 gulp.task('minify-js', () => {
