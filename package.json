@@ -19,6 +19,7 @@
     "gulp-terser": "^1.2.0"
   },
   "build": {
+    "category": "audio",
     "directories": {
       "app": "dist",
       "output": "release-builds",
