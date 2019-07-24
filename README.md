@@ -19,12 +19,14 @@
 ### Linux:
 
 ```sh
-snap install violin
+snap install violin-player
 ```
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/violin-player)
 
 ### MacOS and Windows:
 
-[MacOS installer](#) | [Windows installer](#)
+[MacOS installer](https://github.com/CodeF0x/violin/releases/download/v2.1.1/violin-setup-mac.dmg) | [Windows installer](https://github.com/CodeF0x/violin/releases/download/v2.1.1/violin-setup-windows.msi)
 
 ## Usage
 
@@ -38,7 +40,7 @@ Launch it like any other application on your computer. 🚀
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/CodeF0x/violin/issues).
+Contributions, issues and feature requests are welcome!<br />Before submitting an issue, please take a look on the [wiki](https://github.com/CodeF0x/violin/wiki) first. If your question didn't get answered, feel free to check [issues page](https://github.com/CodeF0x/violin/issues)!
 
 ## Show your support
 
