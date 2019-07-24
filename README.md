@@ -40,7 +40,7 @@ Launch it like any other application on your computer. 🚀
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/CodeF0x/violin/issues).
+Contributions, issues and feature requests are welcome!<br />Before submitting an issue, please take a look on the [wiki](https://github.com/CodeF0x/violin/wiki) first. If your question didn't get answered, feel free to check [issues page](https://github.com/CodeF0x/violin/issues)!
 
 ## Show your support
 
