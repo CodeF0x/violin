@@ -19,12 +19,14 @@
 ### Linux:
 
 ```sh
-snap install violin
+snap install violin-player
 ```
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/violin-player)
 
 ### MacOS and Windows:
 
-[MacOS installer](#) | [Windows installer](#)
+[MacOS installer](https://github.com/CodeF0x/violin/releases/download/v2.1.1/violin-setup-mac.dmg) | [Windows installer](https://github.com/CodeF0x/violin/releases/download/v2.1.1/violin-setup-windows.msi)
 
 ## Usage
 
