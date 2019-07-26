@@ -344,3 +344,44 @@ progress::-webkit-progress-value {
   color: var(--text-color);
   font-size: 0.9em;
 }
+
+#volume-wrapper {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+}
+
+#volume-button {
+  float: left;
+  height: 20px;
+  width: 20px;
+  background-image: url('../img/volume.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+input[type='range'] {
+  margin: 0;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  background: var(--song-con-active);
+  border-radius: 1.3px;
+}
+
+input[type='range']:focus::-webkit-slider-runnable-track {
+  background: var(--song-con-active);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  margin-top: -4px;
+  cursor: pointer;
+}
+
+#volume {
+  background-color: transparent;
+}
