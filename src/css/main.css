@@ -337,7 +337,6 @@ progress::-webkit-progress-value {
 }
 
 .song-info {
-  grid-row: 3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -345,13 +344,15 @@ progress::-webkit-progress-value {
   font-size: 0.9em;
 }
 
-#song-title {
+#song-title,
+#song-artist {
   float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 50%;
 }
 
-#song-artist {
-  float: right;
-}
 
 #volume-wrapper {
   position: absolute;
@@ -387,10 +388,25 @@ input[type='range']:focus::-webkit-slider-runnable-track {
 }
 
 input[type='range']::-webkit-slider-thumb {
-  margin-top: -4px;
+  margin-top: -5px;
   cursor: pointer;
 }
 
 #volume {
   background-color: transparent;
+}
+
+/**
+* Because volume slider is positionied absolute,
+* we need this ugly rule to adjust song artist 
+* and song title
+*/
+@media (max-width: 1000px) {
+  #song-title {
+    max-width: 25%;
+  }
+
+  #song-artist {
+    max-width: 20%;
+  }
 }
