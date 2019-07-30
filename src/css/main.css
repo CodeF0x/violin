@@ -345,10 +345,17 @@ progress::-webkit-progress-value {
   font-size: 0.9em;
 }
 
+#song-title {
+  float: left;
+}
+
+#song-artist {
+  float: right;
+}
+
 #volume-wrapper {
   position: absolute;
   right: 10px;
-  bottom: 20px;
 }
 
 #volume-button {
@@ -363,6 +370,8 @@ progress::-webkit-progress-value {
 
 input[type='range'] {
   margin: 0;
+  padding: 0;
+  padding-left: 10px;
 }
 
 input[type='range']::-webkit-slider-runnable-track {
