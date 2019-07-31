@@ -346,11 +346,9 @@ progress::-webkit-progress-value {
 
 #song-title,
 #song-artist {
-  float: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 50%;
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
 }
 
 
@@ -402,11 +400,15 @@ input[type='range']::-webkit-slider-thumb {
 * and song title
 */
 @media (max-width: 1000px) {
-  #song-title {
-    max-width: 25%;
-  }
-
+  #song-title,
   #song-artist {
-    max-width: 20%;
+    max-width: 10em;
+  }
+}
+
+@media (min-width: 1000px) {
+  #song-title,
+  #song-artist {
+    max-width: 28em;
   }
 }
