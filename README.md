@@ -1,5 +1,8 @@
 <h1 align="center">Welcome to Violin 👋</h1>
 <p>
+  <a href="https://snapcraft.io/violin-player">
+    <img alt="Violin" src="https://snapcraft.io/violin-player/badge.svg" />
+  </a>
   <img alt="Application size" src="https://img.shields.io/badge/application%20size%3A-%3C%20150%20MB-yellow.svg">
   <img alt="Supported platforms" src="https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg">
   <a href="https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade">
@@ -19,7 +22,7 @@
 ### Linux:
 
 ```sh
-snap install violin-player
+sudo snap install violin-player
 ```
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/violin-player)
