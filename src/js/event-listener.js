@@ -99,6 +99,10 @@ module.exports = function() {
   creatorLink.addEventListener('click', () => {
     require('electron').shell.openExternal('https://codef0x.dev');
   });
+
+  volumeSlider.addEventListener('input', () => {
+    player.volume = volumeSlider.value / 100;
+  });
 };
 
 /**

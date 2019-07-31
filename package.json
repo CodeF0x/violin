@@ -54,5 +54,8 @@
       "target": "msi",
       "icon": "src/img/icons/icon.ico"
     }
+  },
+  "dependencies": {
+    "jsmediatags": "^3.9.2"
   }
 }

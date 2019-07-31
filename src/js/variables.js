@@ -12,6 +12,7 @@ module.exports = {
   searchField: document.getElementById('search'),
   creatorLink: document.getElementById('creator-link'),
   loader: document.getElementById('loader'),
+  volumeSlider: document.getElementById('volume'),
   base64String: undefined,
   globalFiles: undefined,
   originalGlobalFiles: undefined,

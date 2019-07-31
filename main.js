@@ -13,7 +13,9 @@ let window = null;
 function createWindow() {
   window = new BrowserWindow({
     width: 800,
+    minWidth: 800,
     height: 600,
+    minHeight: 600,
     titleBarStyle: 'hiddenInset',
     useContentSize: false,
     webPreferences: {

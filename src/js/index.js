@@ -15,6 +15,7 @@ let {
   searchField,
   creatorLink,
   loader,
+  volumeSlider,
   base64String,
   globalFiles,
   originalGlobalFiles,

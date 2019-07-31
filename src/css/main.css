@@ -337,10 +337,78 @@ progress::-webkit-progress-value {
 }
 
 .song-info {
-  grid-row: 3;
   display: flex;
   justify-content: center;
   align-items: center;
   color: var(--text-color);
   font-size: 0.9em;
+}
+
+#song-title,
+#song-artist {
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+}
+
+
+#volume-wrapper {
+  position: absolute;
+  right: 10px;
+}
+
+#volume-button {
+  float: left;
+  height: 20px;
+  width: 20px;
+  background-image: url('../img/volume.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+input[type='range'] {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  background: var(--song-con-active);
+  border-radius: 1.3px;
+}
+
+input[type='range']:focus::-webkit-slider-runnable-track {
+  background: var(--song-con-active);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+#volume {
+  background-color: transparent;
+}
+
+/**
+* Because volume slider is positionied absolute,
+* we need this ugly rule to adjust song artist 
+* and song title
+*/
+@media (max-width: 1000px) {
+  #song-title,
+  #song-artist {
+    max-width: 10em;
+  }
+}
+
+@media (min-width: 1000px) {
+  #song-title,
+  #song-artist {
+    max-width: 28em;
+  }
 }

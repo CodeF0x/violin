@@ -3,7 +3,7 @@
   <head>
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      content="width=device-width, initial-scale=1"
     />
     <meta
       http-equiv="Content-Security-Policy"
@@ -47,8 +47,12 @@
       </div>
       <div class="song-info">
         <div id="song-title">Something</div>
-        &nbsp;by&nbsp;
+        <div>&nbsp;by&nbsp;</div>
         <div id="song-artist">Someone</div>
+        <div id="volume-wrapper">
+          <div id="volume-button"></div>
+          <input type="range" min="0" max="100" value="100" id="volume" />
+        </div>
       </div>
     </div>
     <script src="js/index.js"></script>
