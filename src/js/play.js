@@ -5,6 +5,7 @@ module.exports = {
    * @param {string} item - File path
    */
   play: function(item) {
+    const { resetPlayerUI } = require('./render');
     const { toggleSetter } = require('./event-listener');
     const timerEnd = document.getElementById('timer-end');
     const timerStart = document.getElementById('timer-start');
@@ -38,22 +39,6 @@ module.exports = {
           : `${endTimeInMinutes}:${endTimeRestSeconds}`;
     }
 
-    /**
-     * @resetPlayerUI
-     * @description Sets song length, song name, artist name, and album cover back to default.
-     */
-    function resetPlayerUI() {
-      playButton.style.backgroundImage = "url('../src/img/play.png')";
-      progressBar.value = '0';
-
-      timerEnd.innerText = '0:00';
-      timerStart.innerText = '0:00';
-      songName.innerText = 'Something';
-      artistName.innerText = 'Someone';
-      albumCover.removeAttribute('style');
-      currentFileInList.classList.remove('song-container-active');
-    }
-
     if (process.platform === 'win32') {
       prefix = '';
     }
@@ -79,7 +64,7 @@ module.exports = {
           )}`;
           albumCover.style.backgroundImage = `url('${imgUrl}')`;
         } else {
-          albumCover.src = 'img/placeholder.png';
+          albumCover.style.removeProperty('background-image');
         }
       },
       onError: err => console.error(err)
@@ -116,6 +101,11 @@ module.exports = {
 
     // update progress bar and play next song
     const updateProgress = setInterval(() => {
+      if (player.paused && index === 0 && player.currentTime === 0) {
+        clearInterval(updateProgress);
+        return;
+      }
+
       timerEndTimerStart();
       const length = player.duration;
       const current = player.currentTime;

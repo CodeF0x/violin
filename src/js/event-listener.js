@@ -132,6 +132,7 @@ function toggleSorting(color, element) {
  * @param {number} playPauseToggle - 1 == song is playing, 0 == song is paused
  */
 function togglePlayPause(playPauseToggle) {
+  const self = module.exports;
   if (player.src === '') {
     return;
   }
@@ -139,10 +140,10 @@ function togglePlayPause(playPauseToggle) {
   if (playPauseToggle === 0) {
     resume();
     playButton.style.backgroundImage = "url('../src/img/pause.png')";
-    module.exports.toggleSetter(1);
+    self.toggleSetter(1);
   } else {
     player.pause();
     playButton.style.backgroundImage = "url('../src/img/play.png')";
-    module.exports.toggleSetter(0);
+    self.toggleSetter(0);
   }
 }
