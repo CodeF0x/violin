@@ -6,6 +6,17 @@ module.exports = {
    * @param {boolean} readTags - Tells if function should read tags from file or if tags are already read
    */
   listMusicFiles: function(files, readTags) {
+    /**
+     * If music is playing an user selects a new folder, 
+     * readTags is true -> Reset player UI and stop playback
+     */
+    if (readTags) {
+      self = module.exports;
+      self.resetPlayerUI();
+      player.pause();
+      player.currentTime = 0;
+    }
+
     const { toggleSetter } = require('./event-listener');
 
     /**
@@ -89,5 +100,29 @@ module.exports = {
         currentFileInList.classList.add('song-container-active');
       }
     });
-  }
+  },
+
+  /**
+     * @resetPlayerUI
+     * @description Sets song length, song name, artist name, and album cover back to default.
+     */
+    resetPlayerUI: function() {
+      const timerEnd = document.getElementById('timer-end');
+      const timerStart = document.getElementById('timer-start');
+      const albumCover = document.querySelector('.album-img');
+      const songName = document.getElementById('song-title');
+      const artistName = document.getElementById('song-artist');
+
+      playButton.style.backgroundImage = "url('../src/img/play.png')";
+      progressBar.value = '0';
+
+      timerEnd.innerText = '0:00';
+      timerStart.innerText = '0:00';
+      songName.innerText = 'Something';
+      artistName.innerText = 'Someone';
+      albumCover.style.removeProperty('background-image');
+      if (currentFileInList) {
+        currentFileInList.classList.remove('song-container-active');
+      }
+    }
 };
