@@ -1,5 +1,6 @@
 {
   "name": "violin-player",
+  "productName": "Violin",
   "version": "2.2.1",
   "description": "A fast, lightweight, and minimalistic desktop music player.",
   "homepage": "https://violin-player.cc/",
