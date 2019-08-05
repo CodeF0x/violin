@@ -8,3 +8,4 @@ src/img/icons/*-backup.*
 dist/*
 !dist/package.json
 !dist/package-lock.json
+Violin.md
