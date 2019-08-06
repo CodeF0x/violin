@@ -2,9 +2,10 @@ class Main {
   constructor() {
     const { ipcRenderer } = require('electron');
     const View = require('./js/View');
+    const Play = require('./js/Player');
 
     const self = this;
-    self._Player = new require('./js/Player');
+    self._Player = new Play();
     self._UI = new View(ipcRenderer, self, self._Player);
 
     self._isShuffle = false;
@@ -32,8 +33,6 @@ class Main {
       self._UI.markSort(e.target);
       self._sortedBy = e.target;
     }
-
-    self._files = self._UI.updateSongListMetaData(self);
 
     self.backupFiles();
 
@@ -77,6 +76,11 @@ class Main {
   get files() {
     const self = this;
     return self._files;
+  }
+
+  set sortedBy(sortedBy) {
+    const self = this;
+    self._sortedBy = sortedBy;
   }
 }
 

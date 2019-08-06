@@ -23,6 +23,12 @@ module.exports = class View {
     self._search = self.getElem('search');
     self._creator = self.getElem('creator-link');
     self._volume = self.getElem('volume');
+    self._timerEnd = self.getElem('timer-end');
+    self._timerStart = self.getElem('timer-start');
+    self._albumCover = self.getElem('album-img');
+    self._songName = self.getElem('song-title');
+    self._artist = self.getElem('song-artist');
+    self._progress = self.getElem('progress-value');
 
     self._folderButton.addEventListener('click', () =>
       ipcRenderer.send('open-file-dialog')
@@ -90,18 +96,20 @@ module.exports = class View {
    * @description Lists all music files in the view.
    */
   listFiles(files, newFolder, Main, Player) {
+    const self = this;
+
     /**
      * @function clickHandler
      * @description Handles click on song.
      */
     function clickHandler() {
-      Player.play(this.getAttribute('data-file-path'));
+      Player.play(this.getAttribute('data-file-path'), self, Main);
     }
 
-    const self = this;
     if (newFolder) {
       //self.resetUi();
       //self._player.stop();
+      Main.sortedBy = undefined;
       Main.files = files;
     }
 
@@ -110,6 +118,7 @@ module.exports = class View {
     list.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
+    fragment.addEventListener('load', () => alert(''));
 
     for (let i = 0; i < files.length; i++) {
       const container = document.createElement('div');
@@ -150,7 +159,7 @@ module.exports = class View {
 
       [name, album, artist].forEach(part => container.appendChild(part));
       fragment.appendChild(container);
-      self._list.appendChild(fragment);
+      list.appendChild(fragment);
 
       if (self._currentlyPlaying) {
         const playing = self._currentlyPlaying;
@@ -161,6 +170,25 @@ module.exports = class View {
         );
         playing.classList.add('song-container-active');
       }
+    }
+  }
+
+  resetUI() {
+    const self = this;
+
+    self._timerEnd.innerText = '0:00';
+    self._timerStart.innerText = '0:00';
+    self._songName.innerText = 'Something';
+    self._artist.innerText = 'Someone';
+
+    self._playButton.style.backgroundImage = "url('../src/img/play.png')";
+    self._progress.value = 0;
+
+    self._albumCover.style.removeProperty('background-image');
+
+    if (self._currentlyPlaying) {
+      self._currentlyPlaying.classList.remove('song-container-active');
+      self._currentlyPlaying = undefined;
     }
   }
 
@@ -187,13 +215,56 @@ module.exports = class View {
     return updatedList;
   }
 
+  /**
+   * @function markSort
+   * @param {HTMLElement} element - the element to mark
+   * @description Marks the current sort selection as selected.
+   */
   markSort(element) {
     element.style.color = 'var(--song-con-active)';
   }
 
+  /**
+   * @function unmarkSort
+   * @param {HTMLElement} element - the element to unmark
+   * @description Unmarks the previous sort selection.
+   */
   unmarkSort(element) {
     if (element) {
       element.style.color = 'var(--text-color)';
     }
+  }
+
+  updateUI(player, Main) {
+    const self = this;
+    Main.files = self.updateSongListMetaData(Main);
+
+    const fullTimeSeconds = player.duration;
+    const fullTimeMinutes = Math.floor(fullTimeSeconds / 60);
+    const fullTimeRest = Math.floor(fullTimeSeconds % 60);
+
+    const currentTimeSeconds = player.currentTime;
+    const currentTimeMinutes = Math.floor(currentTimeSeconds / 60);
+    const currentTimeRest = Math.floor(currentTimeSeconds % 60);
+
+    self._timerStart.innerText =
+      currentTimeRest < 10
+        ? `${currentTimeMinutes}:0${currentTimeRest}`
+        : `${currentTimeMinutes}:${currentTimeRest}`;
+
+    self._timerEnd.innerText =
+      fullTimeRest < 10
+        ? `${fullTimeMinutes}:0${fullTimeRest}`
+        : `${fullTimeMinutes}:${fullTimeRest}`;
+
+    self._progress.value = 100 * (player.currentTime / player.duration);
+
+    const currentSong = Main.files.findIndex(song => {
+      song.path === decodeURI(player.src);
+      debugger;
+    });
+    self._songName.innerText = Main.files[currentSong].name;
+    self._artist.innerText = Main.files[currentSong].artist;
+    debugger;
   }
 };

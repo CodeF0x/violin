@@ -229,7 +229,7 @@ input:focus {
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.album-img {
+#album-img {
   grid-column: 1;
   grid-row: 4;
   background-color: gray;
@@ -346,11 +346,10 @@ progress::-webkit-progress-value {
 
 #song-title,
 #song-artist {
- overflow: hidden;
- white-space: nowrap;
- text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-
 
 #volume-wrapper {
   position: absolute;
