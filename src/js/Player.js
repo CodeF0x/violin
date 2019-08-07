@@ -5,7 +5,7 @@ module.exports = class Player {
     self._UI = UI;
 
     self._audioPlayer = new Audio();
-    self._currentPlayback = undefined;
+    self._index = undefined;
     self._playInterval = undefined;
   }
 
@@ -18,15 +18,30 @@ module.exports = class Player {
     const self = this;
     self._audioPlayer.src = path;
     self._audioPlayer.play();
-    self._currentPlayback = path;
 
-    self._playInterval = setInterval(() => {
-      UI.updateUI(self._audioPlayer, Main);
-    }, 500);
+    const prefix = process.platform === 'win32' ? '' : '/';
+    const currentSong = Main.files.findIndex(song => {
+      return (
+        song.path === prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+      );
+    });
+    self._index = currentSong;
+
+    UI.updateUI(Main, self);
   }
 
   get audioPlayer() {
     const self = this;
     return self._audioPlayer;
+  }
+
+  get index() {
+    const self = this;
+    return self._index;
+  }
+
+  set index(index) {
+    const self = this;
+    self._index = index;
   }
 };

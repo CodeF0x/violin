@@ -30,6 +30,8 @@ module.exports = class View {
     self._artist = self.getElem('song-artist');
     self._progress = self.getElem('progress-value');
 
+    self._updateInterval = undefined;
+
     self._folderButton.addEventListener('click', () =>
       ipcRenderer.send('open-file-dialog')
     );
@@ -118,7 +120,6 @@ module.exports = class View {
     list.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
-    fragment.addEventListener('load', () => alert(''));
 
     for (let i = 0; i < files.length; i++) {
       const container = document.createElement('div');
@@ -209,7 +210,6 @@ module.exports = class View {
         artist: data[2].innerText,
         path: Main.files[i].path
       };
-
       updatedList.push(entry);
     }
     return updatedList;
@@ -235,36 +235,48 @@ module.exports = class View {
     }
   }
 
-  updateUI(player, Main) {
+  updateUI(Main, Player) {
     const self = this;
+
+    const audio = Player.audioPlayer;
+    const songs = document.querySelectorAll('div[data-file-path]');
+
+    if (self._currentlyPlaying) {
+      self._currentlyPlaying.classList.remove('song-container-active');
+    }
+
     Main.files = self.updateSongListMetaData(Main);
 
-    const fullTimeSeconds = player.duration;
-    const fullTimeMinutes = Math.floor(fullTimeSeconds / 60);
-    const fullTimeRest = Math.floor(fullTimeSeconds % 60);
+    self._updateInterval = setInterval(() => {
+      const fullTimeSeconds = audio.duration;
+      const fullTimeMinutes = Math.floor(fullTimeSeconds / 60);
+      const fullTimeRest = Math.floor(fullTimeSeconds % 60);
 
-    const currentTimeSeconds = player.currentTime;
-    const currentTimeMinutes = Math.floor(currentTimeSeconds / 60);
-    const currentTimeRest = Math.floor(currentTimeSeconds % 60);
+      const currentTimeSeconds = audio.currentTime;
+      const currentTimeMinutes = Math.floor(currentTimeSeconds / 60);
+      const currentTimeRest = Math.floor(currentTimeSeconds % 60);
 
-    self._timerStart.innerText =
-      currentTimeRest < 10
-        ? `${currentTimeMinutes}:0${currentTimeRest}`
-        : `${currentTimeMinutes}:${currentTimeRest}`;
+      self._timerStart.innerText =
+        currentTimeRest < 10
+          ? `${currentTimeMinutes}:0${currentTimeRest}`
+          : `${currentTimeMinutes}:${currentTimeRest}`;
 
-    self._timerEnd.innerText =
-      fullTimeRest < 10
-        ? `${fullTimeMinutes}:0${fullTimeRest}`
-        : `${fullTimeMinutes}:${fullTimeRest}`;
+      self._timerEnd.innerText =
+        fullTimeRest < 10
+          ? `${fullTimeMinutes}:0${fullTimeRest}`
+          : `${fullTimeMinutes}:${fullTimeRest}`;
 
-    self._progress.value = 100 * (player.currentTime / player.duration);
+      try {
+        self._progress.value = 100 * (audio.currentTime / audio.duration);
+      } catch (e) {
+        // we don't care
+      }
+    }, 500);
 
-    const currentSong = Main.files.findIndex(song => {
-      song.path === decodeURI(player.src);
-      debugger;
-    });
-    self._songName.innerText = Main.files[currentSong].name;
-    self._artist.innerText = Main.files[currentSong].artist;
-    debugger;
+    const index = Player.index;
+    self._songName.innerText = Main.files[index].name;
+    self._artist.innerText = Main.files[index].artist;
+    self._currentlyPlaying = songs[index];
+    self._currentlyPlaying.classList.add('song-container-active');
   }
 };
