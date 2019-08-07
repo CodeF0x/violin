@@ -10,25 +10,25 @@ module.exports = class View {
     self._media = require('jsmediatags');
 
     self._currentlyPlaying = undefined;
-    self._list = self.getElem('songs');
-    self._folderButton = self.getElem('open-folder');
-    self._playButton = self.getElem('play');
-    self._forward = self.getElem('next-song');
+    self._list = self._getElem('songs');
+    self._folderButton = self._getElem('open-folder');
+    self._playButton = self._getElem('play');
+    self._forward = self._getElem('next-song');
     self._backward = self.getElem('last-song');
     self._shuffle = self.getElem('shuffle');
-    self._repeat = self.getElem('repeat');
-    self._sortByName = self.getElem('by-name');
-    self._sortByAlbum = self.getElem('by-album');
-    self._sortByArtist = self.getElem('by-artist');
-    self._search = self.getElem('search');
-    self._creator = self.getElem('creator-link');
-    self._volume = self.getElem('volume');
-    self._timerEnd = self.getElem('timer-end');
-    self._timerStart = self.getElem('timer-start');
-    self._albumCover = self.getElem('album-img');
-    self._songName = self.getElem('song-title');
-    self._artist = self.getElem('song-artist');
-    self._progress = self.getElem('progress-value');
+    self._repeat = self._getElem('repeat');
+    self._sortByName = self._getElem('by-name');
+    self._sortByAlbum = self._getElem('by-album');
+    self._sortByArtist = self._getElem('by-artist');
+    self._search = self._getElem('search');
+    self._creator = self._getElem('creator-link');
+    self._volume = self._getElem('volume');
+    self._timerEnd = self._getElem('timer-end');
+    self._timerStart = self._getElem('timer-start');
+    self._albumCover = self._getElem('album-img');
+    self._songName = self._getElem('song-title');
+    self._artist = self._getElem('song-artist');
+    self._progress = self._getElem('progress-value');
 
     self._updateInterval = undefined;
 
@@ -40,8 +40,13 @@ module.exports = class View {
       self.listFiles(files, true, Main, Player);
     });
     // self._playButton.addEventListener('click', player.check);
-    // self._forward.addEventListener('click', player.next);
-    // self._backward.addEventListener('click', player.last);
+    self._forward.addEventListener('click', () => {
+      Player.next(self, Main);
+    });
+
+    self._backward.addEventListener('click', () => {
+      Player.previous(self, Main);
+    });
     // self._shuffle.addEventListener('click', player.shuffle);
     // self._repeat.addEventListener('click', player.repeat);
     [self._sortByName, self._sortByAlbum, self._sortByArtist].forEach(btn => {
@@ -53,12 +58,12 @@ module.exports = class View {
   }
 
   /**
-   * @function getElem
+   * @function _getElem
    * @param {String} id
    * @returns {HTMLElement} element
    * @description Gets an HTML element by its ID.
    */
-  getElem(id) {
+  _getElem(id) {
     return document.getElementById(id);
   }
 
@@ -235,6 +240,12 @@ module.exports = class View {
     }
   }
 
+  /**
+   * @function updateUI
+   * @param {Main instance} Main - instance of main class
+   * @param {Player instance} Player - instance of player class
+   * @description Updates the UI. (What song from what artist is playing, progress bar, etc.);
+   */
   updateUI(Main, Player) {
     const self = this;
 
@@ -269,7 +280,7 @@ module.exports = class View {
       try {
         self._progress.value = 100 * (audio.currentTime / audio.duration);
       } catch (e) {
-        // we don't care
+        // i don't care
       }
     }, 500);
 
