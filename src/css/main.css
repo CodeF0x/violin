@@ -354,6 +354,7 @@ progress::-webkit-progress-value {
 #volume-wrapper {
   position: absolute;
   right: 10px;
+  -webkit-app-region: no-drag;
 }
 
 #volume-button {

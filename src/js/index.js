@@ -23,6 +23,8 @@ class Main {
   sort(e) {
     const self = this;
 
+    self._files = self._UI.updateSongListMetaData(self);
+
     if (self._sortedBy === e.target) {
       self.revertSorting();
       self._UI.unmarkSort(e.target);
@@ -38,8 +40,8 @@ class Main {
 
     const whatToSort = e.target.innerText.toLowerCase();
     self._files.sort((a, b) => {
-      if (a[whatToSort].toLowerCase() < b[whatToSort].toLowerCase()) return -1;
-      if (a[whatToSort].toLowerCase() > b[whatToSort].toLowerCase()) return 1;
+      if (a[whatToSort] < b[whatToSort]) return -1;
+      if (a[whatToSort] > b[whatToSort]) return 1;
       return 0;
     });
 
