@@ -19,11 +19,13 @@ module.exports = class Player {
     const self = this;
     self._audioPlayer.src = path;
     self._audioPlayer.play();
+    self._audioPlayer.onended = () => self.next(UI, Main);
 
     const prefix = process.platform === 'win32' ? '' : '/';
     self._index = Main.files.findIndex(song => {
       return (
-        song.path === prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+        song.path.replace(/\\/g, '/') ===
+        prefix + decodeURI(self._audioPlayer.src).split('///')[1]
       );
     });
 
