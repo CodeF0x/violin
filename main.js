@@ -27,18 +27,20 @@ function createWindow() {
   window.loadFile('src/index.html');
 }
 
-ipcMain.on('open-file-dialog', (event, path) => {
-  dialog.showOpenDialog(
-    window,
-    {
+ipcMain.on('open-file-dialog', event => {
+  dialog
+    .showOpenDialog(window, {
       properties: ['openDirectory']
-    },
-    filePaths => {
-      if (filePaths) {
-        openDirectory(filePaths, event);
+    })
+    .then(contents => {
+      const files = contents.filePaths;
+      if (files.length > 0) {
+        openDirectory(files, event);
       }
-    }
-  );
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 app.on('ready', () => {
