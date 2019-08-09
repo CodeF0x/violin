@@ -8,10 +8,9 @@ class Main {
     self._Player = new Play();
     self._UI = new View(ipcRenderer, self, self._Player);
 
-    self._isShuffle = false;
     self._sortedBy = undefined;
 
-    self._filesOriginalOrder = [];
+    self._originalFiles = [];
     self._files = [];
   }
 
@@ -83,6 +82,16 @@ class Main {
   set sortedBy(sortedBy) {
     const self = this;
     self._sortedBy = sortedBy;
+  }
+
+  get originalFiles() {
+    const self = this;
+    return self._originalFiles;
+  }
+
+  set originalFiles(files) {
+    const self = this;
+    self._originalFiles = files;
   }
 }
 

@@ -52,17 +52,30 @@ module.exports = class View {
     self._backward.addEventListener('click', () => {
       Player.previous(self, Main);
     });
-    // self._shuffle.addEventListener('click', player.shuffle);
-    // self._repeat.addEventListener('click', player.repeat);
+
+    self._shuffle.addEventListener('click', () =>
+      self._toggleShuffle(Main, Player)
+    );
+
+    self._repeat.addEventListener('click', () => self._toggleRepeat(Player));
+
     [self._sortByName, self._sortByAlbum, self._sortByArtist].forEach(btn => {
       btn.addEventListener('click', Main.sort.bind(Main));
     });
+
     self._search.addEventListener('keyup', self.search);
+
     self._creator.addEventListener('click', self.showWebsite);
 
     self._volume.addEventListener('input', () =>
       Player.setVolume(self._volume.value)
     );
+
+    self._progress.addEventListener('click', e => {
+      const percent = e.offsetX / self._progress.offsetWidth;
+      self._progress.value = percent / 100;
+      Player.setProgress(percent);
+    });
   }
 
   /**
@@ -270,7 +283,9 @@ module.exports = class View {
       self._currentlyPlaying.classList.remove('song-container-active');
     }
 
-    Main.files = self.updateSongListMetaData(Main);
+    if (!Main.files[0].album) {
+      Main.files = self.updateSongListMetaData(Main);
+    }
 
     self._updateInterval = setInterval(() => {
       const fullTimeSeconds = audio.duration;
@@ -310,12 +325,15 @@ module.exports = class View {
         } else {
           self._albumCover.style.removeProperty('background-image');
         }
-      }
+      },
+      onError: err => console.error(err)
     });
 
     self._songName.innerText = Main.files[index].name;
     self._artist.innerText = Main.files[index].artist;
-    self._currentlyPlaying = songs[index];
+    self._currentlyPlaying = [...songs].find(song => {
+      return song.firstChild.innerText === Main.files[index].name;
+    });
     self._currentlyPlaying.classList.add('song-container-active');
   }
 
@@ -343,5 +361,27 @@ module.exports = class View {
     }
     self._playButton.style.backgroundImage = url;
     self.updateUI(Main, Player);
+  }
+
+  _toggleRepeat(Player) {
+    const self = this;
+    Player.repeat = !Player.repeat;
+    self._repeat.style.backgroundImage = Player.repeat
+      ? 'url("../src/img/repeat-active.png")'
+      : 'url("../src/img/repeat.png")';
+  }
+
+  _toggleShuffle(Main, Player) {
+    if (Main.files.length === 0) {
+      return;
+    }
+
+    const self = this;
+    Player.isShuffled = !Player.isShuffled;
+    self._shuffle.style.backgroundImage = Player.isShuffled
+      ? 'url("../src/img/shuffle-active.png")'
+      : 'url("../src/img/shuffle.png")';
+
+    Player.toggleShuffle(Main, self);
   }
 };
