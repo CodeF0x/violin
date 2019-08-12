@@ -198,6 +198,7 @@ input:focus {
 
 .song-container:hover {
   color: var(--song-con-hover);
+  cursor: pointer;
 }
 
 .song-container-active {
