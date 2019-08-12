@@ -32,7 +32,6 @@
   },
   "main": "main.js",
   "devDependencies": {
-    "electron": "^4.0.7",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-terser": "^1.2.0"

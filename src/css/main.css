@@ -198,6 +198,7 @@ input:focus {
 
 .song-container:hover {
   color: var(--song-con-hover);
+  cursor: pointer;
 }
 
 .song-container-active {
@@ -229,7 +230,7 @@ input:focus {
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.album-img {
+#album-img {
   grid-column: 1;
   grid-row: 4;
   background-color: gray;
@@ -346,15 +347,15 @@ progress::-webkit-progress-value {
 
 #song-title,
 #song-artist {
- overflow: hidden;
- white-space: nowrap;
- text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-
 
 #volume-wrapper {
   position: absolute;
   right: 10px;
+  -webkit-app-region: no-drag;
 }
 
 #volume-button {
