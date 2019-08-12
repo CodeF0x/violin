@@ -12,6 +12,22 @@ class Main {
 
     self._originalFiles = [];
     self._files = [];
+
+    ipcRenderer.on('shortcut', (e, key) => {
+      switch (key) {
+        case 'MediaPlayPause':
+          self._Player.playPause(self, self._UI);
+          UI.updateUI(self, self._Player);
+          break;
+        case 'MediaNextTrack':
+          self._Player.next(self._UI, self);
+          self._UI.updateUI(self, self._Player);
+          break;
+        case 'MediaPreviousTrack':
+          self._Player.previous(self._UI, self);
+          self._UI.updateUI(self, self._Player);
+      }
+    });
   }
 
   /**
