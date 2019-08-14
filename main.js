@@ -1,82 +1,88 @@
-const {
-  app,
-  BrowserWindow,
-  globalShortcut,
-  systemPreferences,
-  Notification
-} = require('electron');
+(function() {
+  const {
+    app,
+    BrowserWindow,
+    globalShortcut,
+    systemPreferences,
+    Notification
+  } = require('electron');
 
-const { dialog, ipcMain } = require('electron');
-const openDirectory = require('./modules/open-directory');
-let window = null;
+  const isDev = require('electron-is-dev');
+  const { dialog, ipcMain } = require('electron');
+  const openDirectory = require('./modules/open-directory');
+  let window = null;
 
-function createWindow() {
-  window = new BrowserWindow({
-    width: 800,
-    minWidth: 800,
-    height: 600,
-    minHeight: 600,
-    titleBarStyle: 'hiddenInset',
-    useContentSize: false,
-    webPreferences: {
-      nodeIntegration: true
+  function createWindow() {
+    window = new BrowserWindow({
+      width: 800,
+      minWidth: 800,
+      height: 600,
+      minHeight: 600,
+      titleBarStyle: 'hiddenInset',
+      useContentSize: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    });
+
+    if (!isDev) {
+      require('./modules/menu')();
     }
+    window.setResizable(true);
+    window.loadFile('src/index.html');
+  }
+
+  ipcMain.on('open-file-dialog', event => {
+    dialog
+      .showOpenDialog(window, {
+        properties: ['openDirectory']
+      })
+      .then(contents => {
+        const files = contents.filePaths;
+        if (files.length > 0) {
+          openDirectory(files, event);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   });
 
-  window.setResizable(true);
-  window.loadFile('src/index.html');
-}
-
-ipcMain.on('open-file-dialog', event => {
-  dialog
-    .showOpenDialog(window, {
-      properties: ['openDirectory']
-    })
-    .then(contents => {
-      const files = contents.filePaths;
-      if (files.length > 0) {
-        openDirectory(files, event);
+  app.on('ready', () => {
+    function registerShortcuts() {
+      if (process.platform === 'darwin') {
+        if (!systemPreferences.isTrustedAccessibilityClient(true)) {
+          const not = new Notification({
+            title: 'Violin',
+            body:
+              'Please add Violin as a trusted client, then click on this message or restart Violin.'
+          });
+          not.on('click', () => {
+            app.relaunch();
+            app.quit();
+          });
+          not.show();
+        }
       }
-    })
-    .catch(err => {
-      console.error(err);
-    });
-});
+      // TODO find a smoother way to register shortcuts
+      globalShortcut.register('MediaPlayPause', () => {
+        window.webContents.send('shortcut', 'MediaPlayPause');
+      });
 
-app.on('ready', () => {
-  function registerShortcuts() {
-    if (process.platform === 'darwin') {
-      if (!systemPreferences.isTrustedAccessibilityClient(true)) {
-        const not = new Notification({
-          title: 'Violin',
-          body:
-            'Please add Violin as a trusted client, then click on this message or restart Violin.'
-        });
-        not.on('click', () => {
-          app.relaunch();
-          app.quit();
-        });
-        not.show();
-      }
+      globalShortcut.register('MediaNextTrack', () => {
+        window.webContents.send('shortcut', 'MediaNextTrack');
+      });
+
+      globalShortcut.register('MediaPreviousTrack', () => {
+        window.webContents.send('shortcut', 'MediaPreviousTrack');
+      });
     }
-    // TODO find a smoother way to register shortcuts
-    globalShortcut.register('MediaPlayPause', () => {
-      window.webContents.send('shortcut', 'MediaPlayPause');
-    });
+    createWindow();
+    registerShortcuts();
+  });
 
-    globalShortcut.register('MediaNextTrack', () => {
-      window.webContents.send('shortcut', 'MediaNextTrack');
-    });
-
-    globalShortcut.register('MediaPreviousTrack', () => {
-      window.webContents.send('shortcut', 'MediaPreviousTrack');
-    });
-  }
-  createWindow();
-  registerShortcuts();
-});
-
-app.on('window-all-closed', () => {
-  globalShortcut.unregisterAll();
-  app.quit();
-});
+  app.on('window-all-closed', () => {
+    globalShortcut.unregisterAll();
+    app.quit();
+  });
+})();
