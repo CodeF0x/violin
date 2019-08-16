@@ -1,5 +1,3 @@
-# **On this branch, the player is far from working stable, if even working at all. You've been warned!**
-
 <h1 align="center">Welcome to Violin 👋</h1>
 <p>
   <a href="https://snapcraft.io/violin-player">
