@@ -18,16 +18,17 @@
       minWidth: 800,
       height: 600,
       minHeight: 600,
-      titleBarStyle: 'hiddenInset',
+      titleBarStyle: 'hiddenInsent',
+      frame: false,
       useContentSize: false,
       webPreferences: {
         nodeIntegration: true
       }
     });
 
-    if (!isDev) {
-      require('./modules/menu')();
-    }
+    //if (!isDev) {
+    require('./modules/menu')();
+    //}
     window.setResizable(true);
     window.loadFile('src/index.html');
   }

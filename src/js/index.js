@@ -3,6 +3,11 @@ class Main {
     const { ipcRenderer } = require('electron');
     const View = require('./js/View');
     const Play = require('./js/Player');
+    const customTitlebar = require('custom-electron-titlebar');
+
+    new customTitlebar.Titlebar({
+      backgroundColor: customTitlebar.Color.fromHex('#444')
+    });
 
     const self = this;
     self._Player = new Play();

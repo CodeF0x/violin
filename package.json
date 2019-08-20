@@ -56,6 +56,7 @@
     }
   },
   "dependencies": {
+    "custom-electron-titlebar": "^3.1.0",
     "electron-is-dev": "^1.1.0",
     "jsmediatags": "^3.9.2"
   }
