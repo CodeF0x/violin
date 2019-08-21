@@ -31,10 +31,13 @@
   background: transparent;
 }
 
-body {
+/**
+This element gets injected by custom-electron-titlebar
+*/
+.container-after-titlebar {
   -webkit-app-region: drag;
   display: grid;
-  grid-template-rows: 10vh 5vh 67vh 18vh;
+  grid-template-rows: 10vh 5vh 62vh 18vh;
   grid-template-columns: 15% 1fr 1fr 1fr;
   background-color: var(--bg-color);
 }
@@ -63,6 +66,7 @@ body {
 #creator-link {
   color: var(--link-color);
   text-decoration: none;
+  -webkit-app-region: no-drag;
 }
 
 #creator-link:hover {
@@ -80,6 +84,7 @@ body {
   font-weight: 900;
   font-size: 0.8em;
   cursor: pointer;
+  -webkit-app-region: no-drag;
 }
 
 .btn:hover {
@@ -122,6 +127,7 @@ input:focus {
   margin-top: 10px;
   grid-row: 2;
   justify-self: center;
+  -webkit-app-region: no-drag;
 }
 
 #by-name:hover,
@@ -322,6 +328,7 @@ progress {
   background: rgb(0, 22, 40);
   width: 80%;
   cursor: pointer;
+  -webkit-app-region: no-drag;
 }
 
 progress::-moz-progress-bar {
