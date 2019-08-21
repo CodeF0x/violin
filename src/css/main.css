@@ -35,11 +35,18 @@
 This element gets injected by custom-electron-titlebar
 */
 .container-after-titlebar {
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
   display: grid;
   grid-template-rows: 10vh 5vh 62vh 18vh;
   grid-template-columns: 15% 1fr 1fr 1fr;
   background-color: var(--bg-color);
+}
+
+.menubar-menu-container * {
+  -webkit-app-region: no-drag;
+}
+.menubar-menu-container {
+  -webkit-app-region: no-drag;
 }
 
 .top-bg {

@@ -87,6 +87,10 @@ class Main {
     }
   }
 
+  /**
+   * @function _createTitlebar
+   * @description Creates the custom title bar on Windows and Linux.
+   */
   _createTitlebar() {
     const { Titlebar, Color } = require('custom-electron-titlebar');
     const { Menu, MenuItem } = require('electron').remote;
@@ -97,16 +101,33 @@ class Main {
     });
 
     const menu = new Menu();
-    menu.append(new MenuItem({
-      label: 'Configuration',
-      submenu: [
-        {
-          label: 'Toggle fancymode',
-          click: () => console.log('Click')
-        }
-      ]
-    }));
 
+    const config = {
+      label: 'Color changing title bar',
+      type: 'checkbox',
+      checked: true,
+      click: async function() {
+        config.checked = !config.checked;
+
+        /**
+         * To update the little tick icon, the whole menu must be updated :/
+         */
+        const newMenu = new Menu();
+        const newItem = new MenuItem({
+          label: 'Configuration',
+          submenu: [config]
+        });
+        menu.append(newItem);
+        titlebar.updateMenu(newMenu);
+      }
+    };
+
+    const item = new MenuItem({
+      label: 'Configuration',
+      submenu: [config]
+    });
+
+    menu.append(item);
     titlebar.updateMenu(menu);
   }
 
