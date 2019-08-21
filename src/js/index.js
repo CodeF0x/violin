@@ -117,7 +117,7 @@ class Main {
           label: 'Configuration',
           submenu: [config]
         });
-        menu.append(newItem);
+        newMenu.append(newItem);
         titlebar.updateMenu(newMenu);
       }
     };
