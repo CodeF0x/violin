@@ -7,7 +7,6 @@
     Notification
   } = require('electron');
 
-  const isDev = require('electron-is-dev');
   const { dialog, ipcMain } = require('electron');
   const openDirectory = require('./modules/open-directory');
   let window = null;
@@ -19,18 +18,16 @@
       height: 600,
       minHeight: 600,
       titleBarStyle: 'hiddenInsent',
-      frame: false,
+      frame: process.platform === 'darwin' ? true : false,
       useContentSize: false,
       webPreferences: {
         nodeIntegration: true
       }
     });
 
-    //if (!isDev) {
-    require('./modules/menu')();
-    //}
     window.setResizable(true);
     window.loadFile('src/index.html');
+    //require('./modules/menu')();
   }
 
   ipcMain.on('open-file-dialog', event => {
@@ -65,6 +62,8 @@
           not.show();
         }
       }
+
+      window.webContents.openDevTools();
       // TODO find a smoother way to register shortcuts
       globalShortcut.register('MediaPlayPause', () => {
         window.webContents.send('shortcut', 'MediaPlayPause');

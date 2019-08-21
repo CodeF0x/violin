@@ -3,12 +3,6 @@ class Main {
     const { ipcRenderer } = require('electron');
     const View = require('./js/View');
     const Play = require('./js/Player');
-    const customTitlebar = require('custom-electron-titlebar');
-
-    new customTitlebar.Titlebar({
-      backgroundColor: customTitlebar.Color.fromHex('#002a4d'),
-      icon: './img/icons/icon.png'
-    });
 
     const self = this;
     self._Player = new Play();
@@ -34,6 +28,8 @@ class Main {
           self._UI.updateUI(self, self._Player);
       }
     });
+
+    self._createTitlebar();
   }
 
   /**
@@ -89,6 +85,29 @@ class Main {
     if (self._filesOriginalOrder.length === 0) {
       self._filesOriginalOrder = [...self._files];
     }
+  }
+
+  _createTitlebar() {
+    const { Titlebar, Color } = require('custom-electron-titlebar');
+    const { Menu, MenuItem } = require('electron').remote;
+
+    const titlebar = new Titlebar({
+      backgroundColor: Color.fromHex('#0a416f'),
+      icon: './img/icons/icon.png'
+    });
+
+    const menu = new Menu();
+    menu.append(new MenuItem({
+      label: 'Configuration',
+      submenu: [
+        {
+          label: 'Toggle fancymode',
+          click: () => console.log('Click')
+        }
+      ]
+    }));
+
+    titlebar.updateMenu(menu);
   }
 
   set files(files) {
