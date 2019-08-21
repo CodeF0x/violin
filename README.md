@@ -49,6 +49,13 @@ Contributions, issues and feature requests are welcome!<br />Before submitting a
 
 Give a ⭐️ if this project helped you!
 
+## Upcoming features / changes
+
+Next update will bring:
+
+- custom title bar on Windows and Linux instead of the default one
+- new title bar will have the color that is most prominent in album cover, if there is one (can be toggled on and off)
+
 ## 📝 License
 
 Copyright © 2019 [Tobias Oettl](https://github.com/CodeF0x).<br />
