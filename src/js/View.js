@@ -327,7 +327,7 @@ module.exports = class View {
           self._albumCoverImage.src = url;
           self._albumCoverImage.onload = () => {
             self._albumCover.style.backgroundImage = `url("${url}")`;
-            self.updateTitlebarColor();
+            self.updateTitlebarColor(Main, url);
           };
         } else {
           self._albumCover.style.removeProperty('background-image');
@@ -392,7 +392,7 @@ module.exports = class View {
     Player.toggleShuffle(Main, self);
   }
 
-  updateTitlebarColor() {
+  updateTitlebarColor(Main, url) {
     const self = this;
     const analyze = require('rgbaster');
     const { Color } = require('custom-electron-titlebar');
@@ -405,12 +405,8 @@ module.exports = class View {
       return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
 
-    const style = window.getComputedStyle(self._albumCover);
-    let url = style.getPropertyValue('background-image');
     console.log(url);
-    url = url.slice(4, -1).replace(/["']/g, '');
-
-    analyze(url)
+    analyze(url, { scale: 0.6 })
       .then(result => {
         let color = result[0].color;
         color = color.split('(')[1];

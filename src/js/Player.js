@@ -36,7 +36,6 @@ module.exports = class Player {
 
     UI.updateUI(Main, self);
     UI.togglePlayButton(Main, self);
-    UI.updateTitlebarColor();
   }
 
   /**
