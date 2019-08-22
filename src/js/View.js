@@ -275,7 +275,6 @@ module.exports = class View {
    * @description Updates the UI. (What song from what artist is playing, progress bar, etc.);
    */
   updateUI(Main, Player) {
-    console.trace();
     const media = require('jsmediatags');
     const self = this;
 
@@ -328,7 +327,7 @@ module.exports = class View {
           self._albumCoverImage.src = url;
           self._albumCoverImage.onload = () => {
             self._albumCover.style.backgroundImage = `url("${url}")`;
-            self.updateTitlebarColor(Main, url);
+            self._updateTitlebarColor(Main, url);
           };
         } else {
           self._albumCover.style.removeProperty('background-image');
@@ -392,7 +391,7 @@ module.exports = class View {
     Player.toggleShuffle(Main, self);
   }
 
-  updateTitlebarColor(Main, url) {
+  _updateTitlebarColor(Main, url) {
     const analyze = require('rgbaster');
     const { Color } = require('custom-electron-titlebar');
     function componentToHex(c) {
@@ -404,8 +403,7 @@ module.exports = class View {
       return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
 
-    console.log(url);
-    analyze(url, { scale: 0.6 })
+    analyze(url, { scale: 0.3 })
       .then(result => {
         let color = result[0].color;
         color = color.split('(')[1];
