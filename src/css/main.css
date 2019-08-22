@@ -32,22 +32,32 @@
 }
 
 /**
-This element gets injected by custom-electron-titlebar
+These element get injected by custom-electron-titlebar
+-------------------------------------------------------
 */
+.titlebar {
+  position: static;
+}
+
 .container-after-titlebar {
   -webkit-app-region: no-drag;
   display: grid;
-  grid-template-rows: 10vh 5vh 62vh 18vh;
+  grid-template-rows: 10vh 5vh auto 18vh;
   grid-template-columns: 15% 1fr 1fr 1fr;
   background-color: var(--bg-color);
+  position: static;
+  height: calc(100vh - 30px);
+}
+
+.menubar-menu-container {
+  -webkit-app-region: no-drag;
 }
 
 .menubar-menu-container * {
   -webkit-app-region: no-drag;
 }
-.menubar-menu-container {
-  -webkit-app-region: no-drag;
-}
+
+/** ------------------------------------------------ */
 
 .top-bg {
   grid-row: 1;
