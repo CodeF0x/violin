@@ -13,6 +13,8 @@ class Main {
     self._originalFiles = [];
     self._files = [];
 
+    self._titlebar = undefined;
+
     ipcRenderer.on('shortcut', (e, key) => {
       switch (key) {
         case 'MediaPlayPause':
@@ -99,7 +101,9 @@ class Main {
     const { Titlebar, Color } = require('custom-electron-titlebar');
     const { Menu, MenuItem } = require('electron').remote;
 
-    const titlebar = new Titlebar({
+    const self = this;
+
+    self._titlebar = new Titlebar({
       backgroundColor: Color.fromHex('#0a416f'),
       icon: './img/icons/icon.png'
     });
@@ -122,7 +126,7 @@ class Main {
           submenu: [config]
         });
         newMenu.append(newItem);
-        titlebar.updateMenu(newMenu);
+        self._titlebar.updateMenu(newMenu);
       }
     };
 
@@ -132,7 +136,7 @@ class Main {
     });
 
     menu.append(item);
-    titlebar.updateMenu(menu);
+    self._titlebar.updateMenu(menu);
   }
 
   set files(files) {
@@ -158,6 +162,11 @@ class Main {
   set originalFiles(files) {
     const self = this;
     self._originalFiles = files;
+  }
+
+  get titlebar() {
+    const self = this;
+    return self._titlebar;
   }
 }
 

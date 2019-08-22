@@ -36,6 +36,7 @@ module.exports = class Player {
 
     UI.updateUI(Main, self);
     UI.togglePlayButton(Main, self);
+    UI.updateTitlebarColor();
   }
 
   /**
@@ -155,7 +156,6 @@ module.exports = class Player {
     Main.files = UI.updateSongListMetaData(Main);
     Main.originalFiles = Main.files.slice('');
     Main.files = shuffleFiles(Main.files);
-    console.log(Main.files);
   }
 
   _unshuffle() {

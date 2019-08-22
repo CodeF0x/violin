@@ -32,6 +32,8 @@ module.exports = class View {
 
     self._updateInterval = undefined;
 
+    self._albumCoverImage = undefined;
+
     self._folderButton.addEventListener('click', () =>
       ipcRenderer.send('open-file-dialog')
     );
@@ -321,7 +323,12 @@ module.exports = class View {
         if (pic) {
           const base64 = self._genImgUrl(pic.data);
           const url = `data:${pic.format};base64,${window.btoa(base64)}`;
-          self._albumCover.style.backgroundImage = `url("${url}")`;
+          self._albumCoverImage = new Image(1, 1);
+          self._albumCoverImage.src = url;
+          self._albumCoverImage.onload = () => {
+            self._albumCover.style.backgroundImage = `url("${url}")`;
+            self.updateTitlebarColor();
+          };
         } else {
           self._albumCover.style.removeProperty('background-image');
         }
@@ -383,5 +390,39 @@ module.exports = class View {
       : 'url("../src/img/shuffle.png")';
 
     Player.toggleShuffle(Main, self);
+  }
+
+  updateTitlebarColor() {
+    const self = this;
+    const analyze = require('rgbaster');
+    const { Color } = require('custom-electron-titlebar');
+    function componentToHex(c) {
+      const hex = c.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }
+
+    function rgbToHex(r, g, b) {
+      return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
+
+    const style = window.getComputedStyle(self._albumCover);
+    let url = style.getPropertyValue('background-image');
+    console.log(url);
+    url = url.slice(4, -1).replace(/["']/g, '');
+
+    analyze(url)
+      .then(result => {
+        let color = result[0].color;
+        color = color.split('(')[1];
+        color = color.split(')')[0];
+        color = color.split(',');
+        const hex = rgbToHex(
+          Number.parseInt(color[0]),
+          Number.parseInt(color[1]),
+          Number.parseInt(color[2])
+        );
+        Main.titlebar.updateBackground(Color.fromHex(hex));
+      })
+      .catch(err => console.error(err));
   }
 };
