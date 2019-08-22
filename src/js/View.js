@@ -275,6 +275,7 @@ module.exports = class View {
    * @description Updates the UI. (What song from what artist is playing, progress bar, etc.);
    */
   updateUI(Main, Player) {
+    console.trace();
     const media = require('jsmediatags');
     const self = this;
 
@@ -367,7 +368,6 @@ module.exports = class View {
       url = 'url("../src/img/pause.png")';
     }
     self._playButton.style.backgroundImage = url;
-    self.updateUI(Main, Player);
   }
 
   _toggleRepeat(Player) {
@@ -393,7 +393,6 @@ module.exports = class View {
   }
 
   updateTitlebarColor(Main, url) {
-    const self = this;
     const analyze = require('rgbaster');
     const { Color } = require('custom-electron-titlebar');
     function componentToHex(c) {
