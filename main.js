@@ -12,13 +12,14 @@
   let window = null;
 
   function createWindow() {
+    const isMac = process.platform === 'darwin';
     window = new BrowserWindow({
       width: 800,
       minWidth: 800,
       height: 600,
       minHeight: 600,
-      titleBarStyle: 'hiddenInset',
-      frame: process.platform === 'darwin' ? true : false,
+      titleBarStyle: 'hidden',
+      frame: false,
       useContentSize: false,
       webPreferences: {
         nodeIntegration: true

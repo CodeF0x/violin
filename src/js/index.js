@@ -92,9 +92,9 @@ class Main {
    * @description Creates the custom title bar on Windows and Linux.
    */
   _createTitlebar() {
-    if (process.platform === 'darwin') {
-      return;
-    }
+    // if (process.platform === 'darwin') {
+    //   return;
+    // }
 
     const { Titlebar, Color } = require('custom-electron-titlebar');
     const { Menu, MenuItem } = require('electron').remote;

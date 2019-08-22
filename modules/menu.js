@@ -4,10 +4,10 @@ module.exports = function() {
 
   const template = [
     {
-      role: 'help',
+      label: 'Configuration',
       submenu: [
         {
-          label: 'Learn More',
+          label: 'Color ',
           click: async () => {
             const { shell } = require('electron');
             await shell.openExternal('https://electronjs.org');
