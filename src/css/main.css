@@ -31,7 +31,20 @@
   background: transparent;
 }
 
+/** 
+For OS X
+*/
+body {
+  -webkit-app-region: drag;
+  display: grid;
+  grid-template-rows: 10vh 5vh auto 18vh;
+  grid-template-columns: 15% 1fr 1fr 1fr;
+  background-color: var(--bg-color);
+  height: 100vh;
+}
+
 /**
+For Windows & Linux
 These element get injected by custom-electron-titlebar
 -------------------------------------------------------
 */
@@ -154,6 +167,7 @@ input:focus {
 }
 
 #songs {
+  -webkit-app-region: no-drag;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden scroll;

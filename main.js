@@ -17,7 +17,7 @@
       minWidth: 800,
       height: 600,
       minHeight: 600,
-      titleBarStyle: 'hiddenInsent',
+      titleBarStyle: 'hiddenInset',
       frame: process.platform === 'darwin' ? true : false,
       useContentSize: false,
       webPreferences: {
@@ -27,7 +27,6 @@
 
     window.setResizable(true);
     window.loadFile('src/index.html');
-    //require('./modules/menu')();
   }
 
   ipcMain.on('open-file-dialog', event => {
