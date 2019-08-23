@@ -324,14 +324,16 @@ module.exports = class View {
           const base64 = self._genImgUrl(pic.data);
           const url = `data:${pic.format};base64,${window.btoa(base64)}`;
           self._albumCoverImage = new Image(1, 1);
-          self._albumCoverImage.src = url;
-          self._albumCoverImage.onload = () => {
-            self._albumCover.style.backgroundImage = `url("${url}")`;
-            self.updateTitlebarColor(Main, url);
+          const img = self._albumCoverImage;
+          img.src = url;
+          img.onerror = () => self.updateTitlebarColor(Main, undefined);
+          img.onload = () => {
+            img.style.backgroundImage = `url("${url}")`;
+            self.updateTitlebarColor(Main, self._albumCoverImage);
           };
         } else {
           self._albumCover.style.removeProperty('background-image');
-          self._albumCoverImage.src = '';
+          self._albumCoverImage.src = ''; // <- this will fail on purpose
         }
       },
       onError: err => console.error(err)
@@ -435,7 +437,7 @@ module.exports = class View {
     }
 
     // Reset if no album cover
-    if (url === '' || !image) {
+    if (!image || image.src === '') {
       Main.titlebar.updateBackground(Color.fromHex('#002a4d'));
       return;
     }
