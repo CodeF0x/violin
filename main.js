@@ -63,7 +63,6 @@
         }
       }
 
-      window.webContents.openDevTools();
       // TODO find a smoother way to register shortcuts
       globalShortcut.register('MediaPlayPause', () => {
         window.webContents.send('shortcut', 'MediaPlayPause');
