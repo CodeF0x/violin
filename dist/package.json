@@ -39,6 +39,7 @@
   "dependencies": {
     "custom-electron-titlebar": "^3.1.0",
     "jsmediatags": "^3.8.1",
-    "electron-is-dev": "^1.1.0"
+    "electron-is-dev": "^1.1.0",
+    "rgbaster": "^2.1.1"
   }
 }
