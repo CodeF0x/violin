@@ -9,6 +9,7 @@ gulp.task('copy', () => {
     'src/**/*',
     '!**/img/icons',
     '!**/img/icons/**/*',
+    '**/img/icons/icon.png',
     'modules/**/*'
   ];
   return gulp.src(filesToMove, { base: './' }).pipe(gulp.dest('dist'));
