@@ -124,7 +124,10 @@ class Main {
           label: 'Configuration',
           submenu: [config]
         });
-        newMenu.append(mainItem);
+        
+        if (process.platform === 'darwin') {
+          newMenu.append(mainItem);
+        }
         newMenu.append(newSecondaryItem);
         self._titlebar.updateMenu(newMenu);
       }
