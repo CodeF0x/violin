@@ -107,7 +107,7 @@ class Main {
     const menu = new Menu();
 
     const checked =
-      localStorage.getItem('fancy-titlebar-enabled') == 'true' ? true : false;
+      localStorage.getItem('fancy-titlebar-enabled') === 'true' ? true : false;
     const config = {
       label: 'Color changing title bar',
       type: 'checkbox',
@@ -115,6 +115,7 @@ class Main {
       click: function() {
         config.checked = !config.checked;
         localStorage.setItem('fancy-titlebar-enabled', config.checked);
+        self._UI.updateTitlebarColor(self, self._UI.albumCoverImage.src);
 
         /**
          * To update the little tick icon, the whole menu must be updated :/
@@ -124,7 +125,7 @@ class Main {
           label: 'Configuration',
           submenu: [config]
         });
-        
+
         if (process.platform === 'darwin') {
           newMenu.append(mainItem);
         }

@@ -327,10 +327,11 @@ module.exports = class View {
           self._albumCoverImage.src = url;
           self._albumCoverImage.onload = () => {
             self._albumCover.style.backgroundImage = `url("${url}")`;
-            self._updateTitlebarColor(Main, url);
+            self.updateTitlebarColor(Main, url);
           };
         } else {
           self._albumCover.style.removeProperty('background-image');
+          self._albumCoverImage.src = '';
         }
       },
       onError: err => console.error(err)
@@ -391,9 +392,7 @@ module.exports = class View {
     Player.toggleShuffle(Main, self);
   }
 
-  _updateTitlebarColor(Main, url) {
-    const analyze = require('rgbaster');
-    const { Color } = require('custom-electron-titlebar');
+  updateTitlebarColor(Main, url) {
     function componentToHex(c) {
       const hex = c.toString(16);
       return hex.length === 1 ? '0' + hex : hex;
@@ -401,6 +400,22 @@ module.exports = class View {
 
     function rgbToHex(r, g, b) {
       return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
+
+    const analyze = require('rgbaster');
+    const { Color } = require('custom-electron-titlebar');
+
+    const enabled =
+      localStorage.getItem('fancy-titlebar-enabled') === 'true' ? true : false;
+    if (!enabled) {
+      Main.titlebar.updateBackground(Color.fromHex('#002a4d'));
+      return;
+    }
+
+    // Reset if no album cover
+    if (url === '') {
+      Main.titlebar.updateBackground(Color.fromHex('#002a4d'));
+      return;
     }
 
     analyze(url, { scale: 0.3 })
@@ -417,5 +432,10 @@ module.exports = class View {
         Main.titlebar.updateBackground(Color.fromHex(hex));
       })
       .catch(err => console.error(err));
+  }
+
+  get albumCoverImage() {
+    const self = this;
+    return self._albumCoverImage;
   }
 };
