@@ -115,7 +115,7 @@ class Main {
       click: function() {
         config.checked = !config.checked;
         localStorage.setItem('fancy-titlebar-enabled', config.checked);
-        self._UI.updateTitlebarColor(self, self._UI.albumCoverImage.src);
+        self._UI.updateTitlebarColor(self, self._UI.albumCoverImage);
 
         /**
          * To update the little tick icon, the whole menu must be updated :/

@@ -411,10 +411,10 @@ module.exports = class View {
   /**
    * @function updateTitlebarColor
    * @param {instance} Main - instance of Main class
-   * @param {string} url - url of album cover
+   * @param {object} image - image object
    * @description Updates the color of the title bar.
    */
-  updateTitlebarColor(Main, url) {
+  updateTitlebarColor(Main, image) {
     function componentToHex(c) {
       const hex = c.toString(16);
       return hex.length === 1 ? '0' + hex : hex;
@@ -435,11 +435,12 @@ module.exports = class View {
     }
 
     // Reset if no album cover
-    if (url === '') {
+    if (url === '' || !image) {
       Main.titlebar.updateBackground(Color.fromHex('#002a4d'));
       return;
     }
 
+    const url = image.src;
     analyze(url, { scale: 0.3 })
       .then(result => {
         let color = result[0].color;
