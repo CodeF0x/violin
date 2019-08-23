@@ -44,7 +44,7 @@ module.exports = class View {
 
     self._playButton.addEventListener('click', () => {
       Player.playPause(Main, self);
-      self.togglePlayButton(Main, Player);
+      self.togglePlayButton(Player);
     });
 
     self._forward.addEventListener('click', () => {
@@ -357,7 +357,12 @@ module.exports = class View {
     return base64;
   }
 
-  togglePlayButton(Main, Player) {
+  /**
+   * @function togglePlayButton
+   * @param {object} Player - instance of Player object
+   * @description Toggles the icon of the play button to either playing or paused.
+   */
+  togglePlayButton(Player) {
     const self = this;
     let url;
 
@@ -370,6 +375,11 @@ module.exports = class View {
     self._playButton.style.backgroundImage = url;
   }
 
+  /**
+   * @function _toggleRepeat
+   * @param {object} Player - instance of Player class
+   * @description Toggles the icon of the repeat button to either repeating or non-repeating.
+   */
   _toggleRepeat(Player) {
     const self = this;
     Player.repeat = !Player.repeat;
@@ -378,6 +388,12 @@ module.exports = class View {
       : 'url("../src/img/repeat.png")';
   }
 
+  /**
+   * @function _toggleShuffle
+   * @param {object} Main - instance of Main class
+   * @param {object} Player - instance of Player class
+   * @deprecated Toggles the icon of the shuffle button to either shuffled or unshuffled.
+   */
   _toggleShuffle(Main, Player) {
     if (Main.files.length === 0) {
       return;
@@ -392,6 +408,12 @@ module.exports = class View {
     Player.toggleShuffle(Main, self);
   }
 
+  /**
+   * @function updateTitlebarColor
+   * @param {instance} Main - instance of Main class
+   * @param {string} url - url of album cover
+   * @description Updates the color of the title bar.
+   */
   updateTitlebarColor(Main, url) {
     function componentToHex(c) {
       const hex = c.toString(16);

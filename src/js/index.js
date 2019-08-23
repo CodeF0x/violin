@@ -19,7 +19,7 @@ class Main {
       switch (key) {
         case 'MediaPlayPause':
           self._Player.playPause(self, self._UI);
-          self._UI.togglePlayButton(self, self._Player);
+          self._UI.togglePlayButton(self._Player);
           break;
         case 'MediaNextTrack':
           self._Player.next(self._UI, self);
