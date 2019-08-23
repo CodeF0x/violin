@@ -94,48 +94,71 @@ class Main {
    * @description Creates the custom title bar on Windows and Linux.
    */
   _createTitlebar() {
-    // if (process.platform === 'darwin') {
-    //   return;
-    // }
-
     const { Titlebar, Color } = require('custom-electron-titlebar');
     const { Menu, MenuItem } = require('electron').remote;
 
     const self = this;
 
     self._titlebar = new Titlebar({
-      backgroundColor: Color.fromHex('#0a416f'),
+      backgroundColor: Color.fromHex('#002a4d'),
       icon: './img/icons/icon.png'
     });
 
     const menu = new Menu();
 
+    const checked =
+      localStorage.getItem('fancy-titlebar-enabled') == 'true' ? true : false;
     const config = {
       label: 'Color changing title bar',
       type: 'checkbox',
-      checked: true,
-      click: async function() {
+      checked: checked,
+      click: function() {
         config.checked = !config.checked;
+        localStorage.setItem('fancy-titlebar-enabled', config.checked);
 
         /**
          * To update the little tick icon, the whole menu must be updated :/
          */
         const newMenu = new Menu();
-        const newItem = new MenuItem({
+        const newSecondaryItem = new MenuItem({
           label: 'Configuration',
           submenu: [config]
         });
-        newMenu.append(newItem);
+        newMenu.append(mainItem);
+        newMenu.append(newSecondaryItem);
         self._titlebar.updateMenu(newMenu);
       }
     };
 
-    const item = new MenuItem({
+    let mainItem = new MenuItem({
       label: 'Configuration',
       submenu: [config]
     });
 
-    menu.append(item);
+    let secondaryItem = undefined;
+
+    if (process.platform === 'darwin') {
+      mainItem = new MenuItem({
+        label: require('electron').remote.app.getName(),
+        submenu: [
+          {
+            role: 'quit',
+            accelerator: 'Cmd+Q'
+          }
+        ]
+      });
+
+      secondaryItem = new MenuItem({
+        label: 'Configuration',
+        submenu: [config]
+      });
+    }
+
+    menu.append(mainItem);
+    if (secondaryItem) {
+      menu.append(secondaryItem);
+    }
+
     self._titlebar.updateMenu(menu);
   }
 
