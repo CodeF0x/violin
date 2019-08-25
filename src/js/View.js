@@ -328,7 +328,7 @@ module.exports = class View {
           img.src = url;
           img.onerror = () => self.updateTitlebarColor(Main, undefined);
           img.onload = () => {
-            img.style.backgroundImage = `url("${url}")`;
+            self._albumCover.style.backgroundImage = `url("${url}")`;
             self.updateTitlebarColor(Main, self._albumCoverImage);
           };
         } else {
