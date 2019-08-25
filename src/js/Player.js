@@ -33,6 +33,7 @@ module.exports = class Player {
         prefix + decodeURI(self._audioPlayer.src).split('///')[1]
       );
     });
+    self._isPaused = false;
 
     UI.updateUI(Main, self);
     UI.togglePlayButton(self);
