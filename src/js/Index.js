@@ -73,9 +73,9 @@ class Main {
    */
   revertSorting() {
     const self = this;
-    self._UI.listFiles(self._filesOriginalOrder, false, self, self._Player);
+    self._UI.listFiles(self._originalFiles, false, self, self._Player);
     self._isSorted = false;
-    self._files = [...self._filesOriginalOrder];
+    self._files = [...self._originalFiles];
   }
 
   /**
@@ -84,8 +84,8 @@ class Main {
    */
   backupFiles() {
     const self = this;
-    if (self._filesOriginalOrder.length === 0) {
-      self._filesOriginalOrder = [...self._files];
+    if (self._originalFiles.length === 0) {
+      self._originalFiles = [...self._files];
     }
   }
 
