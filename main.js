@@ -12,7 +12,6 @@
   let window = null;
 
   function createWindow() {
-    const isMac = process.platform === 'darwin';
     window = new BrowserWindow({
       width: 800,
       minWidth: 800,
