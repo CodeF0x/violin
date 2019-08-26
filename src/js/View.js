@@ -215,10 +215,14 @@ module.exports = class View {
     self._songName.innerText = 'Something';
     self._artist.innerText = 'Someone';
 
-    self._playButton.style.backgroundImage = "url('../src/img/play.png')";
+    self._playButton.style.backgroundImage = 'url("../src/img/play.png")';
     self._progress.value = 0;
 
     self._albumCover.style.removeProperty('background-image');
+
+    if (self._albumCoverImage) {
+      self._albumCoverImage.src = ''; // <- Fails on purpose, gets handled in updateUI
+    }
 
     if (self._currentlyPlaying) {
       self._currentlyPlaying.classList.remove('song-container-active');
