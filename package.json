@@ -13,7 +13,7 @@
     "url": "https://github.com/CodeF0x/violin/issues"
   },
   "devDependencies": {
-    "electron": "^6.0.1",
+    "electron": "^6.0.4",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-terser": "^1.2.0"
