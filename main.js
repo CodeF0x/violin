@@ -47,21 +47,6 @@
 
   app.on('ready', () => {
     function registerShortcuts() {
-      if (process.platform === 'darwin') {
-        if (!systemPreferences.isTrustedAccessibilityClient(true)) {
-          const not = new Notification({
-            title: 'Violin',
-            body:
-              'Please add Violin as a trusted client, then click on this message or restart Violin.'
-          });
-          not.on('click', () => {
-            app.relaunch();
-            app.quit();
-          });
-          not.show();
-        }
-      }
-
       // TODO find a smoother way to register shortcuts
       globalShortcut.register('MediaPlayPause', () => {
         window.webContents.send('shortcut', 'MediaPlayPause');
