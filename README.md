@@ -54,6 +54,10 @@ Give a ⭐️ if this project helped you!
 Copyright © 2019 [Tobias Oettl](https://github.com/CodeF0x).<br />
 This project is [MIT](https://github.com/CodeF0x/violin/blob/master/LICENSE) licensed.
 
+<img src="src/img/icons/icon.png" width="100">
+
+[Icon by Zaryab213.](https://www.fiverr.com/zaryab213)
+
 ---
 
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
