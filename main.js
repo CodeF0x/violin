@@ -1,11 +1,5 @@
 (function() {
-  const {
-    app,
-    BrowserWindow,
-    globalShortcut,
-    systemPreferences,
-    Notification
-  } = require('electron');
+  const { app, BrowserWindow, globalShortcut } = require('electron');
 
   const { dialog, ipcMain } = require('electron');
   const openDirectory = require('./modules/open-directory');
