@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="script-src 'self'; style-src 'self'; img-src 'self' data:"
+      content="script-src 'self'; style-src 'unsafe-inline' 'self'; img-src 'self' data:"
     />
     <link rel="stylesheet" href="css/main.css" />
   </head>
@@ -15,7 +12,7 @@
     <div class="top-bg"></div>
     <div class="file-con">
       <div class="creator">
-        with ♥️ by
+        with ❤️ by
         <a href="#" id="creator-link">CodeF0x</a>
       </div>
       <a href="#" id="open-folder" class="btn">OPEN FOLDER</a>
@@ -31,7 +28,7 @@
     <div id="by-artist">Artist</div>
     <div id="loader"></div>
     <div id="songs"></div>
-    <div class="album-img"></div>
+    <div id="album-img"></div>
     <div class="bottom-bg">
       <div class="control-con">
         <div id="shuffle"></div>
@@ -55,6 +52,7 @@
         </div>
       </div>
     </div>
-    <script src="js/index.js"></script>
+    <script src="js/PermissionCheck.js"></script>
+    <script src="js/Index.js"></script>
   </body>
 </html>

@@ -13,7 +13,7 @@
     "url": "https://github.com/CodeF0x/violin/issues"
   },
   "devDependencies": {
-    "electron": "^4.0.7",
+    "electron": "^6.0.4",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-terser": "^1.2.0"
@@ -56,6 +56,9 @@
     }
   },
   "dependencies": {
-    "jsmediatags": "^3.9.2"
+    "custom-electron-titlebar": "^3.1.0",
+    "electron-is-dev": "^1.1.0",
+    "jsmediatags": "^3.9.2",
+    "rgbaster": "^2.1.1"
   }
 }

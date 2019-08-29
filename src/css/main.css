@@ -1,5 +1,5 @@
 :root {
-  --bg-color: rgb(0, 22, 40);
+  --bg-color: #001628;
   --con-color: #002a4d;
   --text-color: #f2f2f2;
   --btn-color: #db2828;
@@ -31,13 +31,45 @@
   background: transparent;
 }
 
+/** 
+For OS X
+*/
 body {
   -webkit-app-region: drag;
   display: grid;
-  grid-template-rows: 10vh 5vh 67vh 18vh;
+  grid-template-rows: 10vh 5vh auto 18vh;
   grid-template-columns: 15% 1fr 1fr 1fr;
   background-color: var(--bg-color);
+  height: 100vh;
 }
+
+/**
+For Windows & Linux
+These element get injected by custom-electron-titlebar
+-------------------------------------------------------
+*/
+.titlebar {
+  position: static;
+}
+
+.container-after-titlebar {
+  -webkit-app-region: no-drag;
+  display: grid;
+  grid-template-rows: 10vh 5vh auto 18vh;
+  grid-template-columns: 15% 1fr 1fr 1fr;
+  background-color: var(--bg-color);
+  position: static;
+}
+
+.menubar-menu-container {
+  -webkit-app-region: no-drag;
+}
+
+.menubar-menu-container * {
+  -webkit-app-region: no-drag;
+}
+
+/** ------------------------------------------------ */
 
 .top-bg {
   grid-row: 1;
@@ -63,6 +95,7 @@ body {
 #creator-link {
   color: var(--link-color);
   text-decoration: none;
+  -webkit-app-region: no-drag;
 }
 
 #creator-link:hover {
@@ -80,6 +113,7 @@ body {
   font-weight: 900;
   font-size: 0.8em;
   cursor: pointer;
+  -webkit-app-region: no-drag;
 }
 
 .btn:hover {
@@ -122,6 +156,7 @@ input:focus {
   margin-top: 10px;
   grid-row: 2;
   justify-self: center;
+  -webkit-app-region: no-drag;
 }
 
 #by-name:hover,
@@ -131,6 +166,7 @@ input:focus {
 }
 
 #songs {
+  -webkit-app-region: no-drag;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden scroll;
@@ -198,6 +234,7 @@ input:focus {
 
 .song-container:hover {
   color: var(--song-con-hover);
+  cursor: pointer;
 }
 
 .song-container-active {
@@ -229,7 +266,7 @@ input:focus {
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.album-img {
+#album-img {
   grid-column: 1;
   grid-row: 4;
   background-color: gray;
@@ -321,6 +358,7 @@ progress {
   background: rgb(0, 22, 40);
   width: 80%;
   cursor: pointer;
+  -webkit-app-region: no-drag;
 }
 
 progress::-moz-progress-bar {
@@ -346,15 +384,15 @@ progress::-webkit-progress-value {
 
 #song-title,
 #song-artist {
- overflow: hidden;
- white-space: nowrap;
- text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-
 
 #volume-wrapper {
   position: absolute;
   right: 10px;
+  -webkit-app-region: no-drag;
 }
 
 #volume-button {

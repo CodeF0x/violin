@@ -9,6 +9,7 @@ gulp.task('copy', () => {
     'src/**/*',
     '!**/img/icons',
     '!**/img/icons/**/*',
+    '**/img/icons/icon.png',
     'modules/**/*'
   ];
   return gulp.src(filesToMove, { base: './' }).pipe(gulp.dest('dist'));
@@ -39,19 +40,7 @@ gulp.task('minify-css', () => {
 });
 
 gulp.task('build', cb => {
-  exec('electron-builder --mac', (error, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    cb(error);
-  });
-
-  exec('electron-builder --linux', (error, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    cb(error);
-  });
-
-  exec('electron-builder --windows', (error, stdout, stderr) => {
+  exec('electron-builder --mac --linux --win', (error, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
     cb(error);
