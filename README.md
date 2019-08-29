@@ -3,7 +3,7 @@
   <a href="https://snapcraft.io/violin-player">
     <img alt="Violin" src="https://snapcraft.io/violin-player/badge.svg" />
   </a>
-  <img alt="Application size" src="https://img.shields.io/badge/application%20size%3A-%3C%20150%20MB-yellow.svg">
+  <img alt="Application size" src="https://img.shields.io/badge/application%20size:-%3C%20160%20MB-yellow.svg">
   <img alt="Supported platforms" src="https://img.shields.io/badge/runs%20on%3A-windows%20|%20linux%20|%20osx-blue.svg">
   <a href="https://www.codacy.com/app/CodeF0x/violin?utm_source=github.com&utm_medium=referral&utm_content=CodeF0x/violin&utm_campaign=Badge_Grade">
     <img alt="Codacy Code Grade" src="https://api.codacy.com/project/badge/Grade/7549990eb1954df9858c27b21bf0f8ed">
