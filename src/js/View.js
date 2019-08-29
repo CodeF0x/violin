@@ -77,6 +77,7 @@ module.exports = class View {
       const percent = e.offsetX / self._progress.offsetWidth;
       self._progress.value = percent / 100;
       Player.setProgress(percent);
+      self.updateUI(Main, Player);
     });
   }
 
