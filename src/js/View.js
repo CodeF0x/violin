@@ -7,7 +7,8 @@ module.exports = class View {
   constructor(ipcRenderer, Main, Player) {
     const self = this;
 
-    self._media = require('jsmediatags');
+    self._musicMetadata = require('music-metadata');
+    self._path = require('path');
 
     self._currentlyPlaying = undefined;
     self._list = self._getElem('songs');
@@ -166,21 +167,17 @@ module.exports = class View {
       artist.classList.add('song-artists');
 
       if (newFolder) {
-        new self._media.Reader(files[i].path)
-          .setTagsToRead(['title', 'album', 'artist'])
-          .read({
-            onSuccess: tag => {
-              let songName = files[i].path.split('/');
-              songName = songName[songName.length - 1];
+        self._musicMetadata.parseFile(files[i].path).then(metadata => {
 
-              const meta = tag.tags;
+          const songName = self._path.basename(files[i].path);
+          const common = metadata.common;
 
-              name.innerText = meta.title ? meta.title : songName;
-              album.innerText = meta.album ? meta.album : 'Unknown';
-              artist.innerText = meta.artist ? meta.artist : 'Unknown';
-            },
-            onError: err => console.error(err.message)
-          });
+          name.innerText = common.title ? common.title : songName;
+          album.innerText = common.album ? common.album : 'Unknown';
+          artist.innerText = common.artist ? common.artist : 'Unknown';
+        }, err =>
+          console.error(err)
+        );
       } else {
         name.innerText = files[i].name;
         album.innerText = files[i].album;
@@ -280,7 +277,6 @@ module.exports = class View {
    * @description Updates the UI. (What song from what artist is playing, progress bar, etc.);
    */
   updateUI(Main, Player) {
-    const media = require('jsmediatags');
     const self = this;
 
     const audio = Player.audioPlayer;
@@ -322,27 +318,23 @@ module.exports = class View {
 
     const index = Player.index;
 
-    new media.Reader(Main.files[index].path).setTagsToRead(['picture']).read({
-      onSuccess: tag => {
-        const pic = tag.tags.picture;
-        if (pic) {
-          const base64 = self._genImgUrl(pic.data);
-          const url = `data:${pic.format};base64,${window.btoa(base64)}`;
-          self._albumCoverImage = new Image(1, 1);
-          const img = self._albumCoverImage;
-          img.src = url;
-          img.onerror = () => self.updateTitlebarColor(Main, undefined);
-          img.onload = () => {
-            self._albumCover.style.backgroundImage = `url("${url}")`;
-            self.updateTitlebarColor(Main, self._albumCoverImage);
-          };
-        } else {
-          self._albumCover.style.removeProperty('background-image');
-          self._albumCoverImage.src = ''; // <- this will fail on purpose
-        }
-      },
-      onError: err => console.error(err)
-    });
+    self._musicMetadata.parseFile(Main.files[index].path).then(metadata => {
+      const pic = (metadata.common.picture && metadata.common.picture.length) >= 1 ? metadata.common.picture[0] : null;
+      if (pic) {
+        const url = `data:${pic.format};base64,${pic.data.toString('base64')}`;
+        self._albumCoverImage = new Image(1, 1);
+        const img = self._albumCoverImage;
+        img.src = url;
+        img.onerror = () => self.updateTitlebarColor(Main, undefined);
+        img.onload = () => {
+          self._albumCover.style.backgroundImage = `url("${url}")`;
+          self.updateTitlebarColor(Main, self._albumCoverImage);
+        };
+      } else {
+        self._albumCover.style.removeProperty('background-image');
+        self._albumCoverImage.src = ''; // <- this will fail on purpose
+      }
+    }, err => console.error(err));
 
     self._songName.innerText = Main.files[index].name;
     self._artist.innerText = Main.files[index].artist;
@@ -350,18 +342,6 @@ module.exports = class View {
       return song.firstChild.innerText === Main.files[index].name;
     });
     self._currentlyPlaying.classList.add('song-container-active');
-  }
-
-  _genImgUrl(arr) {
-    let base64 = '';
-    for (let i = 0; i < arr.length; i++) {
-      if (Array.isArray(arr[i])) {
-        generateUrl(arr[i]);
-      } else {
-        base64 += String.fromCharCode(arr[i]);
-      }
-    }
-    return base64;
   }
 
   /**
