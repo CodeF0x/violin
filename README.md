@@ -17,6 +17,23 @@
 
 ### 🏠 [Homepage](https://violin-player.cc/)
 
+## Features
+
+| Feature                                               | Supported         |
+| ----------------------------------------------------- | ----------------- |
+| Open directory and play contents                      | ✅                |
+| Display metadata \(album cover, album, song, artist\) | ✅                |
+| Media keys \(skip, previous, play / pause\)           | ✅                |
+| App has own volume slider                             | ✅                |
+| Shuffle                                               | ✅                |
+| Endless repeat                                        | ✅                |
+| Search song by name                                   | ✅                |
+| Sorting \(alphabetically by name, album, artist\)     | ✅                |
+| Playlists                                             | ❌                |
+| Gapless                                               | ❌ \(may follow\) |
+| Open single audio file                                | ❌                |
+| Streaming capabilities                                | ❌                |
+
 ## Install
 
 ### Linux:
