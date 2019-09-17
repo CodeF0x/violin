@@ -179,7 +179,7 @@ module.exports = class View {
               album.innerText = meta.album ? meta.album : 'Unknown';
               artist.innerText = meta.artist ? meta.artist : 'Unknown';
             },
-            onError: err => console.error(err)
+            onError: err => console.error(err.message)
           });
       } else {
         name.innerText = files[i].name;

@@ -1,19 +1,20 @@
+/**
+ * Ref: https://www.chromium.org/audio-video
+ */
 module.exports = function isSupported(file) {
   const parts = file.split('.');
   const format = parts[parts.length - 1].toLowerCase();
   switch (format) {
     case 'wav':
-      return true;
     case 'mp3':
-      return true;
     case 'mp4':
-      return true;
-    case 'adts':
-      return true;
+    case 'm4a':
+    case 'oga':
+    case 'ogm':
     case 'ogg':
-      return true;
-    case 'webm':
-      return true;
+    case 'spx':
+    case 'opus':
+    case 'webm':  // not supported by music-metadata yet
     case 'flac':
       return true;
     default:
