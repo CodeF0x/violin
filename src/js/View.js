@@ -167,16 +167,16 @@ module.exports = class View {
       artist.classList.add('song-artists');
 
       if (newFolder) {
-        self._musicMetadata.parseFile(files[i].path).then(metadata => {
+        self._musicMetadata.parseFile(files[i].path).then(
+          metadata => {
+            const songName = self._path.basename(files[i].path);
+            const common = metadata.common;
 
-          const songName = self._path.basename(files[i].path);
-          const common = metadata.common;
-
-          name.innerText = common.title ? common.title : songName;
-          album.innerText = common.album ? common.album : 'Unknown';
-          artist.innerText = common.artist ? common.artist : 'Unknown';
-        }, err =>
-          console.error(err)
+            name.innerText = common.title ? common.title : songName;
+            album.innerText = common.album ? common.album : 'Unknown';
+            artist.innerText = common.artist ? common.artist : 'Unknown';
+          },
+          err => console.error(err)
         );
       } else {
         name.innerText = files[i].name;
@@ -190,12 +190,14 @@ module.exports = class View {
     }
 
     if (self._currentlyPlaying) {
-      let playing = self._currentlyPlaying;
       const songs = [...document.querySelectorAll('div[data-file-path]')];
-      playing = songs.find(song => {
-        return song.firstChild.innerText === playing.firstChild.innerText;
+      self._currentlyPlaying = songs.find(song => {
+        return (
+          song.firstChild.innerText ===
+          self._currentlyPlaying.firstChild.innerText
+        );
       });
-      playing.classList.add('song-container-active');
+      self._currentlyPlaying.classList.add('song-container-active');
     }
   }
 
@@ -318,23 +320,31 @@ module.exports = class View {
 
     const index = Player.index;
 
-    self._musicMetadata.parseFile(Main.files[index].path).then(metadata => {
-      const pic = (metadata.common.picture && metadata.common.picture.length) >= 1 ? metadata.common.picture[0] : null;
-      if (pic) {
-        const url = `data:${pic.format};base64,${pic.data.toString('base64')}`;
-        self._albumCoverImage = new Image(1, 1);
-        const img = self._albumCoverImage;
-        img.src = url;
-        img.onerror = () => self.updateTitlebarColor(Main, undefined);
-        img.onload = () => {
-          self._albumCover.style.backgroundImage = `url("${url}")`;
-          self.updateTitlebarColor(Main, self._albumCoverImage);
-        };
-      } else {
-        self._albumCover.style.removeProperty('background-image');
-        self._albumCoverImage.src = ''; // <- this will fail on purpose
-      }
-    }, err => console.error(err));
+    self._musicMetadata.parseFile(Main.files[index].path).then(
+      metadata => {
+        const pic =
+          (metadata.common.picture && metadata.common.picture.length) >= 1
+            ? metadata.common.picture[0]
+            : null;
+        if (pic) {
+          const url = `data:${pic.format};base64,${pic.data.toString(
+            'base64'
+          )}`;
+          self._albumCoverImage = new Image(1, 1);
+          const img = self._albumCoverImage;
+          img.src = url;
+          img.onerror = () => self.updateTitlebarColor(Main, undefined);
+          img.onload = () => {
+            self._albumCover.style.backgroundImage = `url("${url}")`;
+            self.updateTitlebarColor(Main, self._albumCoverImage);
+          };
+        } else {
+          self._albumCover.style.removeProperty('background-image');
+          self._albumCoverImage.src = ''; // <- this will fail on purpose
+        }
+      },
+      err => console.error(err)
+    );
 
     self._songName.innerText = Main.files[index].name;
     self._artist.innerText = Main.files[index].artist;
