@@ -142,6 +142,10 @@ input:focus {
   outline: none;
 }
 
+input:disabled:hover {
+  cursor: not-allowed;
+}
+
 .song-list {
   grid-row: 2;
   grid-column: 2;
