@@ -1,6 +1,6 @@
 class PermissionCheck {
   constructor() {
-    if (!process.platform === 'darwin') {
+    if (process.platform !== 'darwin') {
       return;
     }
 
