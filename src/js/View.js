@@ -199,6 +199,9 @@ module.exports = class View {
       });
       self._currentlyPlaying.classList.add('song-container-active');
     }
+
+    // Search input field is disabled by default -> enable
+    self._search.disabled = false;
   }
 
   /**
