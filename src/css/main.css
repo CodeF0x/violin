@@ -37,8 +37,8 @@ For OS X
 body {
   -webkit-app-region: drag;
   display: grid;
-  grid-template-rows: 10vh 5vh auto 18vh;
-  grid-template-columns: 15% 1fr 1fr 1fr;
+  grid-template-rows: 10vh 5vh auto 130px;
+  grid-template-columns: 130px 1fr 1fr 1fr;
   background-color: var(--bg-color);
   height: 100vh;
 }
@@ -55,8 +55,8 @@ These element get injected by custom-electron-titlebar
 .container-after-titlebar {
   -webkit-app-region: no-drag;
   display: grid;
-  grid-template-rows: 10vh 5vh auto 18vh;
-  grid-template-columns: 15% 1fr 1fr 1fr;
+  grid-template-rows: 10vh 5vh auto 130px;
+  grid-template-columns: 130px 1fr 1fr 1fr;
   background-color: var(--bg-color);
   position: static;
 }
