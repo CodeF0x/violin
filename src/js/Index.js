@@ -16,6 +16,10 @@ class Main {
     self._titlebar = undefined;
 
     ipcRenderer.on('shortcut', (e, key) => {
+      if (!self._Player.audioPlayer.src) {
+        return;
+      }
+
       switch (key) {
         case 'MediaPlayPause':
           self._Player.playPause(self, self._UI);
