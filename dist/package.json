@@ -1,7 +1,7 @@
 {
   "name": "violin-player",
   "productName": "Violin",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A fast, lightweight, and minimalistic desktop music player.",
   "homepage": "https://violin-player.cc/",
   "keywords": [
@@ -39,7 +39,6 @@
   "dependencies": {
     "custom-electron-titlebar": "^3.1.0",
     "jsmediatags": "^3.8.1",
-    "electron-is-dev": "^1.1.0",
     "rgbaster": "^2.1.1"
   }
 }

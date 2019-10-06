@@ -58,7 +58,6 @@
   },
   "dependencies": {
     "custom-electron-titlebar": "^3.1.0",
-    "electron-is-dev": "^1.1.0",
     "music-metadata": "^4.5.3",
     "rgbaster": "^2.1.1"
   }
