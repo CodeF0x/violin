@@ -161,6 +161,7 @@ input:disabled:hover {
   grid-row: 2;
   justify-self: center;
   -webkit-app-region: no-drag;
+  display: none; /** Issue #144 */
 }
 
 #by-name:hover,
