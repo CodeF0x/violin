@@ -200,8 +200,13 @@ module.exports = class View {
       self._currentlyPlaying.classList.add('song-container-active');
     }
 
-    // Search input field is disabled by default -> enable
+    // Issue #135
     self._search.disabled = false;
+
+    // Issue #144
+    [self._sortByAlbum, self._sortByArtist, self._sortByName].forEach(
+      heading => (heading.style.display = 'block')
+    );
   }
 
   /**
