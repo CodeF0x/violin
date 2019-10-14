@@ -348,7 +348,7 @@ module.exports = class View {
           };
         } else {
           self._albumCover.style.removeProperty('background-image');
-          self._albumCoverImage.src = ''; // <- this will fail on purpose
+          if (self._albumCoverImage) self._albumCoverImage.src = ''; // <- this will fail on purpose
         }
       },
       err => console.error(err)
