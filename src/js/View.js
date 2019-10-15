@@ -135,6 +135,11 @@ module.exports = class View {
      * @description Handles click on song.
      */
     function clickHandler() {
+      if (Player.isShuffled) {
+        Player.reshuffleOnClick(Main, self, this.getAttribute('data-file-path'));
+        return;
+      }
+
       Player.play(this.getAttribute('data-file-path'), self, Main);
     }
 
