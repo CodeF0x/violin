@@ -148,10 +148,10 @@ module.exports = class Player {
 
   toggleShuffle(Main, UI) {
     const self = this;
-    if (self._isShuffled) {
-      self._shuffle(Main, UI);
-    } else {
+    if (self.isShuffled) {
       self._unshuffle(Main);
+    } else {
+      self._shuffle(Main, UI);
     }
   }
 
@@ -170,6 +170,7 @@ module.exports = class Player {
     Main.originalFiles = Main.files.slice('');
     Main.files = self._shuffleFiles(Main.files);
     self.play(Main.files[0].path, UI, Main);
+    self.isShuffled = true;
   }
 
   _unshuffle(Main) {
@@ -183,6 +184,8 @@ module.exports = class Player {
         prefix + decodeURI(self._audioPlayer.src).split('///')[1]
       );
     });
+
+    self.isShuffled = false;
   }
 
   reshuffleOnClick(Main, UI, path) {
