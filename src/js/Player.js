@@ -169,7 +169,23 @@ module.exports = class Player {
     Main.files = UI.updateSongListMetaData(Main);
     Main.originalFiles = Main.files.slice('');
     Main.files = self._shuffleFiles(Main.files);
-    self.play(Main.files[0].path, UI, Main);
+
+    if (self._audioPlayer.src) {
+      const prefix = process.platform === 'win32' ? '' : '/';
+      const head = Main.files.find(song => {
+        return (
+          song.path.replace(/\\/g, '/') ===
+          prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+        );
+      });
+
+      const index = Main.files.findIndex(song => song === head);
+      Main.files.splice(index, 1);
+      Main.files = [head, ...Main.files];
+      self._index = 0;
+    } else {
+      self.play(Main.files[0].path, UI, Main);
+    }
     self.isShuffled = true;
   }
 
