@@ -397,7 +397,7 @@ module.exports = class View {
    * @function _toggleShuffle
    * @param {object} Main - instance of Main class
    * @param {object} Player - instance of Player class
-   * @deprecated Toggles the icon of the shuffle button to either shuffled or unshuffled.
+   * @discription Toggles the icon of the shuffle button to either shuffled or unshuffled.
    */
   _toggleShuffle(Main, Player) {
     if (Main.files.length === 0) {
