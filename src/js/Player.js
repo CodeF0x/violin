@@ -140,7 +140,7 @@ module.exports = class Player {
     if (self._isShuffled) {
       self._shuffle(Main, UI);
     } else {
-      self._unshuffle();
+      self._unshuffle(Main);
     }
   }
 
@@ -153,13 +153,21 @@ module.exports = class Player {
       return files;
     }
 
+    const self = this;
+
     Main.files = UI.updateSongListMetaData(Main);
     Main.originalFiles = Main.files.slice('');
     Main.files = shuffleFiles(Main.files);
+    self.play(Main.files[0].path, UI, Main);
   }
 
-  _unshuffle() {
+  _unshuffle(Main) {
+    const self = this;
     Main.files = Main.originalFiles;
+
+    self._index = Main.files.findIndex(song => 
+      encodeURI(`file://${song.path}`) === self._audioPlayer.src
+    );
   }
 
   get audioPlayer() {
