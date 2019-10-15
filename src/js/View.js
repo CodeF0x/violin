@@ -228,6 +228,8 @@ module.exports = class View {
 
     self._albumCover.style.removeProperty('background-image');
 
+    self._shuffle.style.backgroundImage = 'url("../src/img/shuffle.png")';
+
     if (self._albumCoverImage) {
       self._albumCoverImage.src = ''; // <- Fails on purpose, gets handled in updateUI
     }
