@@ -144,20 +144,20 @@ module.exports = class Player {
     }
   }
 
-  _shuffle(Main, UI) {
-    function shuffleFiles(files) {
-      for (let i = files.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [files[i], files[j]] = [files[j], files[i]];
-      }
-      return files;
+  _shuffleFiles(files) {
+    for (let i = files.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [files[i], files[j]] = [files[j], files[i]];
     }
+    return files;
+  }
 
+  _shuffle(Main, UI) {
     const self = this;
 
     Main.files = UI.updateSongListMetaData(Main);
     Main.originalFiles = Main.files.slice('');
-    Main.files = shuffleFiles(Main.files);
+    Main.files = self._shuffleFiles(Main.files);
     self.play(Main.files[0].path, UI, Main);
   }
 
@@ -168,6 +168,20 @@ module.exports = class Player {
     self._index = Main.files.findIndex(song => 
       encodeURI(`file://${song.path}`) === self._audioPlayer.src
     );
+  }
+
+  reshuffleOnClick(Main, UI, path) {
+    const self = this;
+
+    Main.files = self._shuffleFiles(Main.files);
+
+    // Swap first song and song that got clicked -> Issue #149
+    const curentHead = Main.files[0];
+    const newHeadIndex = Main.files.findIndex(song => song.path === path);
+    Main.files[0] = Main.files[newHeadIndex];
+    Main.files[newHeadIndex] = curentHead;
+    
+    self.play(Main.files[0].path, UI, Main);
   }
 
   get audioPlayer() {

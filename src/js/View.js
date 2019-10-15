@@ -135,6 +135,11 @@ module.exports = class View {
      * @description Handles click on song.
      */
     function clickHandler() {
+      if (Player.isShuffled) {
+        Player.reshuffleOnClick(Main, self, this.getAttribute('data-file-path'));
+        return;
+      }
+
       Player.play(this.getAttribute('data-file-path'), self, Main);
     }
 
@@ -227,6 +232,8 @@ module.exports = class View {
     self._progress.value = 0;
 
     self._albumCover.style.removeProperty('background-image');
+
+    self._shuffle.style.backgroundImage = 'url("../src/img/shuffle.png")';
 
     if (self._albumCoverImage) {
       self._albumCoverImage.src = ''; // <- Fails on purpose, gets handled in updateUI
