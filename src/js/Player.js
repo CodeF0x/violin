@@ -23,7 +23,8 @@ module.exports = class Player {
     const self = this;
     self._audioPlayer.onended = () => self.next(UI, Main);
     self._audioPlayer.src = path;
-    self._audioPlayer.play()
+    self._audioPlayer
+      .play()
       .then(() => {
         const prefix = process.platform === 'win32' ? '' : '/';
 
@@ -175,9 +176,13 @@ module.exports = class Player {
     const self = this;
     Main.files = Main.originalFiles;
 
-    self._index = Main.files.findIndex(song => 
-      encodeURI(`file://${song.path}`) === self._audioPlayer.src
-    );
+    const prefix = process.platform === 'win32' ? '' : '/';
+    self._index = Main.files.findIndex(song => {
+      return (
+        song.path.replace(/\\/g, '/') ===
+        prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+      );
+    });
   }
 
   reshuffleOnClick(Main, UI, path) {
@@ -190,7 +195,7 @@ module.exports = class Player {
     const newHeadIndex = Main.files.findIndex(song => song.path === path);
     Main.files[0] = Main.files[newHeadIndex];
     Main.files[newHeadIndex] = curentHead;
-    
+
     self.play(Main.files[0].path, UI, Main);
   }
 
