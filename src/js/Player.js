@@ -21,22 +21,23 @@ module.exports = class Player {
    */
   play(path, UI, Main) {
     const self = this;
-    self._audioPlayer.src = path;
-    self._audioPlayer.play();
     self._audioPlayer.onended = () => self.next(UI, Main);
+    self._audioPlayer.src = path;
+    self._audioPlayer.play()
+      .then(() => {
+        const prefix = process.platform === 'win32' ? '' : '/';
 
-    const prefix = process.platform === 'win32' ? '' : '/';
+        self._index = Main.files.findIndex(song => {
+          return (
+            song.path.replace(/\\/g, '/') ===
+            prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+          );
+        });
 
-    self._index = Main.files.findIndex(song => {
-      return (
-        song.path.replace(/\\/g, '/') ===
-        prefix + decodeURI(self._audioPlayer.src).split('///')[1]
-      );
-    });
-    self._isPaused = false;
-
-    UI.updateUI(Main, self);
-    UI.togglePlayButton(self);
+        UI.updateUI(Main, self);
+        UI.togglePlayButton(self);
+      })
+      .catch(err => err); // When playlist has ended, playing the first song and then immediately pausing it causes an exception?
   }
 
   /**
@@ -52,7 +53,7 @@ module.exports = class Player {
     if (self._index + 1 === Main.files.length && self._repeat) {
       next = 0;
     } else if (self._index + 1 === Main.files.length) {
-      self.stop(UI);
+      self.preloadHead(UI, Main);
       return;
     } else {
       next = self._index + 1;
@@ -107,6 +108,14 @@ module.exports = class Player {
     UI.resetUI();
   }
 
+  preloadHead(UI, Main) {
+    const self = this;
+
+    self.play(Main.files[0].path, UI, Main);
+    self.playPause(Main, UI);
+    UI.togglePlayButton(self);
+  }
+
   /**
    * @function playPause
    * @param {instance} Main - instance of main class
@@ -116,7 +125,8 @@ module.exports = class Player {
   playPause(Main, UI) {
     const self = this;
 
-    if (self._isPaused) {
+    const isPaused = self._audioPlayer.paused;
+    if (isPaused) {
       self._audioPlayer.play();
       self._isPaused = false;
     } else {
