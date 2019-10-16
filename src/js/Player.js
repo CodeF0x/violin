@@ -110,10 +110,19 @@ module.exports = class Player {
 
   preloadHead(UI, Main) {
     const self = this;
+    const cachedVolume = self._audioPlayer.volume;
 
+    /**
+     * todo this is a very hacky solution, especially with 100 milliseconds. Replace asap!
+     */
+    self._audioPlayer.volume = 0;
     self.play(Main.files[0].path, UI, Main);
-    self.playPause(Main, UI);
-    UI.togglePlayButton(self);
+    setTimeout(() => {
+      const resetVolume = () => self.audioPlayer.volume = cachedVolume;
+      self.playPause();
+      resetVolume();
+      UI.togglePlayButton(self);
+    }, 100);
   }
 
   /**
@@ -125,13 +134,11 @@ module.exports = class Player {
   playPause(Main, UI) {
     const self = this;
 
-    const isPaused = self._audioPlayer.paused;
+    const isPaused = self.isPaused;
     if (isPaused) {
       self._audioPlayer.play();
-      self._isPaused = false;
     } else {
       self._audioPlayer.pause();
-      self._isPaused = true;
     }
   }
 
