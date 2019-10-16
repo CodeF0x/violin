@@ -1,4 +1,9 @@
+/** Representation of audio capabilities. */
 module.exports = class Player {
+  /**
+   * Set up.
+   * @param {Object} UI 
+   */
   constructor(UI) {
     const self = this;
 
@@ -12,11 +17,10 @@ module.exports = class Player {
   }
 
   /**
-   * @function play
-   * @param {String} path - path to music file
-   * @param {instance} UI - instance of view class
-   * @param {instance} Main - instance of main class
-   * @description Plays music file.
+   * Plays a given song.
+   * @param {string} path 
+   * @param {Object} UI 
+   * @param {Object} Main 
    */
   play(path, UI, Main) {
     const self = this;
@@ -41,10 +45,9 @@ module.exports = class Player {
   }
 
   /**
-   * @function next
-   * @param {instance} UI - instance of view class
-   * @param {instance} Main - instance of main class
-   * @description Play next song in order.
+   * Plays next song in order.
+   * @param {Object} UI 
+   * @param {Object} Main 
    */
   next(UI, Main) {
     const self = this;
@@ -63,13 +66,10 @@ module.exports = class Player {
   }
 
   /**
-   * @function previous
-   * @param {instance} UI - instance of view class
-   * @param {instance} Main - instance of main class
-   * @description Plays previous song in order.
+   * Plays previous song in order or resets current song.
+   * @param {Object} UI 
+   * @param {Object} Main 
    */
-
-  // TODO test, seems to work inconsistently
   previous(UI, Main) {
     const self = this;
 
@@ -87,9 +87,8 @@ module.exports = class Player {
   }
 
   /**
-   * @function setVolume
-   * @param {number} value - the value to set
-   * @description Sets the players volume.
+   * Sets playback volume.
+   * @param {number} value 
    */
   setVolume(value) {
     const self = this;
@@ -97,9 +96,8 @@ module.exports = class Player {
   }
 
   /**
-   * @function stop
-   * @param {instance} UI - instance of View class
-   * @description Stops the playback.
+   * Stops playback completely.
+   * @param {Object} UI 
    */
   stop(UI) {
     const self = this;
@@ -108,6 +106,11 @@ module.exports = class Player {
     UI.resetUI();
   }
 
+  /**
+   * Preloads first song of playlist.
+   * @param {Object} UI 
+   * @param {Object} Main 
+   */
   preloadHead(UI, Main) {
     const self = this;
     const cachedVolume = self._audioPlayer.volume;
@@ -126,12 +129,9 @@ module.exports = class Player {
   }
 
   /**
-   * @function playPause
-   * @param {instance} Main - instance of main class
-   * @param {instance} UI - instance of ui class
-   * @description Toggles between play and pause of playback.
+   * Either pauses or resumes playback.
    */
-  playPause(Main, UI) {
+  playPause() {
     const self = this;
 
     const isPaused = self.isPaused;
@@ -143,15 +143,19 @@ module.exports = class Player {
   }
 
   /**
-   * @function setProgress
-   * @param {number} percent - current time in percent
-   * @description Sets the current time to value of progress bar, when clicked on progress bar.
+   * Sets playback step.
+   * @param {number} percent 
    */
   setProgress(percent) {
     const self = this;
     self._audioPlayer.currentTime = percent * self._audioPlayer.duration;
   }
 
+  /**
+   * Either shuffles or unshuffles the playlist.
+   * @param {Object} Main 
+   * @param {Object} UI 
+   */
   toggleShuffle(Main, UI) {
     const self = this;
     if (self.isShuffled) {
@@ -161,6 +165,10 @@ module.exports = class Player {
     }
   }
 
+  /**
+   * Actual shuffle algorythm.
+   * @param {Array<Object>} files 
+   */
   _shuffleFiles(files) {
     for (let i = files.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -169,6 +177,11 @@ module.exports = class Player {
     return files;
   }
 
+  /**
+   * Shuffles the playlist.
+   * @param {Object} Main 
+   * @param {Object} UI 
+   */
   _shuffle(Main, UI) {
     const self = this;
 
@@ -195,6 +208,10 @@ module.exports = class Player {
     self.isShuffled = true;
   }
 
+  /**
+   * Restores original playlist order.
+   * @param {Object} Main 
+   */
   _unshuffle(Main) {
     const self = this;
     Main.files = Main.originalFiles;
@@ -210,6 +227,12 @@ module.exports = class Player {
     self.isShuffled = false;
   }
 
+  /**
+   * Shuffles the playlist, but keeps currently playing song as head.
+   * @param {Object} Main 
+   * @param {Object} UI 
+   * @param {string} path 
+   */
   reshuffleOnClick(Main, UI, path) {
     const self = this;
 

@@ -1,3 +1,4 @@
+/** Represents application itself */
 class Main {
   constructor() {
     const { ipcRenderer } = require('electron');
@@ -39,9 +40,8 @@ class Main {
   }
 
   /**
-   * @function sort
-   * @param {event} e
-   * @description Sorts alphabetically either name, album, or artist.
+   * Sorts alphabetically.
+   * @param {Event} e 
    */
   sort(e) {
     const self = this;
@@ -72,8 +72,7 @@ class Main {
   }
 
   /**
-   * @function revertSorting
-   * @description Reverts sorting to original order of files in directory.
+   * Reverts sorted playlist to original state.
    */
   revertSorting() {
     const self = this;
@@ -83,8 +82,7 @@ class Main {
   }
 
   /**
-   * @function backupFiles
-   * @description Backups original files to revert sorting and shuffle play to original order.
+   * Caches playlist.
    */
   backupFiles() {
     const self = this;
@@ -94,8 +92,7 @@ class Main {
   }
 
   /**
-   * @function _createTitlebar
-   * @description Creates the custom title bar on Windows and Linux.
+   * Creates custom title bar instead of OS default.
    */
   _createTitlebar() {
     const { Titlebar, Color } = require('custom-electron-titlebar');

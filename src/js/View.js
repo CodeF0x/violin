@@ -1,8 +1,10 @@
+/** Class representing the frontend */
 module.exports = class View {
   /**
-   * @constructor
-   * @param {ipcRenderer instance} ipcRenderer
-   * @param {instance} player
+   * Create the frontend logic.
+   * @param {Object} ipcRenderer 
+   * @param {Object} Main 
+   * @param {Object} Player 
    */
   constructor(ipcRenderer, Main, Player) {
     const self = this;
@@ -83,19 +85,17 @@ module.exports = class View {
   }
 
   /**
-   * @function _getElem
-   * @param {String} id
-   * @returns {HTMLElement} element
-   * @description Gets an HTML element by its ID.
+   * Gets an element by its id.
+   * @param {string} id 
+   * @return {HTMLElement} HTMLElement
    */
   _getElem(id) {
     return document.getElementById(id);
   }
 
   /**
-   * @funtion search
-   * @param {event} e
-   * @description Searches for users input in song list.
+   * Filters playlist with user input.
+   * @param {Event} e 
    */
   search(e) {
     const query = e.target.value;
@@ -112,27 +112,24 @@ module.exports = class View {
   }
 
   /**
-   * @function showWebsite
-   * @description Shows website of creator when click on link in UI.
+   * Navigates to author website in systems default browser.
    */
   showWebsite() {
     require('electron').shell.openExternal('https://codef0x.dev');
   }
 
   /**
-   * @function listFiles
-   * @param {Array} files - array of objects with song name and file path
-   * @param {boolean} newFolder - read media tags
-   * @param {instance} - instance of main class
-   * @param {instance} - instance of player class
-   * @description Lists all music files in the view.
+   * Lists all files from a directory.
+   * @param {Array<string} files 
+   * @param {boolean} newFolder 
+   * @param {Object} Main 
+   * @param {Object} Player 
    */
   listFiles(files, newFolder, Main, Player) {
     const self = this;
 
     /**
-     * @function clickHandler
-     * @description Handles click on song.
+     * Handles click on song.
      */
     function clickHandler() {
       if (Player.isShuffled) {
@@ -219,8 +216,7 @@ module.exports = class View {
   }
 
   /**
-   * @function resetUI
-   * @description Resets the UI when necessary (eg. new folder openend).
+   * Resets UI to the state when the app just got launched.
    */
   resetUI() {
     const self = this;
@@ -250,10 +246,9 @@ module.exports = class View {
   }
 
   /**
-   * @function updateSongListMetaData
-   * @param {instance} Main - instance of main class
-   * @returns {Array} updatedList - the song array with extra meta data.
-   * @description Updates the song array by adding meta data.
+   * Adds meta data to all song entries.
+   * @param {Object} Main 
+   * @return {Array<Object>}
    */
   updateSongListMetaData(Main) {
     const updatedList = [];
@@ -272,18 +267,16 @@ module.exports = class View {
   }
 
   /**
-   * @function markSort
-   * @param {HTMLElement} element - the element to mark
-   * @description Marks the current sort selection as selected.
+   * Highlights the click sorting button.
+   * @param {HTMLElement} element 
    */
   markSort(element) {
     element.style.color = 'var(--song-con-active)';
   }
 
   /**
-   * @function unmarkSort
-   * @param {HTMLElement} element - the element to unmark
-   * @description Unmarks the previous sort selection.
+   * Resets color of clicked sorting button.
+   * @param {HTMLElement} element 
    */
   unmarkSort(element) {
     if (element) {
@@ -292,10 +285,9 @@ module.exports = class View {
   }
 
   /**
-   * @function updateUI
-   * @param {instance} Main - instance of main class
-   * @param {instance} Player - instance of player class
-   * @description Updates the UI. (What song from what artist is playing, progress bar, etc.);
+   * Displays meta data, song length, current timestamp, and album cover.
+   * @param {Object} Main 
+   * @param {Object} Player 
    */
   updateUI(Main, Player) {
     const self = this;
@@ -374,9 +366,8 @@ module.exports = class View {
   }
 
   /**
-   * @function togglePlayButton
-   * @param {object} Player - instance of Player object
-   * @description Toggles the icon of the play button to either playing or paused.
+   * Toggles between play or pause button.
+   * @param {Object} Player 
    */
   togglePlayButton(Player) {
     const self = this;
@@ -392,9 +383,8 @@ module.exports = class View {
   }
 
   /**
-   * @function _toggleRepeat
-   * @param {object} Player - instance of Player class
-   * @description Toggles the icon of the repeat button to either repeating or non-repeating.
+   * Shows a visual indication whether endless-repeat is activated.
+   * @param {Object} Player 
    */
   _toggleRepeat(Player) {
     const self = this;
@@ -405,10 +395,9 @@ module.exports = class View {
   }
 
   /**
-   * @function _toggleShuffle
-   * @param {object} Main - instance of Main class
-   * @param {object} Player - instance of Player class
-   * @discription Toggles the icon of the shuffle button to either shuffled or unshuffled.
+   * Shows a visual indication whether the playlist is shuffled or not.
+   * @param {Object} Main 
+   * @param {Object} Player 
    */
   _toggleShuffle(Main, Player) {
     if (Main.files.length === 0) {
@@ -426,17 +415,26 @@ module.exports = class View {
   }
 
   /**
-   * @function updateTitlebarColor
-   * @param {instance} Main - instance of Main class
-   * @param {object} image - image object
-   * @description Updates the color of the title bar.
+   * Updates color of title bar.
+   * @param {Object} Main
+   * @param {Object} image
    */
   updateTitlebarColor(Main, image) {
+    /**
+     * Converts a single number to hex.
+     * @param {number} c 
+     */
     function componentToHex(c) {
       const hex = c.toString(16);
       return hex.length === 1 ? '0' + hex : hex;
     }
 
+    /**
+     * Converts an rgb color to a hex color.
+     * @param {number} r 
+     * @param {number} g 
+     * @param {number} b 
+     */
     function rgbToHex(r, g, b) {
       return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
