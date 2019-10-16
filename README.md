@@ -46,7 +46,7 @@ sudo snap install violin-player
 
 ### MacOS and Windows:
 
-[MacOS installer](https://github.com/CodeF0x/violin/releases/download/v2.2.1/violin-setup-mac.dmg) | [Windows installer](https://github.com/CodeF0x/violin/releases/download/v2.2.1/violin-setup-windows.msi)
+[MacOS installer](https://github.com/CodeF0x/violin/releases/download/v3.1/violin-setup-mac.dmg) | [Windows installer](https://github.com/CodeF0x/violin/releases/download/v3.1/violin-setup-windows.msi)
 
 ## Usage
 
