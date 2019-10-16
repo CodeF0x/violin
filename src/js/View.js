@@ -120,7 +120,7 @@ module.exports = class View {
 
   /**
    * Lists all files from a directory.
-   * @param {Array<string} files 
+   * @param {Array<string>} files 
    * @param {boolean} newFolder 
    * @param {Object} Main 
    * @param {Object} Player 
