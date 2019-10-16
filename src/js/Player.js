@@ -7,7 +7,6 @@ module.exports = class Player {
     self._audioPlayer = new Audio();
     self._index = undefined;
     self._playInterval = undefined;
-    self._isPaused = false;
     self._repeat = false;
     self._isShuffled = false;
   }
@@ -235,7 +234,7 @@ module.exports = class Player {
 
   get isPaused() {
     const self = this;
-    return self._isPaused;
+    return self._audioPlayer.paused;
   }
 
   set repeat(bool) {
