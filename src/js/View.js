@@ -136,7 +136,11 @@ module.exports = class View {
      */
     function clickHandler() {
       if (Player.isShuffled) {
-        Player.reshuffleOnClick(Main, self, this.getAttribute('data-file-path'));
+        Player.reshuffleOnClick(
+          Main,
+          self,
+          this.getAttribute('data-file-path')
+        );
         return;
       }
 
@@ -412,8 +416,9 @@ module.exports = class View {
     }
 
     const self = this;
-    Player.isShuffled = !Player.isShuffled;
-    self._shuffle.style.backgroundImage = Player.isShuffled
+    // Use a "cached" value, actual value gets changed by Player
+    const cachedIsShuffled = !Player.isShuffled;
+    self._shuffle.style.backgroundImage = cachedIsShuffled
       ? 'url("../src/img/shuffle-active.png")'
       : 'url("../src/img/shuffle.png")';
 

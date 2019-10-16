@@ -7,7 +7,6 @@ module.exports = class Player {
     self._audioPlayer = new Audio();
     self._index = undefined;
     self._playInterval = undefined;
-    self._isPaused = false;
     self._repeat = false;
     self._isShuffled = false;
   }
@@ -21,22 +20,24 @@ module.exports = class Player {
    */
   play(path, UI, Main) {
     const self = this;
-    self._audioPlayer.src = path;
-    self._audioPlayer.play();
     self._audioPlayer.onended = () => self.next(UI, Main);
+    self._audioPlayer.src = path;
+    self._audioPlayer
+      .play()
+      .then(() => {
+        const prefix = process.platform === 'win32' ? '' : '/';
 
-    const prefix = process.platform === 'win32' ? '' : '/';
+        self._index = Main.files.findIndex(song => {
+          return (
+            song.path.replace(/\\/g, '/') ===
+            prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+          );
+        });
 
-    self._index = Main.files.findIndex(song => {
-      return (
-        song.path.replace(/\\/g, '/') ===
-        prefix + decodeURI(self._audioPlayer.src).split('///')[1]
-      );
-    });
-    self._isPaused = false;
-
-    UI.updateUI(Main, self);
-    UI.togglePlayButton(self);
+        UI.updateUI(Main, self);
+        UI.togglePlayButton(self);
+      })
+      .catch(err => err); // When playlist has ended, playing the first song and then immediately pausing it causes an exception?
   }
 
   /**
@@ -52,7 +53,7 @@ module.exports = class Player {
     if (self._index + 1 === Main.files.length && self._repeat) {
       next = 0;
     } else if (self._index + 1 === Main.files.length) {
-      self.stop(UI);
+      self.preloadHead(UI, Main);
       return;
     } else {
       next = self._index + 1;
@@ -107,6 +108,23 @@ module.exports = class Player {
     UI.resetUI();
   }
 
+  preloadHead(UI, Main) {
+    const self = this;
+    const cachedVolume = self._audioPlayer.volume;
+
+    /**
+     * todo this is a very hacky solution, especially with 100 milliseconds. Replace asap!
+     */
+    self._audioPlayer.volume = 0;
+    self.play(Main.files[0].path, UI, Main);
+    setTimeout(() => {
+      const resetVolume = () => self.audioPlayer.volume = cachedVolume;
+      self.playPause();
+      resetVolume();
+      UI.togglePlayButton(self);
+    }, 100);
+  }
+
   /**
    * @function playPause
    * @param {instance} Main - instance of main class
@@ -116,12 +134,11 @@ module.exports = class Player {
   playPause(Main, UI) {
     const self = this;
 
-    if (self._isPaused) {
+    const isPaused = self.isPaused;
+    if (isPaused) {
       self._audioPlayer.play();
-      self._isPaused = false;
     } else {
       self._audioPlayer.pause();
-      self._isPaused = true;
     }
   }
 
@@ -137,10 +154,10 @@ module.exports = class Player {
 
   toggleShuffle(Main, UI) {
     const self = this;
-    if (self._isShuffled) {
-      self._shuffle(Main, UI);
-    } else {
+    if (self.isShuffled) {
       self._unshuffle(Main);
+    } else {
+      self._shuffle(Main, UI);
     }
   }
 
@@ -158,16 +175,39 @@ module.exports = class Player {
     Main.files = UI.updateSongListMetaData(Main);
     Main.originalFiles = Main.files.slice('');
     Main.files = self._shuffleFiles(Main.files);
-    self.play(Main.files[0].path, UI, Main);
+
+    if (self._audioPlayer.src) {
+      const prefix = process.platform === 'win32' ? '' : '/';
+      const head = Main.files.find(song => {
+        return (
+          song.path.replace(/\\/g, '/') ===
+          prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+        );
+      });
+
+      const index = Main.files.findIndex(song => song === head);
+      Main.files.splice(index, 1);
+      Main.files = [head, ...Main.files];
+      self._index = 0;
+    } else {
+      self.play(Main.files[0].path, UI, Main);
+    }
+    self.isShuffled = true;
   }
 
   _unshuffle(Main) {
     const self = this;
     Main.files = Main.originalFiles;
 
-    self._index = Main.files.findIndex(song => 
-      encodeURI(`file://${song.path}`) === self._audioPlayer.src
-    );
+    const prefix = process.platform === 'win32' ? '' : '/';
+    self._index = Main.files.findIndex(song => {
+      return (
+        song.path.replace(/\\/g, '/') ===
+        prefix + decodeURI(self._audioPlayer.src).split('///')[1]
+      );
+    });
+
+    self.isShuffled = false;
   }
 
   reshuffleOnClick(Main, UI, path) {
@@ -180,7 +220,7 @@ module.exports = class Player {
     const newHeadIndex = Main.files.findIndex(song => song.path === path);
     Main.files[0] = Main.files[newHeadIndex];
     Main.files[newHeadIndex] = curentHead;
-    
+
     self.play(Main.files[0].path, UI, Main);
   }
 
@@ -201,7 +241,7 @@ module.exports = class Player {
 
   get isPaused() {
     const self = this;
-    return self._isPaused;
+    return self._audioPlayer.paused;
   }
 
   set repeat(bool) {
