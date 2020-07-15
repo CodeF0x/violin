@@ -15,7 +15,7 @@
 
 ![Violin application screenshot](docs/assets/screenshot.png)
 
-### 🏠 [Homepage](https://violin-player.cc/)
+### 🏠 [Homepage](https://violin-player.app/)
 
 ## Features
 
