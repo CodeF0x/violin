@@ -144,7 +144,7 @@ class Main {
 
     if (process.platform === 'darwin') {
       mainItem = new MenuItem({
-        label: require('electron').remote.app.getName(),
+        label: require('electron').remote.app.name,
         submenu: [
           {
             role: 'quit',

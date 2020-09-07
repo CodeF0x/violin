@@ -14,12 +14,12 @@
       titleBarStyle: 'hidden',
       frame: false,
       useContentSize: false,
+      resizable: true,
       webPreferences: {
         nodeIntegration: true
       }
     });
 
-    window.setResizable(true);
     window.loadFile('src/index.html');
   }
 
